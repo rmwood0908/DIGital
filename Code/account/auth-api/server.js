@@ -11,6 +11,8 @@ const app = express()
 app.use(cors());
 app.use(express.json());
 
+const PORT = process.env.PORT || 4000;
+
 // signup method
 app.post('/api/auth/signup', async (req, res) => {
 
