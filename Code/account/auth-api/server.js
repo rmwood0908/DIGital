@@ -59,10 +59,15 @@ app.post('/api/auth/login', async (req, res) => {
     try {
         const { username, password } = req.body;
 
+        if( !username || !password ) {
+            return res.status(400).json({ ok: false,
+                                            error: 'Missing field(s).'});
+            }
+
         // sql query
         const query = `SELECT user_id, password_hash
                        FROM users
-                       WHERE username = $1`
+                       WHERE username = $1`;
 
         // send query to Postgres
         const { rows } = await pool.query(query, [username.trim()]);
