@@ -97,3 +97,9 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+# ignore llm for unity stuff
+/[Aa]ssets/StreamingAssets/undreamai*
+/[Aa]ssets/StreamingAssets/RAG*
+
+*.slnx
