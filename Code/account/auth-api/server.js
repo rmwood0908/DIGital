@@ -4,12 +4,14 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import { pool } from './db.js';
+import artifactRoutes from './artifactRoutes.js';
 
 // server set up
 dotenv.config()
 const app = express()
 app.use(cors());
 app.use(express.json());
+app.use('/api/artifacts', artifactRoutes);
 
 const PORT = process.env.PORT || 4000;
 
