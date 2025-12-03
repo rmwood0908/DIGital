@@ -84,11 +84,10 @@ public class ArtifactFormManager : MonoBehaviour
     // cancel button clicked
     public void OnCancelButtonClicked()
     {
-        // hide pop-up panel
-        if( PanelRoot != null )
-        {
-            PanelRoot.SetActive(false);
-        }
+        // TEMP: clear the form, later it will close the pop-up overlay
+        ClearForm();
+
+        StatusText.text = "";
     }
 
     private bool ValidateInputs( out int Quantity, out float Weight)
@@ -159,11 +158,6 @@ public class ArtifactFormManager : MonoBehaviour
                 StatusText.text = "Artifact submitted successfully!";
 
                 ClearForm();
-
-                if (PanelRoot != null)
-                {
-                    PanelRoot.SetActive(false);
-                }
             }
 
             else
