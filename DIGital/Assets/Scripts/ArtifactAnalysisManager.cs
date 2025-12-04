@@ -63,6 +63,20 @@ public class ArtifactAnalysisManager : MonoBehaviour
         public string error;
     }
 
+    // 3d model bindings
+    [System.Serializable]
+    private class ModelBinding
+    {
+        public string artifactId;
+        public GameObject modelObject;
+    }
+
+    [Header("3D Model Bindings")]
+    [SerializeField] private List<ModelBinding> modelBindings = 
+                                                new List<ModelBinding>();
+
+    [SerializeField] private GameObject defaultModel;
+
     // local cache of artifacts
     private List<Artifact> _artifacts = new List<Artifact>();
 
@@ -266,5 +280,53 @@ public class ArtifactAnalysisManager : MonoBehaviour
         WeightInput.text = artifact.weight ?? "";
         BagNumberInput.text = artifact.bag_number;
         ArtifactIDInput.text = artifact.artifact_id;
+        ShowModelForArtifact(artifact);
+    }
+
+    private void ShowModelForArtifact( Artifact artifact )
+    {
+        // hide all bound models to start
+        if( modelBindings != null )
+        {
+            foreach( var binding in modelBindings )
+            {
+                if( binding != null && binding.modelObject != null )
+                {
+                    binding.modelObject.SetActive(false);
+                }
+            }
+        }
+
+        // show default artifact if none
+        if (artifact == null )
+        {
+            if (defaultModel != null)
+            {
+                defaultModel.SetActive(true);
+            }
+
+            return;
+        }
+
+        // find model whose ID matches node.js id
+        if ( modelBindings != null )
+        {
+            foreach( var binding in modelBindings )
+            {
+                if (binding != null && binding.modelObject != null &&
+                    string.Equals(binding.artifactId, artifact.artifact_id,
+                                  StringComparison.OrdinalIgnoreCase))
+                {
+                    binding.modelObject.SetActive(true);
+                    return;
+                }
+            }
+        }
+
+        // if no match, fall back to default
+        if( defaultModel != null )
+        {
+            defaultModel.SetActive(true);
+        }
     }
 }
