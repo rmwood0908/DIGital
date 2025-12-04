@@ -77,6 +77,9 @@ public class ArtifactAnalysisManager : MonoBehaviour
 
     [SerializeField] private GameObject defaultModel;
 
+    [Header("3D Model Bindings")]
+    [SerializeField] private GameObject BackgroundPanel;
+
     // local cache of artifacts
     private List<Artifact> _artifacts = new List<Artifact>();
 
@@ -119,6 +122,12 @@ public class ArtifactAnalysisManager : MonoBehaviour
         // select artifact
         Artifact selectedArtifact = _artifacts[index];
         PopulateUI(selectedArtifact);
+
+        // hide background panel TEMP WORKAROUND TO SHOW 3D MODEL
+        if( BackgroundPanel != null )
+        {
+            BackgroundPanel.SetActive(false);
+        }
 
         if( StatusText != null )
         {
