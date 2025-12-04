@@ -1,8 +1,5 @@
-﻿<Solution>
+<Solution>
   <Project Path="Assembly-CSharp.csproj" />
-<<<<<<< Updated upstream
-  <Project Path="Assembly-CSharp-Editor.csproj" />
-=======
   <Project Path="Unity.Searcher.Editor.csproj" />
   <Project Path="Unity.VisualScripting.Core.csproj" />
   <Project Path="Unity.AI.Navigation.Editor.ConversionSystem.csproj" />
@@ -32,5 +29,4 @@
   <Project Path="Unity.VisualScripting.DocCodeExamples.csproj" />
   <Project Path="Unity.PlasticSCM.Editor.Entities.csproj" />
   <Project Path="Unity.Collections.Editor.csproj" />
->>>>>>> Stashed changes
 </Solution>
