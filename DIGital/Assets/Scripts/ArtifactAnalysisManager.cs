@@ -65,7 +65,20 @@ public class ArtifactAnalysisManager : MonoBehaviour
         // make input fields read only
         SetFieldsReadOnly(true);
 
-        StatusText.text = "Loading latest artifact...";
+        if( StatusText.text != null )
+        {
+            StatusText.text = "Press Analyze to load artifact data.";
+        }
+    }
+
+    // analyze button
+    public void OnAnalyzeButtonClicked()
+    {
+        if( StatusText.text != null )
+        {
+            StatusText.text = "Loading latest artifact..."
+        }
+
         StartCoroutine(LoadLatestArtifactCoroutine());
     }
 
