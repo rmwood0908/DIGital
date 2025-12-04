@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using TMPro;
@@ -55,10 +56,10 @@ public class ArtifactAnalysisManager : MonoBehaviour
     }
 
     [System.Serializable]
-    private class ArtifactResponse
+    private class ArtifactListResponse
     {
         public bool ok;
-        public Artifact artifact;
+        public Artifact[] artifacts;
         public string error;
     }
 
@@ -164,7 +165,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
             Debug.Log($"Artifact list JSON: {json}");
         #endif
 
-            ArtifactResponse response =
+            ArtifactListResponse response =
                 JsonUtility.FromJson<ArtifactListResponse>(json);
 
             if (response == null || !response.ok || response.artifacts == null)
