@@ -4048,6 +4048,7 @@ MonoBehaviour:
   WeightInput: {fileID: 891291419}
   BagNumberInput: {fileID: 777993417}
   ArtifactIDInput: {fileID: 653467793}
+  SelectArtifact: {fileID: 1630343037}
   StatusText: {fileID: 1802571296}
   apiUrl: http://localhost:4000/api/artifacts/latest
 --- !u!1 &843125659
@@ -8127,7 +8128,19 @@ MonoBehaviour:
       m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 825878033}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &1630343038
 MonoBehaviour:
