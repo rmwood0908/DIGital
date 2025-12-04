@@ -4,12 +4,16 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import { pool } from './db.js';
+import artifactRoutes from './artifactRoutes.js';
 
 // server set up
 dotenv.config()
 const app = express()
 app.use(cors());
 app.use(express.json());
+app.use('/api/artifacts', artifactRoutes);
+
+const PORT = process.env.PORT || 4000;
 
 // signup method
 app.post('/api/auth/signup', async (req, res) => {
@@ -57,10 +61,15 @@ app.post('/api/auth/login', async (req, res) => {
     try {
         const { username, password } = req.body;
 
+        if( !username || !password ) {
+            return res.status(400).json({ ok: false,
+                                            error: 'Missing field(s).'});
+            }
+
         // sql query
         const query = `SELECT user_id, password_hash
                        FROM users
-                       WHERE username = $1`
+                       WHERE username = $1`;
 
         // send query to Postgres
         const { rows } = await pool.query(query, [username.trim()]);
