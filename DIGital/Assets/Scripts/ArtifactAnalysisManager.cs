@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -151,7 +152,18 @@ public class ArtifactAnalysisManager : MonoBehaviour
     // populate input fields
     private void PopulateUI(Artifact artifact)
     {
-        DateDiscoveredInput.text = artifact.date_discovered;
+        // format date
+        if (!string.IsNullOrEmpty(artifact.date_discovered))
+        {
+            string[] parts = artifact.date_discovered.Split('T');
+            DateDiscoveredInput.text = parts[0].Trim();
+        }
+        
+        else
+        {
+            DateDiscoveredInput.text = "";
+        }
+
         InvestigatorInput.text = artifact.investigator;
         AreaInput.text = artifact.area;
         UnitInput.text = artifact.unit;
