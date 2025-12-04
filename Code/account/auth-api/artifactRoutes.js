@@ -129,7 +129,7 @@ router.get('/latest', async (req, res) => {
 });
 
 // get all artifacts (for dropdown in analysis scene)
-router.get('/', async, (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const selectAllArtifactsQuery =
         `SELECT id, date_discovered, investigator,
