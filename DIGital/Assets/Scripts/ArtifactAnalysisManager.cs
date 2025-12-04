@@ -285,6 +285,10 @@ public class ArtifactAnalysisManager : MonoBehaviour
 
     private void ShowModelForArtifact( Artifact artifact )
     {
+        // debugging 
+        string artifactId = artifact != null ? artifact.artifact_id : "null";
+        Debug.Log($"ShowModelForArtifact called. Artifact ID = '{artifactId}'");
+
         // hide all bound models to start
         if( modelBindings != null )
         {
@@ -300,6 +304,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
         // show default artifact if none
         if (artifact == null )
         {
+            Debug.Log("Artifact is null, showing default if assigned.");
             if (defaultModel != null)
             {
                 defaultModel.SetActive(true);
@@ -308,25 +313,48 @@ public class ArtifactAnalysisManager : MonoBehaviour
             return;
         }
 
+        bool foundMatch = false;
+
         // find model whose ID matches node.js id
-        if ( modelBindings != null )
+        if (modelBindings != null)
         {
-            foreach( var binding in modelBindings )
+            foreach (var binding in modelBindings)
             {
-                if (binding != null && binding.modelObject != null &&
-                    string.Equals(binding.artifactId, artifact.artifact_id,
-                                  StringComparison.OrdinalIgnoreCase))
+                if (binding == null || binding.modelObject == null)
+                    continue;
+
+                string bindingId = binding.artifactId ?? "null";
+                Debug.Log($"Checking binding id '{bindingId}' " +
+                        $"against artifact id '{artifact.artifact_id}'");
+
+                if (string.Equals(binding.artifactId?.Trim(),
+                                artifact.artifact_id?.Trim(),
+                                StringComparison.OrdinalIgnoreCase))
                 {
+                    Debug.Log("Match found, enabling model: " +
+                            binding.modelObject.name);
                     binding.modelObject.SetActive(true);
-                    return;
+                    Debug.Log(
+                    $"After enabling: {binding.modelObject.name} " +
+                    $"activeSelf={binding.modelObject.activeSelf}, " +
+                    $"activeInHierarchy={binding.modelObject.activeInHierarchy}, " +
+                    $"pos={binding.modelObject.transform.position}");
+                    foundMatch = true;
+                    break;
                 }
             }
         }
 
-        // if no match, fall back to default
-        if( defaultModel != null )
+        if (!foundMatch)
         {
-            defaultModel.SetActive(true);
+            Debug.LogWarning("No matching model binding for artifact id " +
+                            artifact.artifact_id);
+
+            if (defaultModel != null)
+            {
+                Debug.Log("Showing defaultModel instead.");
+                defaultModel.SetActive(true);
+            }
         }
     }
 }
