@@ -4050,7 +4050,7 @@ MonoBehaviour:
   ArtifactIDInput: {fileID: 653467793}
   SelectArtifact: {fileID: 1630343037}
   StatusText: {fileID: 1802571296}
-  apiUrl: http://localhost:4000/api/artifacts/latest
+  apiUrl: http://localhost:4000/api/artifacts
 --- !u!1 &843125659
 GameObject:
   m_ObjectHideFlags: 0
@@ -5102,7 +5102,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 671.24, y: 596}
+  m_AnchoredPosition: {x: 868.4803, y: 602}
   m_SizeDelta: {x: 349.58, y: 85.1445}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &960641835
@@ -8063,8 +8063,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1054.9, y: 596}
-  m_SizeDelta: {x: 349.59, y: 165.7851}
+  m_AnchoredPosition: {x: 67.89, y: 600.3872}
+  m_SizeDelta: {x: 799.35, y: 165.7851}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1630343037
 MonoBehaviour:
@@ -8864,8 +8864,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 592.42, y: -566}
-  m_SizeDelta: {x: 1534.1438, y: 193.6611}
+  m_AnchoredPosition: {x: 400.65, y: -564.3872}
+  m_SizeDelta: {x: 2301.2, y: 187.2098}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1802571296
 MonoBehaviour:
@@ -9316,7 +9316,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Select Artifact
+  m_text: Option A
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9586,7 +9586,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 22, y: 626}
+  m_AnchoredPosition: {x: -759, y: 642}
   m_SizeDelta: {x: 1945.9, y: 114.0686}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1995440850
