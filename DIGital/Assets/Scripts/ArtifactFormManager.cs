@@ -46,7 +46,7 @@ public class ArtifactFormManager : MonoBehaviour
         public string associated_features;
         public string material_type;
         public int quantity;
-        public float weight;
+        public string weight;
         public string bag_number;
         public string artifact_id;
     }
@@ -55,7 +55,7 @@ public class ArtifactFormManager : MonoBehaviour
     public void OnSubmitButtonClicked()
     {
         // front end validation
-        if (!ValidateInputs( out int Quantity, out float Weight))
+        if (!ValidateInputs(out int Quantity))
         {
             return;
         }
@@ -73,7 +73,7 @@ public class ArtifactFormManager : MonoBehaviour
             associated_features = AssociatedFeaturesInput.text.Trim(),
             material_type = MaterialTypeInput.text.Trim(),
             quantity = Quantity,
-            weight = Weight,
+            weight = WeightInput.text.Trim(),
             bag_number = BagNumberInput.text.Trim(),
             artifact_id = ArtifactIDInput.text.Trim()
         };
@@ -90,10 +90,9 @@ public class ArtifactFormManager : MonoBehaviour
         StatusText.text = "";
     }
 
-    private bool ValidateInputs( out int Quantity, out float Weight)
+    private bool ValidateInputs( out int Quantity )
     {
         Quantity = 0;
-        Weight = 0f;
 
         // required fields
         if (string.IsNullOrWhiteSpace(DateDiscoveredInput.text) ||
@@ -112,16 +111,10 @@ public class ArtifactFormManager : MonoBehaviour
             return false;
         }
 
-        // quantity and weight validation
+        // quantity validation
         if (!int.TryParse(QuantityInput.text.Trim(), out Quantity))
         {
             StatusText.text = "Quantity must be a valid integer (whole number).";
-            return false;
-        }
-
-        if (!float.TryParse(WeightInput.text.Trim(), out Weight))
-        {
-            StatusText.text = "Weight must be a valid number.";
             return false;
         }
 
