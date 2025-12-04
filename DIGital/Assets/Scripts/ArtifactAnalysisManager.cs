@@ -138,17 +138,17 @@ public class ArtifactAnalysisManager : MonoBehaviour
     // populate input fields
     private void PopulateUI(Artifact artifact)
     {
-        DateField.text = artifact.date_discovered;
-        InvestigatorField.text = artifact.investigator;
-        AreaField.text = artifact.area;
-        UnitField.text = artifact.unit;
-        LayerField.text = artifact.layer;
-        SiteField.text = artifact.site;
-        AssociatedFeaturesField.text = artifact.associated_features;
-        MaterialTypeField.text = artifact.material_type;
-        QuantityField.text = artifact.quantity.ToString();
-        WeightField.text = artifact.weight.ToString("0.##");
-        BagNumberField.text = artifact.bag_number;
-        ArtifactIDField.text = artifact.artifact_id;
+        DateDiscoveredInput.text = artifact.date_discovered;
+        InvestigatorInput.text = artifact.investigator;
+        AreaInput.text = artifact.area;
+        UnitInput.text = artifact.unit;
+        LayerInput.text = artifact.layer;
+        SiteInput.text = artifact.site;
+        AssociatedFeaturesInput.text = artifact.associated_features;
+        MaterialTypeInput.text = artifact.material_type;
+        QuantityInput.text = artifact.quantity.ToString();
+        WeightInput.text = artifact.weight.ToString("0.##");
+        BagNumberInput.text = artifact.bag_number;
+        ArtifactIDInput.text = artifact.artifact_id;
     }
 }
