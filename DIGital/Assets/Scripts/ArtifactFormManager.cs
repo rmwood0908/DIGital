@@ -90,7 +90,7 @@ public class ArtifactFormManager : MonoBehaviour
         StatusText.text = "";
     }
 
-    private bool ValidateInputs( out int Quantity, out float Weight)
+    private bool ValidateInputs( out int Quantity )
     {
         Quantity = 0;
 
@@ -111,7 +111,7 @@ public class ArtifactFormManager : MonoBehaviour
             return false;
         }
 
-        // quantity and weight validation
+        // quantity validation
         if (!int.TryParse(QuantityInput.text.Trim(), out Quantity))
         {
             StatusText.text = "Quantity must be a valid integer (whole number).";
