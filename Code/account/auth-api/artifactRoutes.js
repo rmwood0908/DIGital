@@ -133,7 +133,7 @@ router.get('/', async (req, res) => {
     try {
         const selectAllArtifactsQuery =
         `SELECT id, date_discovered, investigator,
-                area, unit, layer, site, associated_features
+                area, unit, layer, site, associated_features,
                 material_type, quantity, weight, bag_number,
                 artifact_id
          FROM artifacts

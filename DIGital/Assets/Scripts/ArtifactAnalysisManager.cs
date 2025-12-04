@@ -34,7 +34,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
     // api
     [Header("API Settings")]
     [SerializeField] private string apiUrl =
-                     "http://localhost:4000/api/artifacts/latest";
+                     "http://localhost:4000/api/artifacts";
 
     // node app variables
     [System.Serializable]
@@ -74,7 +74,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
         // make input fields read only
         SetFieldsReadOnly(true);
 
-        if( StatusText.text != null )
+        if( StatusText != null )
         {
             StatusText.text = "Loading artifact list...";
         }
@@ -106,7 +106,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
         Artifact selectedArtifact = _artifacts[index];
         PopulateUI(selectedArtifact);
 
-        if( StatusText.text != null )
+        if( StatusText != null )
         {
             StatusText.text = "Artifact data loaded.";
         }
@@ -221,15 +221,15 @@ public class ArtifactAnalysisManager : MonoBehaviour
         List<TMP_Dropdown.OptionData> options =
             new List<TMP_Dropdown.OptionData>();
 
-        foreach (var a in _artifacts)
+        foreach (var artifact in _artifacts)
         {
             // clean date to just YYYY-MM-DD if it has a T timestamp
-            string rawDate = a.date_discovered ?? "";
+            string rawDate = artifact.date_discovered ?? "";
             string shortDate =
                 rawDate.Length >= 10 ? rawDate.Substring(0, 10) : rawDate;
 
             string label =
-                $"{a.bag_number} | {a.artifact_id} | {shortDate}";
+                $"{artifact.bag_number} | {artifact.artifact_id} | {shortDate}";
 
             options.Add(new TMP_Dropdown.OptionData(label));
         }
