@@ -55,7 +55,7 @@ public class ArtifactFormManager : MonoBehaviour
     public void OnSubmitButtonClicked()
     {
         // front end validation
-        if (!ValidateInputs( out int Quantity))
+        if (!ValidateInputs(out int Quantity))
         {
             return;
         }
