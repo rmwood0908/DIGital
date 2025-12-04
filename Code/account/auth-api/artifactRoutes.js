@@ -128,5 +128,32 @@ router.get('/latest', async (req, res) => {
     }
 });
 
+// get all artifacts (for dropdown in analysis scene)
+router.get('/', async, (req, res) => {
+    try {
+        const selectAllArtifactsQuery =
+        `SELECT id, date_discovered, investigator,
+                area, unit, layer, site, associated_features
+                material_type, quantity, weight, bag_number,
+                artifact_id
+         FROM artifacts
+         ORDER BY created_at DESC;`;
+
+        // send query to database
+        const result = await pool.query(selectAllArtifactsQuery);
+
+        // error handling
+        return res.status(200).json({
+            ok: true, artifacts: result.rows, error: null,
+        });
+    }
+    catch(error) {
+        console.error('Error fetching artifacts list:', error);
+        return res.status(500).json({
+            ok: false, artifacts: [], error: "Internal server error.",
+        });
+    }
+});
+
 // export the router
 export default router;
