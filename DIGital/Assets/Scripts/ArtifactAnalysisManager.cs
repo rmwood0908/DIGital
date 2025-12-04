@@ -76,7 +76,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
     {
         if( StatusText.text != null )
         {
-            StatusText.text = "Loading latest artifact..."
+            StatusText.text = "Loading latest artifact...";
         }
 
         StartCoroutine(LoadLatestArtifactCoroutine());
