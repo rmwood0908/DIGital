@@ -27,10 +27,11 @@ public class ArtifactAnalysisManager : MonoBehaviour
 
     // api
     [Header("API Settings")]
-    [SerializeField] private string apiURL =
+    [SerializeField] private string apiUrl =
                      "http://localhost:4000/api/artifacts/latest";
 
     // node app variables
+    [System.Serializable]
     private class Artifact
     {
         public int id;
@@ -48,6 +49,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
         public string artifact_id;
     }
 
+    [System.Serializable]
     private class ArtifactResponse
     {
         public bool ok;
@@ -72,10 +74,10 @@ public class ArtifactAnalysisManager : MonoBehaviour
     {
         TMP_InputField[] fields =
         {
-            DateField, InvestigatorField, AreaField, UnitField,
-            LayerField, SiteField, AssociatedFeaturesField,
-            MaterialTypeField, QuantityField, WeightField,
-            BagNumberField, ArtifactIDField
+            DateDiscoveredInput, InvestigatorInput, AreaInput, UnitInput,
+            LayerInput, SiteInput, AssociatedFeaturesInput,
+            MaterialTypeInput, QuantityInput, WeightInput,
+            BagNumberInput, ArtifactIDInput
         };
 
         foreach ( var field in fields )
