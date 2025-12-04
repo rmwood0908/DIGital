@@ -75,8 +75,6 @@ public class ArtifactAnalysisManager : MonoBehaviour
     [SerializeField] private List<ModelBinding> modelBindings = 
                                                 new List<ModelBinding>();
 
-    [SerializeField] private GameObject defaultModel;
-
     [Header("UI Panel")]
     [SerializeField] private GameObject BackgroundPanel;
 
@@ -308,24 +306,12 @@ public class ArtifactAnalysisManager : MonoBehaviour
             }
         }
 
-        // also hide default
-        if (defaultModel != null)
-        {
-            defaultModel.SetActive(false);
-        }
-
         // reset current active
         CurrentActiveModel = null;
 
-        // show default artifact if none
+        // if no artifact, show nothing
         if (artifact == null )
         { 
-            if (defaultModel != null)
-            {
-                defaultModel.SetActive(true);
-                CurrentActiveModel = defaultModel;
-            }
-
             return;
         }
 
@@ -348,15 +334,6 @@ public class ArtifactAnalysisManager : MonoBehaviour
                     foundMatch = true;
                     break;
                 }
-            }
-        }
-
-        if (!foundMatch)
-        {
-            if (defaultModel != null)
-            {
-                defaultModel.SetActive(true);
-                CurrentActiveModel = defaultModel;
             }
         }
     }

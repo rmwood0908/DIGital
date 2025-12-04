@@ -4054,8 +4054,8 @@ Camera:
   m_GameObject: {fileID: 817700597}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 4
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.73333335, g: 0.4039216, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -4217,7 +4217,6 @@ MonoBehaviour:
   modelBindings:
   - artifactId: 2
     modelObject: {fileID: 931546644}
-  defaultModel: {fileID: 931546644}
   BackgroundPanel: {fileID: 210723479}
 --- !u!1 &832246321
 GameObject:
