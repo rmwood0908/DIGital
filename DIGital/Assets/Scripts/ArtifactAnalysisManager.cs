@@ -22,6 +22,10 @@ public class ArtifactAnalysisManager : MonoBehaviour
     [SerializeField] private TMP_InputField BagNumberInput;
     [SerializeField] private TMP_InputField ArtifactIDInput;
 
+    // dropdown menu
+    [Header("Dropdown")]
+    [SerializeField] private TMP_Dropdown SelectArtifact;
+
     // status text
     [Header("Status Text")]
     [SerializeField] private TMP_Text StatusText;
@@ -58,6 +62,9 @@ public class ArtifactAnalysisManager : MonoBehaviour
         public string error;
     }
 
+    // local cache of artifacts
+    private List<Artifact> _artifacts = new List<Artifact>();
+
     // functions
 
     // initialize analysis panel
@@ -68,19 +75,40 @@ public class ArtifactAnalysisManager : MonoBehaviour
 
         if( StatusText.text != null )
         {
-            StatusText.text = "Press Analyze to load artifact data.";
+            StatusText.text = "Loading artifact list...";
         }
+
+        StartCoroutine(LoadArtifactListCoroutine());
     }
 
     // analyze button
     public void OnAnalyzeButtonClicked()
     {
-        if( StatusText.text != null )
+        // error handling
+        if( _artifacts.Count == 0 )
         {
-            StatusText.text = "Loading latest artifact...";
+            StatusText.text = "No artifacts available to analyze.";
+            return;
         }
 
-        StartCoroutine(LoadLatestArtifactCoroutine());
+        // initalize index
+        int index = SelectArtifact != null ? SelectArtifact.value : 0;
+
+        // error handling
+        if ( index < 0 || index >= _artifacts.Count )
+        {
+            StatusText.text = "Invalid selection.";
+            return;
+        }
+
+        // select artifact
+        Artifact selectedArtifact = _artifacts[index];
+        PopulateUI(selectedArtifact);
+
+        if( StatusText.text != null )
+        {
+            StatusText.text = "Artifact data loaded.";
+        }
     }
 
     // set input to read only
@@ -103,7 +131,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
     }
 
     // load artifact from database
-    private IEnumerator LoadLatestArtifactCoroutine()
+    private IEnumerator LoadArtifactListCoroutine()
     {
         // use node app JS code
         using (UnityWebRequest request = UnityWebRequest.Get(apiUrl))
@@ -118,35 +146,97 @@ public class ArtifactAnalysisManager : MonoBehaviour
                     : "";
 
                 Debug.LogError(
-                    $"Error fetching artifact: " +
+                    $"Error fetching artifact list: " +
                     $"{request.responseCode} - {request.error} - {serverText}");
 
-                StatusText.text = "Error loading artifact data.";
+
+                if (StatusText != null)
+                {
+                    StatusText.text = "Error loading artifact list.";
+                }
+
                 yield break;
             }
 
             string json = request.downloadHandler.text;
 
         #if UNITY_EDITOR
-            Debug.Log($"Artifact analysis JSON: {json}");
+            Debug.Log($"Artifact list JSON: {json}");
         #endif
 
             ArtifactResponse response =
-                JsonUtility.FromJson<ArtifactResponse>(json);
+                JsonUtility.FromJson<ArtifactListResponse>(json);
 
-            if (response == null || !response.ok || response.artifact == null)
+            if (response == null || !response.ok || response.artifacts == null)
             {
-                StatusText.text =
-                    response != null && !string.IsNullOrEmpty(response.error)
-                        ? $"Server error: {response.error}"
-                        : "No artifact data available.";
+                if( StatusText != null )
+                {
+                    StatusText.text =
+                        response != null && !string.IsNullOrEmpty(response.error)
+                            ? $"Server error: {response.error}"
+                            : "No artifact data available.";
+                }
+
                 yield break;
             }
 
-            // success
-            PopulateUI(response.artifact);
-            StatusText.text = "Artifact data loaded.";
+            // get artifact list
+            _artifacts = new List<Artifact>(response.artifacts);
+
+            if( _artifacts.Count == 0 )
+            {
+                if( StatusText != null )
+                {
+                    StatusText.text = "No artifacts in database.";
+                }
+
+                if ( SelectArtifact != null )
+                {
+                    SelectArtifact.ClearOptions();
+                }
+
+                yield break;
+            }
+
+            // success, populate dropdown
+            PopulateDropdownOptions();
+
+            if( StatusText != null )
+            {
+                StatusText.text = "Select an artifact and press Analyze.";
+            }
         }
+    }
+
+    // populate dropdown function
+    private void PopulateDropdownOptions()
+    {
+        if (SelectArtifact == null)
+        {
+            Debug.LogWarning("SelectArtifact is not assigned.");
+            return;
+        }
+
+        List<TMP_Dropdown.OptionData> options =
+            new List<TMP_Dropdown.OptionData>();
+
+        foreach (var a in _artifacts)
+        {
+            // clean date to just YYYY-MM-DD if it has a T timestamp
+            string rawDate = a.date_discovered ?? "";
+            string shortDate =
+                rawDate.Length >= 10 ? rawDate.Substring(0, 10) : rawDate;
+
+            string label =
+                $"{a.bag_number} | {a.artifact_id} | {shortDate}";
+
+            options.Add(new TMP_Dropdown.OptionData(label));
+        }
+
+        SelectArtifact.ClearOptions();
+        SelectArtifact.AddOptions(options);
+        SelectArtifact.value = 0;
+        SelectArtifact.RefreshShownValue();
     }
 
     // populate input fields
