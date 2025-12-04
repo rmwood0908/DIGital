@@ -33,8 +33,7 @@ router.post('/', async (req, res) => {
             !material_type ||
             quantity === undefined ||
             quantity === '' ||
-            weight === undefined ||
-            weight === '' ||
+            !weight ||
             !bag_number ||
             !artifact_id
         ) {
@@ -44,11 +43,10 @@ router.post('/', async (req, res) => {
         });
     }
 
-    // coerce quantity and weight to numbers
+    // coerce quantity to number
     const quantityValue = Number(quantity);
-    const weightValue = Number(weight);
 
-    if (Number.isNaN(quantityValue) || Number.isNaN(weightValue)) {
+    if (Number.isNaN(quantityValue)) {
       return res.status(400).json({
         ok: false,
         error: 'Quantity and weight must be numbers',
@@ -74,7 +72,7 @@ router.post('/', async (req, res) => {
         associated_features || null,
         material_type,
         quantityValue,
-        weightValue,
+        weight,
         bag_number,
         artifact_id
     ];

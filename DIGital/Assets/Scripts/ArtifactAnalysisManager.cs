@@ -50,7 +50,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
         public string associated_features;
         public string material_type;
         public int quantity;
-        public float weight;
+        public string weight;
         public string bag_number;
         public string artifact_id;
     }
@@ -229,7 +229,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
                 rawDate.Length >= 10 ? rawDate.Substring(0, 10) : rawDate;
 
             string label =
-                $"{artifact.bag_number} | {artifact.artifact_id} | {shortDate}";
+                $"Artifact ID: {artifact.artifact_id} | {artifact.bag_number} | {shortDate}";
 
             options.Add(new TMP_Dropdown.OptionData(label));
         }
@@ -263,7 +263,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
         AssociatedFeaturesInput.text = artifact.associated_features;
         MaterialTypeInput.text = artifact.material_type;
         QuantityInput.text = artifact.quantity.ToString();
-        WeightInput.text = artifact.weight.ToString("0.##");
+        WeightInput.text = artifact.weight ?? "";
         BagNumberInput.text = artifact.bag_number;
         ArtifactIDInput.text = artifact.artifact_id;
     }
