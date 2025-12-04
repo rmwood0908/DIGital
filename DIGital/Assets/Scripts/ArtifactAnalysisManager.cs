@@ -77,11 +77,13 @@ public class ArtifactAnalysisManager : MonoBehaviour
 
     [SerializeField] private GameObject defaultModel;
 
-    [Header("3D Model Bindings")]
+    [Header("UI Panel")]
     [SerializeField] private GameObject BackgroundPanel;
 
     // local cache of artifacts
     private List<Artifact> _artifacts = new List<Artifact>();
+
+    public GameObject CurrentActiveModel { get; private set; }
 
     // functions
 
@@ -294,10 +296,6 @@ public class ArtifactAnalysisManager : MonoBehaviour
 
     private void ShowModelForArtifact( Artifact artifact )
     {
-        // debugging 
-        string artifactId = artifact != null ? artifact.artifact_id : "null";
-        Debug.Log($"ShowModelForArtifact called. Artifact ID = '{artifactId}'");
-
         // hide all bound models to start
         if( modelBindings != null )
         {
@@ -310,13 +308,22 @@ public class ArtifactAnalysisManager : MonoBehaviour
             }
         }
 
+        // also hide default
+        if (defaultModel != null)
+        {
+            defaultModel.SetActive(false);
+        }
+
+        // reset current active
+        CurrentActiveModel = null;
+
         // show default artifact if none
         if (artifact == null )
-        {
-            Debug.Log("Artifact is null, showing default if assigned.");
+        { 
             if (defaultModel != null)
             {
                 defaultModel.SetActive(true);
+                CurrentActiveModel = defaultModel;
             }
 
             return;
@@ -332,22 +339,12 @@ public class ArtifactAnalysisManager : MonoBehaviour
                 if (binding == null || binding.modelObject == null)
                     continue;
 
-                string bindingId = binding.artifactId ?? "null";
-                Debug.Log($"Checking binding id '{bindingId}' " +
-                        $"against artifact id '{artifact.artifact_id}'");
-
                 if (string.Equals(binding.artifactId?.Trim(),
-                                artifact.artifact_id?.Trim(),
-                                StringComparison.OrdinalIgnoreCase))
+                                  artifact.artifact_id?.Trim(),
+                                  StringComparison.OrdinalIgnoreCase))
                 {
-                    Debug.Log("Match found, enabling model: " +
-                            binding.modelObject.name);
                     binding.modelObject.SetActive(true);
-                    Debug.Log(
-                    $"After enabling: {binding.modelObject.name} " +
-                    $"activeSelf={binding.modelObject.activeSelf}, " +
-                    $"activeInHierarchy={binding.modelObject.activeInHierarchy}, " +
-                    $"pos={binding.modelObject.transform.position}");
+                    CurrentActiveModel = binding.modelObject;
                     foundMatch = true;
                     break;
                 }
@@ -356,13 +353,10 @@ public class ArtifactAnalysisManager : MonoBehaviour
 
         if (!foundMatch)
         {
-            Debug.LogWarning("No matching model binding for artifact id " +
-                            artifact.artifact_id);
-
             if (defaultModel != null)
             {
-                Debug.Log("Showing defaultModel instead.");
                 defaultModel.SetActive(true);
+                CurrentActiveModel = defaultModel;
             }
         }
     }
