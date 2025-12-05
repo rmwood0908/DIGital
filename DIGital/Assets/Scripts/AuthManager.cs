@@ -177,7 +177,7 @@ public class AuthManager : MonoBehaviour
     public class LoginResponse
     {
         public bool ok;
-        public int userId;
+        public string userId;
         public string error;
     }
 
@@ -193,7 +193,7 @@ public class AuthManager : MonoBehaviour
     public class SignupUser
     {
         // use same field names Node sends: user_id, email, username, created_at
-        public int user_id;
+        public string user_id;
         public string email;
         public string username;
         public string created_at;
