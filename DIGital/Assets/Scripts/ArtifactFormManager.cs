@@ -30,7 +30,7 @@ public class ArtifactFormManager : MonoBehaviour
     // api settings
     [Header("API Settings")]
     [SerializeField] private string apiUrl = 
-                    "http://localhost:4000/api/artifacts";
+                    "https://digital-ty59.onrender.com/api/artifacts";
 
 
     // input field types

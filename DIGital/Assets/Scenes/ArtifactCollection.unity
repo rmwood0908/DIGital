@@ -5063,7 +5063,7 @@ MonoBehaviour:
   ArtifactIDInput: {fileID: 1770865955}
   StatusText: {fileID: 2061799164}
   PanelRoot: {fileID: 388823467}
-  apiUrl: http://localhost:4000/api/artifacts
+  apiUrl: https://digital-ty59.onrender.com/api/artifacts
 --- !u!4 &1319118416
 Transform:
   m_ObjectHideFlags: 0
