@@ -51,6 +51,31 @@ public class ArtifactFormManager : MonoBehaviour
         public string artifact_id;
     }
 
+    private void Start()
+    {
+        // ensure the panel starts hidden if you want it that way
+        if (PanelRoot != null)
+        {
+            PanelRoot.SetActive(false);
+        }
+    }
+
+    public void OpenForm()
+    {
+        if (PanelRoot != null)
+        {
+            PanelRoot.SetActive(true);
+        }
+    }
+
+    public void CloseForm()
+    {
+        if (PanelRoot != null)
+        {
+            PanelRoot.SetActive(false);
+        }
+    }
+
     // submit button clicked
     public void OnSubmitButtonClicked()
     {
@@ -84,10 +109,9 @@ public class ArtifactFormManager : MonoBehaviour
     // cancel button clicked
     public void OnCancelButtonClicked()
     {
-        // TEMP: clear the form, later it will close the pop-up overlay
         ClearForm();
-
         StatusText.text = "";
+        CloseForm();
     }
 
     private bool ValidateInputs( out int Quantity )
