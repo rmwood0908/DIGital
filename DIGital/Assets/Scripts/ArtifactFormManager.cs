@@ -30,7 +30,7 @@ public class ArtifactFormManager : MonoBehaviour
     // api settings
     [Header("API Settings")]
     [SerializeField] private string apiUrl = 
-                    "http://localhost:4000/api/artifacts";
+                    "https://digital-ty59.onrender.com/api/artifacts";
 
 
     // input field types
@@ -49,7 +49,53 @@ public class ArtifactFormManager : MonoBehaviour
         public string weight;
         public string bag_number;
         public string artifact_id;
+        public string userId;
     }
+
+    private void Start()
+    {
+        // ensure the panel starts hidden if you want it that way
+        if (PanelRoot != null)
+        {
+            PanelRoot.SetActive(false);
+        }
+    }
+
+    public void OpenForm()
+    {
+        if (PanelRoot != null)
+        {
+            Debug.Log("[ArtifactFormManager] OpenForm() - enabling PanelRoot");
+            PanelRoot.SetActive(true);
+
+            // unlock cursor for UI interaction
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible   = true;
+
+            // pause game while form is open
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Debug.LogWarning("[ArtifactFormManager] PanelRoot is not assigned!");
+        }
+    }
+
+    public void CloseForm()
+    {
+        if (PanelRoot != null)
+        {
+            PanelRoot.SetActive(false);
+
+            // restore FPS controls
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible   = false;
+
+            // resume game if you paused it
+            Time.timeScale = 1f;
+        }
+    }
+
 
     // submit button clicked
     public void OnSubmitButtonClicked()
@@ -75,7 +121,11 @@ public class ArtifactFormManager : MonoBehaviour
             quantity = Quantity,
             weight = WeightInput.text.Trim(),
             bag_number = BagNumberInput.text.Trim(),
-            artifact_id = ArtifactIDInput.text.Trim()
+            artifact_id = ArtifactIDInput.text.Trim(),
+            userId = (SessionManager.Instance != null &&
+                        SessionManager.Instance.IsLoggedIn)
+                        ? SessionManager.Instance.UserId
+                        : null            
         };
 
         StartCoroutine(SubmitArtifactCoroutine(data));
@@ -84,10 +134,10 @@ public class ArtifactFormManager : MonoBehaviour
     // cancel button clicked
     public void OnCancelButtonClicked()
     {
-        // TEMP: clear the form, later it will close the pop-up overlay
+        Debug.Log("[ArtifactFormManager] Cancel button clicked");
         ClearForm();
-
         StatusText.text = "";
+        CloseForm();
     }
 
     private bool ValidateInputs( out int Quantity )

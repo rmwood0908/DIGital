@@ -20,6 +20,9 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float cameraSens = 0.1f;
     [SerializeField] private float heightRange = 80f;
 
+    [Header("Interaction")]
+    [SerializeField] private float interactDistance = 3f;  
+
     [Header("References")]
     [SerializeField] private CharacterController characterController;
     [SerializeField] private Transform interactionSource;
@@ -87,19 +90,66 @@ public class FirstPersonController : MonoBehaviour
         VerticalRotation(mouseYRotation);
     }
 
+    // UPDATED to handle dirt vs artifact interaction
     private void HandleInteraction()
     {
-        
-        Ray r = new Ray(interactionSource.position, interactionSource.forward);
-        if(Physics.Raycast(r, out RaycastHit hitInfo, 5))
+        if (mainCamera == null)
         {
-            if(hitInfo.collider.gameObject.TryGetComponent(out Interactable interactObj))
+            return;
+        }
+
+        Ray ray = new Ray(mainCamera.transform.position,
+                          mainCamera.transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, interactDistance))
+        {
+            // 1) prefer dirt (DiggableEarth) if present
+            DiggableEarth dirt = hit.collider.GetComponentInParent<DiggableEarth>();
+            if (dirt != null)
             {
-                interactObj.displayTooltip();
-                if(playerHandler.InteractTriggered)
+                if (Input.GetMouseButtonDown(0))
                 {
-                    interactObj.Interact();
-                    playerHandler.InteractTriggered = false;
+                    dirt.Interact();
+                }
+                else
+                {
+                    dirt.displayTooltip();
+                }
+
+                return; // stop here, don’t let artifact also fire
+            }
+
+            // 2) else, try artifact
+            ArtifactInteractable artifact =
+                hit.collider.GetComponentInParent<ArtifactInteractable>();
+
+            if (artifact != null)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    artifact.Interact();
+                }
+                else
+                {
+                    artifact.displayTooltip();
+                }
+
+                return;
+            }
+
+            // 3) generic Interactable fallback
+            Interactable generic =
+                hit.collider.GetComponentInParent<Interactable>();
+
+            if (generic != null)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    generic.Interact();
+                }
+                else
+                {
+                    generic.displayTooltip();
                 }
             }
         }

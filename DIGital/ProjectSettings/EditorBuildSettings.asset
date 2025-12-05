@@ -5,9 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/AccountManagement.unity
+    guid: c44a5b52c32a78142828cec71b0d9b42
+  - enabled: 1
+    path: Assets/Scenes/Walk&Excavate.unity
+    guid: 43556bf2cf14cad42ab99abee49f23f2
+  - enabled: 1
+    path: Assets/Scenes/ArtifactAnalysis.unity
+    guid: 568634c7aacaaf14b941af7837c54161
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

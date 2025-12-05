@@ -34,7 +34,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
     // api
     [Header("API Settings")]
     [SerializeField] private string apiUrl =
-                     "http://localhost:4000/api/artifacts";
+                     "https://digital-ty59.onrender.com/api/artifacts";
 
     // node app variables
     [System.Serializable]
@@ -292,49 +292,73 @@ public class ArtifactAnalysisManager : MonoBehaviour
         ShowModelForArtifact(artifact);
     }
 
-    private void ShowModelForArtifact( Artifact artifact )
+    private void ShowModelForArtifact(Artifact artifact)
     {
         // hide all bound models to start
-        if( modelBindings != null )
+        if (modelBindings != null)
         {
-            foreach( var binding in modelBindings )
+            foreach (var binding in modelBindings)
             {
-                if( binding != null && binding.modelObject != null )
+                if (binding != null && binding.modelObject != null)
                 {
                     binding.modelObject.SetActive(false);
                 }
             }
         }
 
-        // reset current active
         CurrentActiveModel = null;
 
-        // if no artifact, show nothing
-        if (artifact == null )
-        { 
+        if (artifact == null)
+        {
+            Debug.LogWarning("[ArtifactAnalysisManager] Artifact is null in ShowModelForArtifact");
             return;
         }
 
+        string dbId = artifact.artifact_id != null
+            ? artifact.artifact_id.Trim()
+            : "(null)";
+
+        Debug.Log($"[ArtifactAnalysisManager] ShowModelForArtifact called for DB ID: '{dbId}'");
+
         bool foundMatch = false;
 
-        // find model whose ID matches node.js id
-        if (modelBindings != null)
+        if (modelBindings != null && modelBindings.Count > 0)
         {
             foreach (var binding in modelBindings)
             {
                 if (binding == null || binding.modelObject == null)
                     continue;
 
-                if (string.Equals(binding.artifactId?.Trim(),
-                                  artifact.artifact_id?.Trim(),
-                                  StringComparison.OrdinalIgnoreCase))
+                string bindingId = binding.artifactId != null
+                    ? binding.artifactId.Trim()
+                    : "(null)";
+
+                Debug.Log($"[ArtifactAnalysisManager] Checking binding: '{bindingId}' " +
+                        $"against DB ID: '{dbId}'");
+
+                if (string.Equals(bindingId,
+                                dbId,
+                                StringComparison.OrdinalIgnoreCase))
                 {
+                    Debug.Log("[ArtifactAnalysisManager] Match found! " +
+                            $"Enabling model: {binding.modelObject.name}");
+
                     binding.modelObject.SetActive(true);
                     CurrentActiveModel = binding.modelObject;
                     foundMatch = true;
                     break;
                 }
             }
+        }
+        else
+        {
+            Debug.LogWarning("[ArtifactAnalysisManager] modelBindings list is empty or null.");
+        }
+
+        if (!foundMatch)
+        {
+            Debug.LogWarning("[ArtifactAnalysisManager] No modelBinding matched DB ID: '" +
+                            dbId + "'");
         }
     }
 }
