@@ -21,6 +21,9 @@ public class AuthManager : MonoBehaviour
     [Header("Server Settings")]
     public string serverBaseUrl = "https://digital-ty59.onrender.com";
 
+    [Header("Scenes")]
+    public string excavationSceneName = "Walk&Excavate";
+
     // called by Login button
     public void OnLoginButtonClicked()
     {
@@ -44,7 +47,8 @@ public class AuthManager : MonoBehaviour
     IEnumerator LoginCoroutine(string username, string password)
     {
         // uses existing .js code for login route
-        string url = serverBaseUrl + "/api/auth/login";
+        string url = $"{serverBaseUrl}/api/auth/login";
+        Debug.Log($"Login URL: {url}");
 
         // create request data 
         LoginRequest data = new LoginRequest
@@ -68,25 +72,41 @@ public class AuthManager : MonoBehaviour
 
             if (req.result != UnityWebRequest.Result.Success)
             {
-                Debug.LogError("Login error: " + 
-                                req.responseCode + " " + req.error);
-                Debug.LogError("Server says: " + req);
+                Debug.LogError($"Login error: {req.responseCode} - {req.error}");
+                Debug.LogError($"Server response: {req.downloadHandler.text}");
+                yield break;
             }
+
+            Debug.Log("Login raw response: " + req.downloadHandler.text);
+
+            // parse JSON
+            LoginResponse response = 
+                          JsonUtility.Fromjson<LoginResponse>(req.downloadHandler.text);
+
+            if (response != null && response.ok)
+            {
+                Debug.Log("Login successful, userId = " + response.userId);
+                // TODO: store userId for later user
+
+                // go to excavation scene
+                SceneManager.LoadScene(excavationSceneName); 
+            }
+
             else
             {
-                Debug.Log("Login response: " + req.downloadHandler.text);
-                // TODO: parse JSON and move to next scene if ok
+                Debug.LogError("Login failed: " + 
+                              (response != null ? response.error : "Invalid JSON"));
             }
         }
     }
-
     // coroutine for signup
     IEnumerator SignupCoroutine(string email,
                                 string username,
                                 string password)
     {
         // uses existing .js code for signup route
-        string url = serverBaseUrl + "/api/auth/signup";
+        string url = $"{serverBaseUrl}/api/auth/signup";
+        Debug.Log($"Signup URL: {url}");
 
         // create request data
         SignupRequest data = new SignupRequest
@@ -111,13 +131,28 @@ public class AuthManager : MonoBehaviour
 
             if (req.result != UnityWebRequest.Result.Success)
             {
-                Debug.LogError("Signup error: " + req.error);
+                Debug.LogError($"Signup error: {req.responseCode} - {req.error}");
+                Debug.LogError($"Server response: {req.downloadHandler.text}");
+                yield break;
             }
+
+            Debug.Log("Signup raw respones: " + req.downloadHandler.text);
+
+            SignupReponse respone = 
+                          JsonUtility.Fromjson<SignupResponse>(req.downloadHandler.text);
+
+            if( response != null && response.ok )
+            {
+                Debug.Log("Signup successful for: " + respone.user.username);
+
+                // auto login AKA go to scene
+                SceneManager.LoadScene(excavationSceneName);
+            }
+
             else
             {
-                Debug.Log("Signup response: " +
-                          req.downloadHandler.text);
-                // TODO: show "Account created" message in UI
+                Debug.LogError("Signup failed: " +
+                              (resp != null ? resp.error : "Invalid JSON"));
             }
         }
     }
@@ -135,5 +170,31 @@ public class AuthManager : MonoBehaviour
         public string email;
         public string username;
         public string password;
+    }
+
+    [System.Serializable]
+    public class LoginResponse
+    {
+        public bool ok;
+        public int userId;
+        public string error;
+    }
+
+    [System.Serializable]
+    public class SignupResponse
+    {
+        public bool ok;
+        public SignupUser user;
+        public string error;
+    }
+
+    [System.Serializable]
+    public class SignupUser
+    {
+        // use same field names Node sends: user_id, email, username, created_at
+        public int user_id;
+        public string email;
+        public string username;
+        public string created_at;
     }
 }
