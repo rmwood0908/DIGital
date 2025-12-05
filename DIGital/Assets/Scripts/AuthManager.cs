@@ -47,11 +47,19 @@ public class AuthManager : MonoBehaviour
     // coroutine for login
     IEnumerator LoginCoroutine(string username, string password)
     {
-        // uses existing .js code for login route
         string url = $"{serverBaseUrl}/api/auth/login";
-        Debug.Log($"Login URL: {url}");
+        Debug.Log($"[AuthManager] Login URL: {url}");
+        Debug.Log($"[AuthManager] Username entered: '{username}' (len={username?.Length ?? 0})");
 
-        // create request data 
+        // Extra safety: if serverBaseUrl is empty in Inspector, warn loudly
+        if (string.IsNullOrWhiteSpace(serverBaseUrl))
+        {
+            Debug.LogError("[AuthManager] serverBaseUrl is EMPTY. " +
+                        "Set it in the Inspector to " +
+                        "\"https://digital-ty59.onrender.com\".");
+            yield break;
+        }
+
         LoginRequest data = new LoginRequest
         {
             username = username,
@@ -61,49 +69,69 @@ public class AuthManager : MonoBehaviour
         string json = JsonUtility.ToJson(data);
         byte[] body = Encoding.UTF8.GetBytes(json);
 
-        // send POST request
-        using (UnityWebRequest req =
-               new UnityWebRequest(url, "POST"))
+        using (UnityWebRequest req = new UnityWebRequest(url, "POST"))
         {
-            req.uploadHandler = new UploadHandlerRaw(body);
+            req.uploadHandler   = new UploadHandlerRaw(body);
             req.downloadHandler = new DownloadHandlerBuffer();
             req.SetRequestHeader("Content-Type", "application/json");
 
+            Debug.Log("[AuthManager] Sending login request...");
+
+            // NO try/catch around yield — this avoids CS1626
             yield return req.SendWebRequest();
+
+            Debug.Log($"[AuthManager] Request finished. " +
+                    $"Result={req.result}, Code={req.responseCode}");
+
+            string responseText = req.downloadHandler != null
+                ? req.downloadHandler.text
+                : "(no downloadHandler)";
 
             if (req.result != UnityWebRequest.Result.Success)
             {
-                Debug.LogError($"Login error: {req.responseCode} - {req.error}");
-                Debug.LogError($"Server response: {req.downloadHandler.text}");
+                Debug.LogError($"[AuthManager] Login error: {req.responseCode} - {req.error}");
+                Debug.LogError($"[AuthManager] Server response text: {responseText}");
                 yield break;
             }
 
-            Debug.Log("Login raw response: " + req.downloadHandler.text);
+            Debug.Log("[AuthManager] Login raw response: " + responseText);
 
-            // parse JSON
-            LoginResponse response = 
-                          JsonUtility.FromJson<LoginResponse>(req.downloadHandler.text);
+            LoginResponse response = null;
+            try
+            {
+                response = JsonUtility.FromJson<LoginResponse>(responseText);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError("[AuthManager] EXCEPTION parsing JSON: " + ex);
+                yield break;
+            }
 
             if (response != null && response.ok)
             {
-                Debug.Log("Login successful, userId = " + response.userId);
-                
+                Debug.Log("[AuthManager] Login successful, userId = " + response.userId);
+
                 if (SessionManager.Instance != null)
                 {
                     SessionManager.Instance.SetUser(response.userId, username);
                 }
+                else
+                {
+                    Debug.LogWarning("[AuthManager] SessionManager.Instance is null in login scene.");
+                }
 
-                // go to excavation scene
-                SceneManager.LoadScene(excavationSceneName); 
+                Debug.Log("[AuthManager] Loading excavation scene: " + excavationSceneName);
+                SceneManager.LoadScene(excavationSceneName);
             }
-
             else
             {
-                Debug.LogError("Login failed: " + 
-                              (response != null ? response.error : "Invalid JSON"));
+                Debug.LogError("[AuthManager] Login failed: " +
+                            (response != null ? response.error : "Invalid or null JSON"));
             }
         }
     }
+
+
     // coroutine for signup
     IEnumerator SignupCoroutine(string email,
                                 string username,
