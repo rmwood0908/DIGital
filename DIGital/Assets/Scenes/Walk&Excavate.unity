@@ -14646,6 +14646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   ui: {fileID: 868776318}
+  fpsController: {fileID: 169532084}
   llmCharacter: {fileID: 160259107}
   input: {fileID: 808567766}
   AIText: {fileID: 1786518115}
@@ -14670,6 +14671,7 @@ MonoBehaviour:
     define the major sites of Huaca Letrada and Songoy-Cojal, situated in the valleys
     of La Leche and Za\xF1a, respectively, potentially at other yet-to-be-studied
     sites as well."
+  toggleKey: 9
 --- !u!114 &2023515563
 MonoBehaviour:
   m_ObjectHideFlags: 0
