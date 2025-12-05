@@ -1174,7 +1174,8 @@ MonoBehaviour:
   EmailInput: {fileID: 1140930691}
   CreateUsernameInput: {fileID: 1548972063}
   CreatePasswordInput: {fileID: 730872839}
-  serverBaseUrl: http://localhost:4000
+  serverBaseUrl: https://digital-ty59.onrender.com
+  excavationSceneName: Walk&Excavate
 --- !u!4 &396610860
 Transform:
   m_ObjectHideFlags: 0
