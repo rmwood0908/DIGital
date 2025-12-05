@@ -3,6 +3,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 // authentication manager class for login and signup
 public class AuthManager : MonoBehaviour
@@ -81,7 +82,7 @@ public class AuthManager : MonoBehaviour
 
             // parse JSON
             LoginResponse response = 
-                          JsonUtility.Fromjson<LoginResponse>(req.downloadHandler.text);
+                          JsonUtility.FromJson<LoginResponse>(req.downloadHandler.text);
 
             if (response != null && response.ok)
             {
@@ -136,14 +137,14 @@ public class AuthManager : MonoBehaviour
                 yield break;
             }
 
-            Debug.Log("Signup raw respones: " + req.downloadHandler.text);
+            Debug.Log("Signup raw response: " + req.downloadHandler.text);
 
-            SignupReponse respone = 
-                          JsonUtility.Fromjson<SignupResponse>(req.downloadHandler.text);
+            SignupResponse response = 
+                          JsonUtility.FromJson<SignupResponse>(req.downloadHandler.text);
 
             if( response != null && response.ok )
             {
-                Debug.Log("Signup successful for: " + respone.user.username);
+                Debug.Log("Signup successful for: " + response.user.username);
 
                 // auto login AKA go to scene
                 SceneManager.LoadScene(excavationSceneName);
@@ -152,7 +153,7 @@ public class AuthManager : MonoBehaviour
             else
             {
                 Debug.LogError("Signup failed: " +
-                              (resp != null ? resp.error : "Invalid JSON"));
+                              (response != null ? response.error : "Invalid JSON"));
             }
         }
     }
