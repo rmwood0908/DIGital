@@ -4213,7 +4213,7 @@ MonoBehaviour:
   ArtifactIDInput: {fileID: 891547937}
   SelectArtifact: {fileID: 1747613209}
   StatusText: {fileID: 235039201}
-  apiUrl: http://localhost:4000/api/artifacts
+  apiUrl: https://digital-ty59.onrender.com/api/artifacts
   modelBindings:
   - artifactId: 2
     modelObject: {fileID: 931546644}
