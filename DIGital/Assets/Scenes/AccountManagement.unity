@@ -1169,8 +1169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d7c695dde860545aede42c706c8de1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AuthManager
-  UsernameInput: {fileID: 1548972063}
-  PasswordInput: {fileID: 730872839}
+  UsernameInput: {fileID: 1724220700}
+  PasswordInput: {fileID: 1626345069}
   EmailInput: {fileID: 1140930691}
   CreateUsernameInput: {fileID: 1548972063}
   CreatePasswordInput: {fileID: 730872839}
