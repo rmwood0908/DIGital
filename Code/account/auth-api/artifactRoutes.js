@@ -60,7 +60,7 @@ router.post('/', async (req, res) => {
         (date_discovered, investigator, area, unit, layer, site, 
          associated_features, material_type, quantity, weight, 
          bag_number, artifact_id, user_id) 
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
          RETURNING id`;
 
     const values = [
