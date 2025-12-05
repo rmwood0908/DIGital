@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class DirtPile : MonoBehaviour, Interactable
 {
@@ -13,6 +14,8 @@ public class DirtPile : MonoBehaviour, Interactable
 
     [SerializeField] private float initialScalar;
     [SerializeField] private float scalarFalloff;
+
+    [SerializeField] private string analysisSceneName = "ArtifactAnalysis";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,6 +37,8 @@ public class DirtPile : MonoBehaviour, Interactable
             Instantiate(refillLayer, new Vector3(-112.5f, -0.125f, -62.5f), Quaternion.identity);
 
             Destroy(gameObject);
+
+            SceneManager.LoadScene(analysisSceneName);
         }
     }
 
