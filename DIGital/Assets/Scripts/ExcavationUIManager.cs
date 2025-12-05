@@ -8,7 +8,7 @@ public class ExcavationUIManager : MonoBehaviour
 
     private void Start()
     {
-        if (welcomeText == null)
+        if (WelcomeText == null)
         {
             Debug.LogWarning("[ExcavationUIManager] Welcome Text is not assigned.");
             return;
@@ -17,11 +17,11 @@ public class ExcavationUIManager : MonoBehaviour
         if (SessionManager.Instance != null && SessionManager.Instance.IsLoggedIn)
         {
             string username = SessionManager.Instance.Username;
-            welcomeText.text = $"Welcome, {username}!";
+            WelcomeText.text = $"Welcome, {username}!";
         }
         else
         {
-            welcomeText.text = "Welcome, archaeologist!";
+            WelcomeText.text = "Welcome, archaeologist!";
         }
     }
 }
