@@ -554,6 +554,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: artifact2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3d870c06b8d5f534c8f0a9df749fee1d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 3d870c06b8d5f534c8f0a9df749fee1d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6427,6 +6435,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: artifact1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5f724607e0f355341b8bf03672abded3, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1151388028547126963, guid: 5f724607e0f355341b8bf03672abded3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1077
@@ -6462,6 +6474,10 @@ PrefabInstance:
     - target: {fileID: 1151388028547126963, guid: 5f724607e0f355341b8bf03672abded3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 5f724607e0f355341b8bf03672abded3, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10775,6 +10791,55 @@ MonoBehaviour:
   currentStep: 2
   currentLayer: 0
   dirtPile: {fileID: 1470138597}
+--- !u!1 &1527703917
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1527703919}
+  - component: {fileID: 1527703918}
+  m_Layer: 0
+  m_Name: InteractionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1527703918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527703917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b4bfccda52f9c4ea5a6946d51614e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArtifactClickManager
+  playerCamera: {fileID: 2143970435}
+  maxDistance: 100
+  artifactLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!4 &1527703919
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527703917}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1280, y: 720, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1540276845
 GameObject:
   m_ObjectHideFlags: 0
@@ -14535,3 +14600,4 @@ SceneRoots:
   - {fileID: 548421996}
   - {fileID: 894078663}
   - {fileID: 1967557270}
+  - {fileID: 1527703919}

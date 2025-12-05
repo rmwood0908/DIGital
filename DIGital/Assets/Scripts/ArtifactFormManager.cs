@@ -65,7 +65,19 @@ public class ArtifactFormManager : MonoBehaviour
     {
         if (PanelRoot != null)
         {
+            Debug.Log("[ArtifactFormManager] OpenForm() - enabling PanelRoot");
             PanelRoot.SetActive(true);
+
+            // unlock cursor for UI interaction
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible   = true;
+
+            // pause game while form is open
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Debug.LogWarning("[ArtifactFormManager] PanelRoot is not assigned!");
         }
     }
 
@@ -74,8 +86,16 @@ public class ArtifactFormManager : MonoBehaviour
         if (PanelRoot != null)
         {
             PanelRoot.SetActive(false);
+
+            // restore FPS controls
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible   = false;
+
+            // resume game if you paused it
+            Time.timeScale = 1f;
         }
     }
+
 
     // submit button clicked
     public void OnSubmitButtonClicked()
@@ -114,6 +134,7 @@ public class ArtifactFormManager : MonoBehaviour
     // cancel button clicked
     public void OnCancelButtonClicked()
     {
+        Debug.Log("[ArtifactFormManager] Cancel button clicked");
         ClearForm();
         StatusText.text = "";
         CloseForm();

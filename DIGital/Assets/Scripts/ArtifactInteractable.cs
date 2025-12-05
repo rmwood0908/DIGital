@@ -1,27 +1,66 @@
+using TMPro;
 using UnityEngine;
 
-// class for artifacts to be able to be clicked
-public class ArtifactInteractable : MonoBehaviour
+public class ArtifactInteractable : MonoBehaviour, Interactable
 {
-    [Tooltip("Optional: an ID or label for this artifact.")]
-    public string artifactId;
+    [Header("UI / Form")]
+    [SerializeField] private TMP_Text textBox;               // same TMP as dirt
+    [SerializeField] private ArtifactFormManager formManager;
 
-    [Tooltip("Reference to the ArtifactFormManager in the scene.")]
-    public ArtifactFormManager formManager;
+    [Header("Tooltip Text")]
+    [SerializeField] private string tooltipText = "Record artifact (Left Click)";
 
-    private void OnMouseDown()
+    private float textDisplayedTime = 0f;
+    private bool checkForText = false;
+
+    public void Interact()
     {
-        // this is called when you click on this object in Game view
-        // (requires a Collider on this GameObject and an active Camera)
-        if (formManager == null)
+        if (formManager != null)
         {
-            Debug.LogWarning(
-                "[ArtifactInteractable] formManager is not assigned on " 
-                + gameObject.name
-            );
+            Debug.Log("[ArtifactInteractable] Interact() called, opening form.");
+            if (textBox != null)
+            {
+                textBox.text = "";
+            }
+            formManager.OpenForm();
+        }
+        else
+        {
+            Debug.LogWarning("[ArtifactInteractable] formManager is not assigned on "
+                             + gameObject.name);
+        }
+    }
+
+    public void displayTooltip()
+    {
+        // Called by your existing interaction system when this is under the cursor
+        textDisplayedTime = 0.03f;
+        checkForText = true;
+    }
+
+    private void FixedUpdate()
+    {
+        if (!checkForText)
+        {
             return;
         }
 
-        formManager.OpenForm();
+        if (textDisplayedTime > 0f)
+        {
+            if (textBox != null)
+            {
+                textBox.text = tooltipText;
+            }
+        }
+        else
+        {
+            if (textBox != null)
+            {
+                textBox.text = "";
+            }
+            checkForText = false;
+        }
+
+        textDisplayedTime -= Time.deltaTime;
     }
 }
