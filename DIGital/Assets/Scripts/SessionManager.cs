@@ -12,7 +12,7 @@ public class SessionManager: MonoBehaviour
     public bool IsLoggedIn => !string.IsNullOrEmpty(UserId);
 
     // carry information across scenes
-    private void PersistUserInformation()
+    private void Awake()
     {
         if (Instance != null && Instance != this)
         {
