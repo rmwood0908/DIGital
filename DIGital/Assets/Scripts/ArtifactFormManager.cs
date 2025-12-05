@@ -49,6 +49,7 @@ public class ArtifactFormManager : MonoBehaviour
         public string weight;
         public string bag_number;
         public string artifact_id;
+        public string userId;
     }
 
     private void Start()
@@ -100,7 +101,11 @@ public class ArtifactFormManager : MonoBehaviour
             quantity = Quantity,
             weight = WeightInput.text.Trim(),
             bag_number = BagNumberInput.text.Trim(),
-            artifact_id = ArtifactIDInput.text.Trim()
+            artifact_id = ArtifactIDInput.text.Trim(),
+            userId = (SessionManager.Instance != null &&
+                        SessionManager.Instance.IsLoggedIn)
+                        ? SessionManager.Instance.UserId
+                        : null            
         };
 
         StartCoroutine(SubmitArtifactCoroutine(data));

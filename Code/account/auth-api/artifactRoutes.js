@@ -19,7 +19,8 @@ router.post('/', async (req, res) => {
             quantity,
             weight, 
             bag_number,
-            artifact_id
+            artifact_id,
+            userId
         } = req.body;
 
         // validate user input (required fields)
@@ -58,7 +59,7 @@ router.post('/', async (req, res) => {
         `INSERT INTO artifacts 
         (date_discovered, investigator, area, unit, layer, site, 
          associated_features, material_type, quantity, weight, 
-         bag_number, artifact_id) 
+         bag_number, artifact_id, user_id) 
          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
          RETURNING id`;
 
@@ -74,7 +75,8 @@ router.post('/', async (req, res) => {
         quantityValue,
         weight,
         bag_number,
-        artifact_id
+        artifact_id,
+        userId || null
     ];
 
     // send query to database
