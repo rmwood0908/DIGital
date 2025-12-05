@@ -19,7 +19,7 @@ public class AuthManager : MonoBehaviour
     public TMP_InputField CreatePasswordInput;
 
     [Header("Server Settings")]
-    public string serverBaseUrl = "http://localhost:4000";
+    public string serverBaseUrl = "https://digital-ty59.onrender.com";
 
     // called by Login button
     public void OnLoginButtonClicked()
