@@ -4,7 +4,7 @@ using UnityEngine;
 public class ArtifactInteractable : MonoBehaviour, Interactable
 {
     [Header("UI / Form")]
-    [SerializeField] private TMP_Text textBox;               // same TMP as dirt
+    [SerializeField] private TMP_Text textBox;
     [SerializeField] private ArtifactFormManager formManager;
 
     [Header("Tooltip Text")]
@@ -33,7 +33,7 @@ public class ArtifactInteractable : MonoBehaviour, Interactable
 
     public void displayTooltip()
     {
-        // Called by your existing interaction system when this is under the cursor
+        // Called by FirstPersonController when this is the target
         textDisplayedTime = 0.03f;
         checkForText = true;
     }
