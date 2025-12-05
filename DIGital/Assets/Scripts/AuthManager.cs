@@ -87,7 +87,11 @@ public class AuthManager : MonoBehaviour
             if (response != null && response.ok)
             {
                 Debug.Log("Login successful, userId = " + response.userId);
-                // TODO: store userId for later user
+                
+                if (SessionManager.Instance != null)
+                {
+                    SessionManager.Instance.SetUser(response.userId, username);
+                }
 
                 // go to excavation scene
                 SceneManager.LoadScene(excavationSceneName); 
@@ -145,6 +149,12 @@ public class AuthManager : MonoBehaviour
             if( response != null && response.ok )
             {
                 Debug.Log("Signup successful for: " + response.user.username);
+
+                if (SessionManager.Instance != null )
+                {
+                    SessionManager.Instance.SetUser(response.user.user_id,
+                                                    response.user.username);
+                }
 
                 // auto login AKA go to scene
                 SceneManager.LoadScene(excavationSceneName);
