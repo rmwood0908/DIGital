@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_es
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: 31ea228af823ade4e82ce66ef070da61, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 1303104090112
+    m_Localized: Bienvenido a DIGital
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1387426377728
+    m_Localized: 'Usuario:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1535179124736
+    m_Localized: Ingrese Usuario...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1674014781440
+    m_Localized: "Contrase\xF1a:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1803300007936
+    m_Localized: "Ingrese Contrase\xF1a..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1928357376000
+    m_Localized: "Iniciar sesi\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198906761216
+    m_Localized: 'Correo:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2442818121728
+    m_Localized: Ingrese Correo...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2538301452288
+    m_Localized: 'Usuario:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2652856283136
+    m_Localized: Ingrese Usuario...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2796410531840
+    m_Localized: "Contrase\xF1a:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2876332994560
+    m_Localized: "Ingrese Contrase\xF1a..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2947019599872
+    m_Localized: Crear Cuenta
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

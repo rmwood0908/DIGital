@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UI Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: UI
+  m_TableCollectionNameGuidString: 31ea228af823ade4e82ce66ef070da61
+  m_Entries:
+  - m_Id: 1303104090112
+    m_Key: welcome_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1387426377728
+    m_Key: login_username_text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1535179124736
+    m_Key: login_username_input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1674014781440
+    m_Key: login_password_text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1803300007936
+    m_Key: login_password_input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1928357376000
+    m_Key: login_button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198906761216
+    m_Key: create_account_email_text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2442818121728
+    m_Key: create_account_email_input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2538301452288
+    m_Key: create_account_username_text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2652856283136
+    m_Key: create_account_username_input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2796410531840
+    m_Key: create_account_password_text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2876332994560
+    m_Key: create_account_password_input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2947019599872
+    m_Key: create_account_button
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6995386152780300497
+  references:
+    version: 2
+    RefIds:
+    - rid: 6995386152780300497
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1769836035747
