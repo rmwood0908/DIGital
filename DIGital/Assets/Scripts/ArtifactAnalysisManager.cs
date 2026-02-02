@@ -51,7 +51,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
     [SerializeField] private string NoArtifactData = "analysis_status_no_artifact_data";
     [SerializeField] private string NoArtifactsInDb = "analysis_status_no_artifacts_in_db";
     [SerializeField] private string SelectAndAnalyze = "analysis_status_select_and_analyze";
-    [SerializeField] private string DropdownLabelKey = "analysis_dropdown_label";
+    [SerializeField] private string DropdownLabelKey = "artifact_analysis_dropdown_label";
 
     // re-translation
     private enum StatusMode { None, Key, ServerError }
