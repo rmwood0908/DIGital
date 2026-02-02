@@ -83,6 +83,142 @@ MonoBehaviour:
     m_Key: walk_and_excavate_dig
     m_Metadata:
       m_Items: []
+  - m_Id: 706481465749504
+    m_Key: walk_and_excavate_record_artifact
+    m_Metadata:
+      m_Items: []
+  - m_Id: 708508342185984
+    m_Key: artifact_collection_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 708707076698112
+    m_Key: artifact_collection_submit_button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 708959842234368
+    m_Key: artifact_collection_cancel_button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709051194175488
+    m_Key: artifact_collection_date
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709168894734336
+    m_Key: artifact_collection_investigator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709340420796416
+    m_Key: artifact_collection_area
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709457722896384
+    m_Key: artifact_collection_unit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709539818008576
+    m_Key: artifact_collection_layer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709627965501440
+    m_Key: artifact_collection_site
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709699021205504
+    m_Key: artifact_collection_features
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709847243714560
+    m_Key: artifact_collection_material
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709977627848704
+    m_Key: artifact_collection_quantity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 710196180447232
+    m_Key: artifact_collection_weight
+    m_Metadata:
+      m_Items: []
+  - m_Id: 710253583691776
+    m_Key: artifact_collection_bag_number
+    m_Metadata:
+      m_Items: []
+  - m_Id: 710341441777664
+    m_Key: artifact_collection_artifact_ID
+    m_Metadata:
+      m_Items: []
+  - m_Id: 710804576825344
+    m_Key: artifact_collection_status_submit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711135855538176
+    m_Key: artifact_collection_status_database
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711305036984320
+    m_Key: artifact_collection_status_success
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711369687986176
+    m_Key: artifact_collection_status_missing_fields
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711465120985088
+    m_Key: artifact_collection_status_invalid_quantity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711574663622656
+    m_Key: artifact_collection_status_error_details
+    m_Metadata:
+      m_Items: []
+  - m_Id: 715213671133184
+    m_Key: artifact_collection_date_input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 715825305513984
+    m_Key: artifact_collection_investigator_input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 716126028722176
+    m_Key: artifact_collection_area_input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 716372825763840
+    m_Key: artifact_collection_unit_input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 716645560381440
+    m_Key: artifact_collection_layer_input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 716824002850816
+    m_Key: artifact_collection_site_input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 716968760864768
+    m_Key: artifact_collection_features_input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717118564626432
+    m_Key: artifact_collection_matieral_input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717328493735936
+    m_Key: artifact_collection_quantity_input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717430927028224
+    m_Key: artifact_collection_weight_input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717517669429248
+    m_Key: artifact_collection_bag_number_input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717525303062528
+    m_Key: artifact_collection_artifact_ID_input
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

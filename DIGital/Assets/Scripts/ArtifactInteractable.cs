@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 public class ArtifactInteractable : MonoBehaviour, Interactable
 {
@@ -7,8 +8,9 @@ public class ArtifactInteractable : MonoBehaviour, Interactable
     [SerializeField] private TMP_Text textBox;
     [SerializeField] private ArtifactFormManager formManager;
 
-    [Header("Tooltip Text")]
-    [SerializeField] private string tooltipText = "Record artifact (Left Click)";
+    [Header("Localization")]
+    [SerializeField] private string table = "UI";
+    [SerializeField] private string tooltipKey = "walk_and_excavate_record_artifact";
 
     private float textDisplayedTime = 0f;
     private bool checkForText = false;
@@ -49,7 +51,7 @@ public class ArtifactInteractable : MonoBehaviour, Interactable
         {
             if (textBox != null)
             {
-                textBox.text = tooltipText;
+                textBox.text = LocalizationSettings.StringDatabase.GetLocalizedString(table, tooltipKey);
             }
         }
         else

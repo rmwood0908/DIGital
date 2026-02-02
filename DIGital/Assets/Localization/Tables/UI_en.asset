@@ -88,6 +88,143 @@ MonoBehaviour:
     m_Localized: Dig (Left Click)
     m_Metadata:
       m_Items: []
+  - m_Id: 706481465749504
+    m_Localized: 'Record artifact (Left Click) '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 708508342185984
+    m_Localized: 'Artifact Discovered! Enter Information Below:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 708707076698112
+    m_Localized: Submit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 708959842234368
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709051194175488
+    m_Localized: 'Date:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709168894734336
+    m_Localized: 'Investigator:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709340420796416
+    m_Localized: 'Area:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709457722896384
+    m_Localized: 'Unit:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709539818008576
+    m_Localized: 'Layer:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709627965501440
+    m_Localized: 'Site:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709699021205504
+    m_Localized: 'Associated Features:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709847243714560
+    m_Localized: 'Matieral Type:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709977627848704
+    m_Localized: 'Quantity:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 710196180447232
+    m_Localized: 'Weight:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 710253583691776
+    m_Localized: 'Bag Number:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 710341441777664
+    m_Localized: 'Artifact ID:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 710804576825344
+    m_Localized: Submitting artifact...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711135855538176
+    m_Localized: Submitting artifact to database...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711305036984320
+    m_Localized: Artifact submitted successfully!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711369687986176
+    m_Localized: Please fill in all required fields.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711465120985088
+    m_Localized: Quantity must be a valid integer (whole number).
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711574663622656
+    m_Localized: 'Error submitting artifact: {details}'
+    m_Metadata:
+      m_Items:
+      - rid: 745707523204972611
+  - m_Id: 715213671133184
+    m_Localized: Enter Date...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 715825305513984
+    m_Localized: Enter Investigator...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 716126028722176
+    m_Localized: Enter Area...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 716372825763840
+    m_Localized: Enter Unit...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 716645560381440
+    m_Localized: Enter Layer...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 716824002850816
+    m_Localized: Enter Site...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 716968760864768
+    m_Localized: Enter Associated Features...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717118564626432
+    m_Localized: Enter Material Type...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717328493735936
+    m_Localized: Enter Quantity...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717430927028224
+    m_Localized: Enter Weight...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717517669429248
+    m_Localized: Enter Bag Number...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717525303062528
+    m_Localized: Enter Artifact ID...
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
@@ -97,3 +234,4 @@ MonoBehaviour:
         m_Entries: 
         m_SharedEntries:
         - id: 695464761389056
+        - id: 711574663622656
