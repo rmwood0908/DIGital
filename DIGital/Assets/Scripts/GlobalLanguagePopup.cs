@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GlobalLanguagePopup : MonoBehaviour
@@ -5,11 +6,11 @@ public class GlobalLanguagePopup : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject panelRoot;
 
-    [Header("Optional - disable these while popup is open")]
-    [SerializeField] private MonoBehaviour[] disableWhileOpen;
-
     [Header("Pause gameplay while open?")]
     [SerializeField] private bool pauseWithTimeScale = false;
+
+    // runtime disabled scripts
+    private readonly List<MonoBehaviour> disabledRuntime = new();
 
     private bool isOpen;
     private CursorLockMode prevLock;
@@ -24,9 +25,7 @@ public class GlobalLanguagePopup : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.M))
-        {
             Toggle();
-        }
     }
 
     public void Toggle()
@@ -38,6 +37,7 @@ public class GlobalLanguagePopup : MonoBehaviour
     public void Open()
     {
         if (panelRoot == null) return;
+        if (isOpen) return;
 
         isOpen = true;
 
@@ -49,14 +49,10 @@ public class GlobalLanguagePopup : MonoBehaviour
         // show UI
         panelRoot.SetActive(true);
 
-        // disable gameplay scripts that fight cursor / input
-        if (disableWhileOpen != null)
-        {
-            foreach (var mb in disableWhileOpen)
-                if (mb != null) mb.enabled = false;
-        }
+        // disable player/camera scripts in THIS scene
+        DisableGameplayForPopup();
 
-        // cursor for UI
+        // Cursor for UI
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
@@ -68,19 +64,16 @@ public class GlobalLanguagePopup : MonoBehaviour
     public void Close()
     {
         if (panelRoot == null) return;
+        if (!isOpen) return;
 
         isOpen = false;
 
         panelRoot.SetActive(false);
 
-        // re-enable gameplay scripts
-        if (disableWhileOpen != null)
-        {
-            foreach (var mb in disableWhileOpen)
-                if (mb != null) mb.enabled = true;
-        }
+        // Re-enable what we disabled
+        RestoreGameplayAfterPopup();
 
-        // restore previous cursor state
+        // restore cursor state
         Cursor.lockState = prevLock;
         Cursor.visible = prevVisible;
 
@@ -89,11 +82,52 @@ public class GlobalLanguagePopup : MonoBehaviour
             Time.timeScale = prevTimeScale;
     }
 
+    private void DisableGameplayForPopup()
+    {
+        disabledRuntime.Clear();
+
+        // disable FirstPersonController (player movement/look)
+        var fps = FindFirstObjectByTypeSafe<FirstPersonController>();
+        if (fps != null && fps.enabled)
+        {
+            fps.enabled = false;
+            disabledRuntime.Add(fps);
+        }
+
+        // 2) disable MoveCamera (camera look script)
+        var camMove = FindFirstObjectByTypeSafe<MoveCamera>();
+        if (camMove != null && camMove.enabled)
+        {
+            camMove.enabled = false;
+            disabledRuntime.Add(camMove);
+        }
+    }
+
+    private void RestoreGameplayAfterPopup()
+    {
+        for (int i = 0; i < disabledRuntime.Count; i++)
+        {
+            if (disabledRuntime[i] != null)
+                disabledRuntime[i].enabled = true;
+        }
+        disabledRuntime.Clear();
+    }
+
+    private T FindFirstObjectByTypeSafe<T>() where T : Object
+    {
+#if UNITY_6000_0_OR_NEWER
+
+        var found = Object.FindObjectsByType<T>(FindObjectsSortMode.None);
+        return (found != null && found.Length > 0) ? found[0] : null;
+#else
+        return Object.FindObjectOfType<T>();
+#endif
+    }
+
     public void ChooseEnglish()
     {
         if (LanguageManager.Instance != null)
             LanguageManager.Instance.SetLanguage("en");
-
         Close();
     }
 
@@ -101,7 +135,6 @@ public class GlobalLanguagePopup : MonoBehaviour
     {
         if (LanguageManager.Instance != null)
             LanguageManager.Instance.SetLanguage("es");
-
         Close();
     }
 }
