@@ -18,7 +18,7 @@ public class LanguageManager : MonoBehaviour
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(transform.root.gameObject);
 
         // load saved language
         CurrentCode = PlayerPrefs.GetString(PrefKey, "en");
