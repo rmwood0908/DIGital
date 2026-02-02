@@ -219,6 +219,14 @@ MonoBehaviour:
     m_Key: artifact_collection_artifact_ID_input
     m_Metadata:
       m_Items: []
+  - m_Id: 744056326877184
+    m_Key: artifact_analysis_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 744168449011712
+    m_Key: artifact_analysis_button
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

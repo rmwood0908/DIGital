@@ -225,6 +225,14 @@ MonoBehaviour:
     m_Localized: Ingrese el ID del Artefacto...
     m_Metadata:
       m_Items: []
+  - m_Id: 744056326877184
+    m_Localized: "An\xE1lisis de Artefactos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 744168449011712
+    m_Localized: Analizar
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
