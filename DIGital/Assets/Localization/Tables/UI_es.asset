@@ -233,6 +233,48 @@ MonoBehaviour:
     m_Localized: Analizar
     m_Metadata:
       m_Items: []
+  - m_Id: 754783292911616
+    m_Localized: "Cargando lista de artefactos\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754837357490176
+    m_Localized: Error al cargar la lista de artefactos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754865467715584
+    m_Localized: No hay artefactos disponibles para analizar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754867149631488
+    m_Localized: "Selecci\xF3n inv\xE1lida."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754868437282816
+    m_Localized: Datos del artefacto cargados.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754869712351232
+    m_Localized: No hay datos de artefactos disponibles.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754871016779776
+    m_Localized: No hay artefactos en la base de datos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754872149241856
+    m_Localized: Seleccione un artefacto y presione Analizar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754873294286848
+    m_Localized: 'Error del servidor: {error}'
+    m_Metadata:
+      m_Items:
+      - rid: 745707523204972612
+  - m_Id: 757137585106944
+    m_Localized: 'ID del Artefacto: {id} | {bag} | {date}'
+    m_Metadata:
+      m_Items:
+      - rid: 745707523204972612
   references:
     version: 2
     RefIds:
@@ -243,3 +285,5 @@ MonoBehaviour:
         m_SharedEntries:
         - id: 695464761389056
         - id: 711574663622656
+        - id: 754873294286848
+        - id: 757137585106944

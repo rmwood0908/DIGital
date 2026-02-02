@@ -4319,6 +4319,17 @@ MonoBehaviour:
   SelectArtifact: {fileID: 1747613209}
   StatusText: {fileID: 235039201}
   apiUrl: https://digital-ty59.onrender.com/api/artifacts
+  table: UI
+  LoadingList: analysis_status_loading_list
+  ErrorLoadingList: analysis_status_error_loading_list
+  NoArtifactsToAnalyze: analysis_status_no_artifacts_to_analyze
+  InvalidSelection: analysis_status_invalid_selection
+  DataLoaded: analysis_status_data_loaded
+  NoArtifactData: analysis_status_no_artifact_data
+  NoArtifactsInDb: analysis_status_no_artifacts_in_db
+  SelectAndAnalyze: analysis_status_select_and_analyze
+  DropdownLabelKey: analysis_dropdown_label
+  ServerErrorDetails: analysis_status_server_error_details
   modelBindings:
   - artifactId: 1
     modelObject: {fileID: 311303625}
@@ -8520,8 +8531,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -245.37, y: 354}
-  m_SizeDelta: {x: 490.92, y: 161.07}
+  m_AnchoredPosition: {x: -297.72, y: 354}
+  m_SizeDelta: {x: 595.444, y: 163.1605}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1747613209
 MonoBehaviour:

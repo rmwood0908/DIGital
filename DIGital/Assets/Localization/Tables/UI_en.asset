@@ -233,6 +233,48 @@ MonoBehaviour:
     m_Localized: Analyze
     m_Metadata:
       m_Items: []
+  - m_Id: 754783292911616
+    m_Localized: "Loading artifact list\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754837357490176
+    m_Localized: Error loading artifact list.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754865467715584
+    m_Localized: No artifacts available to analyze.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754867149631488
+    m_Localized: Invalid selection.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754868437282816
+    m_Localized: Artifact data loaded.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754869712351232
+    m_Localized: No artifact data available.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754871016779776
+    m_Localized: No artifacts in database.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754872149241856
+    m_Localized: Select an artifact and press Analyze.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754873294286848
+    m_Localized: 'Server error: {error}'
+    m_Metadata:
+      m_Items:
+      - rid: 745707523204972611
+  - m_Id: 757137585106944
+    m_Localized: 'Artifact ID: {id} | {bag} | {date}'
+    m_Metadata:
+      m_Items:
+      - rid: 745707523204972611
   references:
     version: 2
     RefIds:
@@ -243,3 +285,5 @@ MonoBehaviour:
         m_SharedEntries:
         - id: 695464761389056
         - id: 711574663622656
+        - id: 754873294286848
+        - id: 757137585106944

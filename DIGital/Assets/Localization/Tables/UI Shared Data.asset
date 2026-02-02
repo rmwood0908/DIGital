@@ -227,6 +227,46 @@ MonoBehaviour:
     m_Key: artifact_analysis_button
     m_Metadata:
       m_Items: []
+  - m_Id: 754783292911616
+    m_Key: analysis_status_loading_list
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754837357490176
+    m_Key: analysis_status_error_loading_list
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754865467715584
+    m_Key: analysis_status_no_artifacts_to_analyze
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754867149631488
+    m_Key: analysis_status_invalid_selection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754868437282816
+    m_Key: analysis_status_data_loaded
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754869712351232
+    m_Key: analysis_status_no_artifact_data
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754871016779776
+    m_Key: analysis_status_no_artifacts_in_db
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754872149241856
+    m_Key: analysis_status_select_and_analyze
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754873294286848
+    m_Key: analysis_status_server_error_details
+    m_Metadata:
+      m_Items: []
+  - m_Id: 757137585106944
+    m_Key: analysis_dropdown_label
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
