@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.Localization.Settings;
 
 public class DirtPile : MonoBehaviour, Interactable
 {
@@ -16,6 +17,11 @@ public class DirtPile : MonoBehaviour, Interactable
     [SerializeField] private float scalarFalloff;
 
     [SerializeField] private string analysisSceneName = "ArtifactAnalysis";
+
+    // added localization for backfill (spanish)
+    [Header("Localization")]
+    [SerializeField] private string table = "UI";
+    [SerializeField] private string backfillTipKey = "walk_and_excavate_backfill";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -48,7 +54,7 @@ public class DirtPile : MonoBehaviour, Interactable
         {
             if(textDisplayedTime > 0)
             {
-                textBox.text = "Backfill (Left Click)";
+                textBox.text = LocalizationSettings.StringDatabase.GetLocalizedString(table, backfillTipKey);
             }
 
             else

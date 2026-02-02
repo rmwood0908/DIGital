@@ -80,6 +80,14 @@ MonoBehaviour:
     m_Localized: Welcome, archaeologist!
     m_Metadata:
       m_Items: []
+  - m_Id: 702131037171712
+    m_Localized: Backfill (Left Click)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703042161635328
+    m_Localized: Dig (Left Click)
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
