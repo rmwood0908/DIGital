@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using TMPro;
 
 public class GlobalLanguagePopup : MonoBehaviour
 {
@@ -22,10 +24,31 @@ public class GlobalLanguagePopup : MonoBehaviour
         if (panelRoot != null) panelRoot.SetActive(false);
     }
 
+    // updated update function to disable menu popup 
+    // when entering artifact information
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.M))
+        {
+            // if the player is typing in any TMP_InputField, ignore the hotkey
+            if (IsTypingInInputField()) return;
+
             Toggle();
+        }
+
+        // let Esc close the popup
+        if (isOpen && Input.GetKeyDown(KeyCode.Escape)) Close();
+    }
+
+    private bool IsTypingInInputField()
+    {
+        if (EventSystem.current == null) return false;
+
+        var selected = EventSystem.current.currentSelectedGameObject;
+        if (selected == null) return false;
+
+        // if the selected object is a TMP_InputField or inside one, treat as typing
+        return selected.GetComponentInParent<TMP_InputField>() != null;
     }
 
     public void Toggle()
