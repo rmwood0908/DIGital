@@ -67,6 +67,14 @@ MonoBehaviour:
     m_Key: create_account_button
     m_Metadata:
       m_Items: []
+  - m_Id: 695464761389056
+    m_Key: walk_and_excavate_welcome_text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 696095794425856
+    m_Key: walk_and_excavate_welcome_guest_text
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

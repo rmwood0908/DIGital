@@ -4507,7 +4507,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd6d4ff6768f94438e64187e19a2696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExcavationUIManager
-  WelcomeText: {fileID: 850027166}
+  welcomeText: {fileID: 850027166}
+  table: UI
+  userKey: walk_and_excavate_welcome_text
+  guestKey: walk_and_excavate_welcome_guest_text
 --- !u!4 &548421996
 Transform:
   m_ObjectHideFlags: 0

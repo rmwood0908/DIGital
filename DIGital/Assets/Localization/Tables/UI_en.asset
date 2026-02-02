@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: 31ea228af823ade4e82ce66ef070da61, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 745707523204972611
   m_TableData:
   - m_Id: 1303104090112
     m_Localized: Welcome To DIGital
@@ -70,6 +71,21 @@ MonoBehaviour:
     m_Localized: Create Account
     m_Metadata:
       m_Items: []
+  - m_Id: 695464761389056
+    m_Localized: Welcome, {username}!
+    m_Metadata:
+      m_Items:
+      - rid: 745707523204972611
+  - m_Id: 696095794425856
+    m_Localized: Welcome, archaeologist!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 745707523204972611
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 695464761389056
