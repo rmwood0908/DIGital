@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 751557}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_quantity
 --- !u!1 &2098104
@@ -307,8 +307,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 738.9924, y: 29.234398}
-  m_SizeDelta: {x: 575.1594, y: 76.605}
+  m_AnchoredPosition: {x: 779, y: 41.268}
+  m_SizeDelta: {x: 495, y: 76.605}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2098106
 MonoBehaviour:
@@ -866,7 +866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 102519362}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_quantity_input
 --- !u!1 &104819844
@@ -1018,7 +1018,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 104819846}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_area
 --- !u!1 &107865246
@@ -1254,8 +1254,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 342, y: 223.84439}
-  m_SizeDelta: {x: 652.6173, y: 112}
+  m_AnchoredPosition: {x: 425, y: 231}
+  m_SizeDelta: {x: 817, y: 97}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &134868591
 MonoBehaviour:
@@ -1368,7 +1368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 134868591}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_features
 --- !u!1 &140572513
@@ -1520,7 +1520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 140572515}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_title
 --- !u!4 &158792312 stripped
@@ -2564,7 +2564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 284193508}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_layer
 --- !u!1001 &301668811
@@ -2799,7 +2799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 331142188}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_area_input
 --- !u!1 &342863263
@@ -2838,8 +2838,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 494.5158, y: -202.7656}
-  m_SizeDelta: {x: 422.206, y: 76.605}
+  m_AnchoredPosition: {x: 526.8, y: -201.47}
+  m_SizeDelta: {x: 486.75, y: 76.605}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &342863265
 MonoBehaviour:
@@ -3129,7 +3129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 368269714}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_date
 --- !u!1 &376684191
@@ -3248,8 +3248,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -583.20233, y: 241.5444}
-  m_SizeDelta: {x: 422.206, y: 76.605}
+  m_AnchoredPosition: {x: -514, y: 249}
+  m_SizeDelta: {x: 481, y: 76.605}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &409943973
 MonoBehaviour:
@@ -3622,7 +3622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 427170139}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_artifact_ID_input
 --- !u!1 &442811070
@@ -3910,8 +3910,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 738.9958, y: -315.92557}
-  m_SizeDelta: {x: 575.16, y: 76.605}
+  m_AnchoredPosition: {x: 806, y: -306.27}
+  m_SizeDelta: {x: 441.16, y: 76.605}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &477830983
 MonoBehaviour:
@@ -4219,8 +4219,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 187.4858, y: -414.7656}
-  m_SizeDelta: {x: 324.8599, y: 50.318}
+  m_AnchoredPosition: {x: 264.94, y: -425.34}
+  m_SizeDelta: {x: 479.7706, y: 71.468}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &519702208
 MonoBehaviour:
@@ -4333,7 +4333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 519702208}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_artifact_ID
 --- !u!1 &521676442
@@ -4372,8 +4372,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -599.00604, y: -329.2256}
-  m_SizeDelta: {x: 422.206, y: 76.605}
+  m_AnchoredPosition: {x: -581, y: -328}
+  m_SizeDelta: {x: 458, y: 76.605}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &521676444
 MonoBehaviour:
@@ -6321,7 +6321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 824914821}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_layer_input
 --- !u!1001 &825356458
@@ -6556,7 +6556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 826017336}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_features_input
 --- !u!1 &830602857
@@ -6783,8 +6783,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 632.81586, y: -426.34488}
-  m_SizeDelta: {x: 547.066, y: 73.4835}
+  m_AnchoredPosition: {x: 778.02, y: -425.34}
+  m_SizeDelta: {x: 497.11, y: 76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &851755234
 MonoBehaviour:
@@ -8206,7 +8206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 1005203292}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_matieral_input
 --- !u!1 &1076423957
@@ -8245,8 +8245,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -583.21606, y: 15.932396}
-  m_SizeDelta: {x: 422.206, y: 76.605}
+  m_AnchoredPosition: {x: -565, y: 15.932396}
+  m_SizeDelta: {x: 458, y: 76.605}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1076423959
 MonoBehaviour:
@@ -8427,8 +8427,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -894.3145, y: -90.7656}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -874, y: -88}
+  m_SizeDelta: {x: 239, y: 44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1090357950
 MonoBehaviour:
@@ -8541,7 +8541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 1090357950}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_unit
 --- !u!1001 &1115032733
@@ -8826,8 +8826,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 800.2001, y: 442.00003}
-  m_SizeDelta: {x: 266.131, y: 101.7945}
+  m_AnchoredPosition: {x: 835, y: 442.00003}
+  m_SizeDelta: {x: 335, y: 101.7945}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1184175750
 MonoBehaviour:
@@ -9093,7 +9093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 1185753018}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_bag_number_input
 --- !u!4 &1194432121 stripped
@@ -9335,8 +9335,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -599.00604, y: -104.065605}
-  m_SizeDelta: {x: 422.206, y: 76.605}
+  m_AnchoredPosition: {x: -484, y: -98}
+  m_SizeDelta: {x: 507, y: 76.605}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1207370501
 MonoBehaviour:
@@ -9626,7 +9626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 1223800965}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_investigator
 --- !u!1 &1225070329
@@ -9857,7 +9857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 1227225579}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_cancel_button
 --- !u!1 &1229007560
@@ -10009,7 +10009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 1229007562}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_submit_button
 --- !u!1 &1257656020
@@ -10184,8 +10184,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -568.00604, y: -216.06558}
-  m_SizeDelta: {x: 422.206, y: 76.605}
+  m_AnchoredPosition: {x: -543, y: -216.06558}
+  m_SizeDelta: {x: 471, y: 76.605}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1287132155
 MonoBehaviour:
@@ -10806,8 +10806,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 246.78578, y: -296.7656}
-  m_SizeDelta: {x: 443.4768, y: 50.318}
+  m_AnchoredPosition: {x: 295.84, y: -298.05}
+  m_SizeDelta: {x: 541.58, y: 52.8998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1348441164
 MonoBehaviour:
@@ -10920,7 +10920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 1348441164}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_bag_number
 --- !u!1 &1383742530
@@ -11694,7 +11694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 1487469351}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_unit_input
 --- !u!1 &1507155191
@@ -12847,7 +12847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 1729729301}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_site_input
 --- !u!1 &1786518113
@@ -13205,7 +13205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 1826222956}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_site
 --- !u!1 &1826289634
@@ -13473,7 +13473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 1870601652}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_weight
 --- !u!1 &1876553675
@@ -14014,8 +14014,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 256.15582, y: 50.234398}
-  m_SizeDelta: {x: 480.9348, y: 50.318}
+  m_AnchoredPosition: {x: 269, y: 47.65}
+  m_SizeDelta: {x: 506.75, y: 55.48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1983257349
 MonoBehaviour:
@@ -14128,7 +14128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 1983257349}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_material
 --- !u!1 &1991445107
@@ -14590,7 +14590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 2010991216}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_date_input
 --- !u!1 &2016408669
@@ -14765,8 +14765,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 514.1858, y: -90.7656}
-  m_SizeDelta: {x: 422.206, y: 76.605}
+  m_AnchoredPosition: {x: 608.6, y: -76.15}
+  m_SizeDelta: {x: 569.37, y: 76.605}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2020804345
 MonoBehaviour:
@@ -15355,7 +15355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 2096839406}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_weight_input
 --- !u!1001 &2101903614
@@ -15594,7 +15594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 2128928731}
+  target: {fileID: 0}
   table: UI
   key: artifact_collection_investigator_input
 --- !u!1 &2137031017
