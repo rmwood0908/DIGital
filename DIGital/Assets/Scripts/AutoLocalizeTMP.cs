@@ -1,24 +1,31 @@
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 
-public class WelcomeManualLocalizeTest : MonoBehaviour
+[DisallowMultipleComponent]
+public class AutoLocalizeTMP : MonoBehaviour
 {
+    // intialize TMP and localzie table variables
     [SerializeField] private TMP_Text tmp;
     [SerializeField] private string table = "UI";
-    [SerializeField] private string key = "welcome_title";
+    [SerializeField] private string key;
+
+    void Awake()
+    {
+        if (!tmp) tmp = GetComponent<TMP_Text>();
+    }
 
     IEnumerator Start()
     {
-        if (!tmp) tmp = GetComponent<TMP_Text>();
-
         yield return LocalizationSettings.InitializationOperation;
 
-        Apply("startup");
+        // wait a frame so other “init/reset UI” scripts run first
+        yield return null;
 
+        // reapply tmp if removed
+        Apply();
         LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
     }
 
@@ -29,16 +36,12 @@ public class WelcomeManualLocalizeTest : MonoBehaviour
 
     void OnLocaleChanged(Locale _)
     {
-        Apply("locale_changed");
+        Apply();
     }
 
-    private void Apply(string reason)
+    public void Apply()
     {
-        string s = LocalizationSettings.StringDatabase.GetLocalizedString(table, key);
-        var code = LocalizationSettings.SelectedLocale?.Identifier.Code ?? "null";
-
-        Debug.Log($"[WelcomeManualLocalizeTest] {reason} locale={code} -> '{s}'");
-
-        tmp.text = s;
+        if (!tmp || string.IsNullOrEmpty(key)) return;
+        tmp.text = LocalizationSettings.StringDatabase.GetLocalizedString(table, key);
     }
 }
