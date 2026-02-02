@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 18188681}
+  target: {fileID: 0}
   table: UI
   key: create_account_password_text
 --- !u!1 &79455285
@@ -523,7 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 79455288}
+  target: {fileID: 0}
   table: UI
   key: login_password_input
 --- !u!1 &86380670
@@ -716,7 +716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  tmp: {fileID: 86380672}
+  target: {fileID: 0}
   table: UI
   key: welcome_title
 --- !u!1 &103500160
@@ -1685,7 +1685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 435783366}
+  target: {fileID: 0}
   table: UI
   key: create_account_username_text
 --- !u!1 &482450173
@@ -2168,7 +2168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 628757470}
+  target: {fileID: 0}
   table: UI
   key: login_username_input
 --- !u!1 &629366364
@@ -2695,7 +2695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 672944061}
+  target: {fileID: 0}
   table: UI
   key: create_account_email_input
 --- !u!1 &730872835
@@ -3066,7 +3066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 754676733}
+  target: {fileID: 0}
   table: UI
   key: create_account_email_text
 --- !u!1 &901065632
@@ -3417,7 +3417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 940975719}
+  target: {fileID: 0}
   table: UI
   key: create_account_password_input
 --- !u!1 &1033818747
@@ -3445,13 +3445,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1033818747}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 577.6687, y: 329.41953, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 26.625, y: 28.568726, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1806066581}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1534882171}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1033818749
 MonoBehaviour:
@@ -3466,7 +3466,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GlobalLanguagePopup
   panelRoot: {fileID: 2099910707}
-  toggleKey: 109
+  disableWhileOpen: []
+  pauseWithTimeScale: 0
 --- !u!1 &1034629076
 GameObject:
   m_ObjectHideFlags: 0
@@ -4586,7 +4587,8 @@ Transform:
   m_LocalPosition: {x: 551.0437, y: 300.8508, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1033818748}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1534974289
@@ -4800,7 +4802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 1534974292}
+  target: {fileID: 0}
   table: UI
   key: create_account_username_input
 --- !u!1 &1548972059
@@ -5349,7 +5351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 1637986101}
+  target: {fileID: 0}
   table: UI
   key: login_button
 --- !u!1 &1656460717
@@ -6007,7 +6009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 1811472231}
+  target: {fileID: 0}
   table: UI
   key: create_account_button
 --- !u!1 &1861857488
@@ -6200,7 +6202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 1861857490}
+  target: {fileID: 0}
   table: UI
   key: login_password_text
 --- !u!1 &1891053944
@@ -6393,7 +6395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
-  tmp: {fileID: 1891053946}
+  target: {fileID: 0}
   table: UI
   key: login_username_text
 --- !u!1 &1906804249
@@ -6975,4 +6977,3 @@ SceneRoots:
   - {fileID: 396610860}
   - {fileID: 629366366}
   - {fileID: 1534882171}
-  - {fileID: 1033818748}
