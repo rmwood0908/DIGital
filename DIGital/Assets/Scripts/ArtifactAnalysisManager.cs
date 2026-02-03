@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using TMPro;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 // class
 public class ArtifactAnalysisManager : MonoBehaviour
@@ -35,6 +37,33 @@ public class ArtifactAnalysisManager : MonoBehaviour
     [Header("API Settings")]
     [SerializeField] private string apiUrl =
                      "https://digital-ty59.onrender.com/api/artifacts";
+
+    // localization
+    [Header("Localization")]
+    [SerializeField] private string table = "UI";
+
+    // localization table keys
+    [SerializeField] private string LoadingList = "analysis_status_loading_list";
+    [SerializeField] private string ErrorLoadingList = "analysis_status_error_loading_list";
+    [SerializeField] private string NoArtifactsToAnalyze = "analysis_status_no_artifacts_to_analyze";
+    [SerializeField] private string InvalidSelection = "analysis_status_invalid_selection";
+    [SerializeField] private string DataLoaded = "analysis_status_data_loaded";
+    [SerializeField] private string NoArtifactData = "analysis_status_no_artifact_data";
+    [SerializeField] private string NoArtifactsInDb = "analysis_status_no_artifacts_in_db";
+    [SerializeField] private string SelectAndAnalyze = "analysis_status_select_and_analyze";
+    [SerializeField] private string DropdownLabelKey = "analysis_dropdown_label";
+
+    // re-translation
+    private enum StatusMode { None, Key, ServerError }
+    private StatusMode _statusMode = StatusMode.None;
+    private string _lastStatusKey = null;
+    private string _lastServerError = null;
+
+    // smart string error 
+    [SerializeField] private string ServerErrorDetails = "analysis_status_server_error_details";
+
+    private LocalizedString lsServerErrorDetails;
+    private LocalizedString lsDropdownLabel;
 
     // node app variables
     [System.Serializable]
@@ -85,6 +114,54 @@ public class ArtifactAnalysisManager : MonoBehaviour
 
     // functions
 
+    private void Awake()
+    {
+        // intialize error string and dropdown
+        lsServerErrorDetails = new LocalizedString(table, ServerErrorDetails);
+        lsDropdownLabel = new LocalizedString(table, DropdownLabelKey);
+    }
+
+    private void OnEnable()
+    {
+        LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+    }
+
+    private void OnDisable()
+    {
+        LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
+    }
+
+    private void OnLocaleChanged(Locale _)
+    {
+        // refresh dropdown labels
+        if (_artifacts != null && _artifacts.Count > 0)
+            PopulateDropdownOptions();
+
+        // refresh the current status message
+        RefreshStatusText();
+    }
+
+    private void RefreshStatusText()
+    {
+        if (StatusText == null) return;
+
+        switch (_statusMode)
+        {
+            case StatusMode.Key:
+                if (!string.IsNullOrEmpty(_lastStatusKey))
+                    StatusText.text = LocalizationSettings.StringDatabase.GetLocalizedString(table, _lastStatusKey);
+                break;
+
+            case StatusMode.ServerError:
+                if (!string.IsNullOrEmpty(_lastServerError))
+                {
+                    lsServerErrorDetails.Arguments = new object[] { new { error = _lastServerError } };
+                    StatusText.text = lsServerErrorDetails.GetLocalizedString();
+                }
+                break;
+        }
+    }
+
     // initialize analysis panel
     private void Start()
     {
@@ -93,10 +170,31 @@ public class ArtifactAnalysisManager : MonoBehaviour
 
         if( StatusText != null )
         {
-            StatusText.text = "Loading artifact list...";
+            SetStatus(LoadingList);
         }
 
         StartCoroutine(LoadArtifactListCoroutine());
+    }
+
+    private void SetStatus(string key)
+    {
+        _statusMode = StatusMode.Key;
+        _lastStatusKey = key;
+
+        if (StatusText == null) return;
+        StatusText.text = LocalizationSettings.StringDatabase.GetLocalizedString(table, key);
+    }
+
+    private void SetStatusServerError(string error)
+    {
+        _statusMode = StatusMode.ServerError;
+        _lastServerError = error;
+
+        if (StatusText == null) return;
+
+        // uses Smart String in table
+        lsServerErrorDetails.Arguments = new object[] { new { error } };
+        StatusText.text = lsServerErrorDetails.GetLocalizedString();
     }
 
     // analyze button
@@ -105,7 +203,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
         // error handling
         if( _artifacts.Count == 0 )
         {
-            StatusText.text = "No artifacts available to analyze.";
+            SetStatus(NoArtifactsToAnalyze);
             return;
         }
 
@@ -115,7 +213,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
         // error handling
         if ( index < 0 || index >= _artifacts.Count )
         {
-            StatusText.text = "Invalid selection.";
+            SetStatus(InvalidSelection);
             return;
         }
 
@@ -131,7 +229,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
 
         if( StatusText != null )
         {
-            StatusText.text = "Artifact data loaded.";
+            SetStatus(DataLoaded);
         }
     }
 
@@ -176,7 +274,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
 
                 if (StatusText != null)
                 {
-                    StatusText.text = "Error loading artifact list.";
+                    SetStatus(ErrorLoadingList);
                 }
 
                 yield break;
@@ -193,12 +291,15 @@ public class ArtifactAnalysisManager : MonoBehaviour
 
             if (response == null || !response.ok || response.artifacts == null)
             {
-                if( StatusText != null )
+
+                if (response != null && !string.IsNullOrEmpty(response.error))
                 {
-                    StatusText.text =
-                        response != null && !string.IsNullOrEmpty(response.error)
-                            ? $"Server error: {response.error}"
-                            : "No artifact data available.";
+                    SetStatusServerError(response.error);
+                }
+
+                else
+                {
+                    SetStatus(NoArtifactData);
                 }
 
                 yield break;
@@ -211,7 +312,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
             {
                 if( StatusText != null )
                 {
-                    StatusText.text = "No artifacts in database.";
+                    SetStatus(NoArtifactsInDb);
                 }
 
                 if ( SelectArtifact != null )
@@ -227,7 +328,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
 
             if( StatusText != null )
             {
-                StatusText.text = "Select an artifact and press Analyze.";
+                SetStatus(SelectAndAnalyze);
             }
         }
     }
@@ -241,19 +342,25 @@ public class ArtifactAnalysisManager : MonoBehaviour
             return;
         }
 
-        List<TMP_Dropdown.OptionData> options =
-            new List<TMP_Dropdown.OptionData>();
+        var options = new List<TMP_Dropdown.OptionData>();
 
         foreach (var artifact in _artifacts)
         {
-            // clean date to just YYYY-MM-DD if it has a T timestamp
             string rawDate = artifact.date_discovered ?? "";
-            string shortDate =
-                rawDate.Length >= 10 ? rawDate.Substring(0, 10) : rawDate;
+            string shortDate = rawDate.Length >= 10 ? rawDate.Substring(0, 10) : rawDate;
 
-            string label =
-                $"Artifact ID: {artifact.artifact_id} | {artifact.bag_number} | {shortDate}";
+            // Smart String arguments (named placeholders)
+            lsDropdownLabel.Arguments = new object[]
+            {
+                new
+                {
+                    id = artifact.artifact_id ?? "",
+                    bag = artifact.bag_number ?? "",
+                    date = shortDate
+                }
+            };
 
+            string label = lsDropdownLabel.GetLocalizedString();
             options.Add(new TMP_Dropdown.OptionData(label));
         }
 

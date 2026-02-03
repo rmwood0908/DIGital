@@ -18,5 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/ArtifactAnalysis.unity
     guid: 568634c7aacaaf14b941af7837c54161
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 0b8008639eb690248869c3e20a246f24, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.localization.settings: {fileID: 11400000, guid: b7b57616a4384ef40be3bf9710aa6d80, type: 2}
   m_UseUCBPForAssetBundles: 0

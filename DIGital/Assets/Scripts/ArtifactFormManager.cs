@@ -3,6 +3,8 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 using TMPro;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 // class
 public class ArtifactFormManager : MonoBehaviour
@@ -32,6 +34,13 @@ public class ArtifactFormManager : MonoBehaviour
     [SerializeField] private string apiUrl = 
                     "https://digital-ty59.onrender.com/api/artifacts";
 
+    // localization
+    [Header("Localization")]
+    [SerializeField] private string table = "UI";
+    [SerializeField] private string errorDetailsKey = "artifact_collection_status_error_details";
+
+    // cache to not recreate error message each time
+    private LocalizedString errorLocalizedString;
 
     // input field types
     [System.Serializable]
@@ -52,6 +61,12 @@ public class ArtifactFormManager : MonoBehaviour
         public string userId;
     }
 
+    private void Awake()
+    {
+        // cache this once (uses key + table from Inspector)
+        errorLocalizedString = new LocalizedString(table, errorDetailsKey);
+    }
+
     private void Start()
     {
         // ensure the panel starts hidden if you want it that way
@@ -59,6 +74,21 @@ public class ArtifactFormManager : MonoBehaviour
         {
             PanelRoot.SetActive(false);
         }
+    }
+
+    // status text with localization
+    private void SetStatus(string key)
+    {
+        if (StatusText == null) return;
+        StatusText.text = LocalizationSettings.StringDatabase.GetLocalizedString(table, key);
+    }
+
+    private void SetStatusErrorWithDetails(string details)
+    {
+        if (StatusText == null) return;
+
+        errorLocalizedString.Arguments = new object[] { new { details } }; // smart string
+        StatusText.text = errorLocalizedString.GetLocalizedString();
     }
 
     public void OpenForm()
@@ -106,7 +136,7 @@ public class ArtifactFormManager : MonoBehaviour
             return;
         }
 
-        StatusText.text = "Submitting artifact...";
+        SetStatus("artifact_collection_status_submit");
 
         ArtifactData data = new ArtifactData
         {
@@ -157,14 +187,14 @@ public class ArtifactFormManager : MonoBehaviour
             string.IsNullOrWhiteSpace(BagNumberInput.text) ||
             string.IsNullOrWhiteSpace(ArtifactIDInput.text))
         {
-            StatusText.text = "Please fill in all required fields.";
+            SetStatus("artifact_collection_status_missing_fields");
             return false;
         }
 
         // quantity validation
         if (!int.TryParse(QuantityInput.text.Trim(), out Quantity))
         {
-            StatusText.text = "Quantity must be a valid integer (whole number).";
+            SetStatus("artifact_collection_status_invalid_quantity");
             return false;
         }
 
@@ -174,7 +204,7 @@ public class ArtifactFormManager : MonoBehaviour
     // submit artifact coroutine
     private IEnumerator SubmitArtifactCoroutine(ArtifactData artifactData)
     {
-        StatusText.text = "Submitting artifact to database...";
+        SetStatus("artifact_collection_status_database");
 
         string json = JsonUtility.ToJson(artifactData);
         byte[] postData = Encoding.UTF8.GetBytes(json);
@@ -198,26 +228,17 @@ public class ArtifactFormManager : MonoBehaviour
                         request.downloadHandler.text);
     #endif
 
-                StatusText.text = "Artifact submitted successfully!";
+                SetStatus("artifact_collection_status_success");
 
                 ClearForm();
             }
 
             else
             {
-                string serverText = request.downloadHandler != null
-                    ? request.downloadHandler.text
-                    : "";
+                string serverText = request.downloadHandler != null ? request.downloadHandler.text : "";
+                string details = !string.IsNullOrEmpty(serverText) ? serverText : request.error;
 
-                Debug.LogError($"Error submitting artifact: " +
-                            $"{request.responseCode} - " +
-                            $"{request.error} - {serverText}");
-
-                StatusText.text =
-                    "Error submitting artifact: " +
-                    (!string.IsNullOrEmpty(serverText)
-                        ? serverText
-                        : request.error);
+                SetStatusErrorWithDetails(details);
             }
         }
     }

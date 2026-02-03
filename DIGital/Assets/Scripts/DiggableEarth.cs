@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Localization.Settings;
 
 public class DiggableEarth : MonoBehaviour, Interactable
 {
@@ -10,6 +11,11 @@ public class DiggableEarth : MonoBehaviour, Interactable
     private bool checkForText = false;
 
     private int digLayer;
+
+    // added localization for backfill (spanish)
+    [Header("Localization")]
+    [SerializeField] private string table = "UI";
+    [SerializeField] private string digTipKey = "walk_and_excavate_dig";
 
     void Start()
     {
@@ -34,7 +40,7 @@ public class DiggableEarth : MonoBehaviour, Interactable
         {
             if(textDisplayedTime > 0)
             {
-                textBox.text = "Dig (Left Click)";
+                textBox.text = LocalizationSettings.StringDatabase.GetLocalizedString(table, digTipKey);
             }
 
             else

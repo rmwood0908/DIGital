@@ -1,0 +1,289 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_es
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: 31ea228af823ade4e82ce66ef070da61, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 745707523204972612
+  m_TableData:
+  - m_Id: 1303104090112
+    m_Localized: Bienvenido a DIGital
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1387426377728
+    m_Localized: 'Usuario:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1535179124736
+    m_Localized: Ingrese Usuario...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1674014781440
+    m_Localized: "Contrase\xF1a:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1803300007936
+    m_Localized: "Ingrese Contrase\xF1a..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1928357376000
+    m_Localized: "Iniciar sesi\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198906761216
+    m_Localized: 'Correo:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2442818121728
+    m_Localized: Ingrese Correo...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2538301452288
+    m_Localized: 'Usuario:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2652856283136
+    m_Localized: Ingrese Usuario...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2796410531840
+    m_Localized: "Contrase\xF1a:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2876332994560
+    m_Localized: "Ingrese Contrase\xF1a..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2947019599872
+    m_Localized: Crear Cuenta
+    m_Metadata:
+      m_Items: []
+  - m_Id: 695464761389056
+    m_Localized: "\xA1Bienvenido, {username}!"
+    m_Metadata:
+      m_Items:
+      - rid: 745707523204972612
+  - m_Id: 696095794425856
+    m_Localized: "\xA1Bienvenido, arque\xF3logo!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 702131037171712
+    m_Localized: Rellenar (Clic Izquierdo)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703042161635328
+    m_Localized: Excavar (Clic Izquierdo)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 706481465749504
+    m_Localized: Grabar artefacto (Clic Izquierdo)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 708508342185984
+    m_Localized: "\xA1Artefacto Descubierto! Ingrese la Informaci\xF3n a Continuaci\xF3n:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 708707076698112
+    m_Localized: Enviar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 708959842234368
+    m_Localized: Cancelar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709051194175488
+    m_Localized: 'Fecha:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709168894734336
+    m_Localized: 'Investigador:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709340420796416
+    m_Localized: "\xC1rea:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709457722896384
+    m_Localized: 'Unidad:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709539818008576
+    m_Localized: 'Capa:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709627965501440
+    m_Localized: 'Sitio:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709699021205504
+    m_Localized: "Caracter\xEDsticas Asociadas:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709847243714560
+    m_Localized: 'Tipo de Material:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709977627848704
+    m_Localized: 'Cantidad:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 710196180447232
+    m_Localized: 'Peso:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 710253583691776
+    m_Localized: "N\xFAmero de Bolsa:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 710341441777664
+    m_Localized: 'ID del Artefacto:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 710804576825344
+    m_Localized: Enviando artefacto...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711135855538176
+    m_Localized: Enviando artefacto a la base de datos...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711305036984320
+    m_Localized: "\xA1Artefacto enviado correctamente!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711369687986176
+    m_Localized: Por favor, complete todos los campos obligatorios.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711465120985088
+    m_Localized: "La cantidad debe ser un n\xFAmero entero v\xE1lido."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711574663622656
+    m_Localized: 'Error al enviar el artefacto: {details}'
+    m_Metadata:
+      m_Items:
+      - rid: 745707523204972612
+  - m_Id: 715213671133184
+    m_Localized: Ingrese la Fecha...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 715825305513984
+    m_Localized: Ingrese el Investigador...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 716126028722176
+    m_Localized: "Ingrese el \xC1rea..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 716372825763840
+    m_Localized: Ingrese la Unidad...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 716645560381440
+    m_Localized: Ingrese la Capa...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 716824002850816
+    m_Localized: Ingrese el Sitio...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 716968760864768
+    m_Localized: "Ingrese las Caracter\xEDsticas Asociadas..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717118564626432
+    m_Localized: Ingrese el Tipo de Matieral...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717328493735936
+    m_Localized: Ingrese la Cantidad...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717430927028224
+    m_Localized: Ingrese el Peso...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717517669429248
+    m_Localized: "Ingrese el N\xFAmero de Bolsa..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 717525303062528
+    m_Localized: Ingrese el ID del Artefacto...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 744056326877184
+    m_Localized: "An\xE1lisis de Artefactos"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 744168449011712
+    m_Localized: Analizar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754783292911616
+    m_Localized: "Cargando lista de artefactos\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754837357490176
+    m_Localized: Error al cargar la lista de artefactos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754865467715584
+    m_Localized: No hay artefactos disponibles para analizar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754867149631488
+    m_Localized: "Selecci\xF3n inv\xE1lida."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754868437282816
+    m_Localized: Datos del artefacto cargados.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754869712351232
+    m_Localized: No hay datos de artefactos disponibles.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754871016779776
+    m_Localized: No hay artefactos en la base de datos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754872149241856
+    m_Localized: Seleccione un artefacto y presione Analizar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754873294286848
+    m_Localized: 'Error del servidor: {error}'
+    m_Metadata:
+      m_Items:
+      - rid: 745707523204972612
+  - m_Id: 757137585106944
+    m_Localized: 'ID del Artefacto: {id} | {bag} | {date}'
+    m_Metadata:
+      m_Items:
+      - rid: 745707523204972612
+  references:
+    version: 2
+    RefIds:
+    - rid: 745707523204972612
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 695464761389056
+        - id: 711574663622656
+        - id: 754873294286848
+        - id: 757137585106944
