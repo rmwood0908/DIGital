@@ -1544,7 +1544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &160259107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5069,7 +5069,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &681438550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14944,10 +14944,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   ui: {fileID: 868776318}
   fpsController: {fileID: 169532084}
-  llmCharacter: {fileID: 160259107}
   input: {fileID: 808567766}
   AIText: {fileID: 1786518115}
-  rag: {fileID: 2023515563}
+  serverBaseUrl: https://digital-ty59.onrender.com
   data: "In the Lambayeque region, at well-known sites like Sipan and \xDAcupe, copper
     and copper alloy artifacts (especially tumbaga) make up a large portion of the
     materials recovered from the elite tombs of the northern Mochica. Unlike the
@@ -14976,7 +14975,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2023515561}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a2496546d1575771597fc8cbdd0d852d, type: 3}
   m_Name: 
@@ -14992,7 +14991,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2023515561}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5102d32385d84d87f98c64d376cbcc90, type: 3}
   m_Name: 
@@ -15005,7 +15004,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2023515561}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6856fbefac554a38a7b8a4b353fd43d, type: 3}
   m_Name: 

@@ -2,9 +2,10 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import bcrypt from 'bcryptjs';
+import * as bcrypt from 'bcryptjs';
 import { pool } from './db.js';
 import artifactRoutes from './artifactRoutes.js';
+import aiRoutes from './aiRoutes.js';
 
 // server set up
 dotenv.config()
@@ -12,6 +13,7 @@ const app = express()
 app.use(cors());
 app.use(express.json());
 app.use('/api/artifacts', artifactRoutes);
+app.use('/api/ai', aiRoutes);
 
 const PORT = process.env.PORT || 4000;
 
@@ -56,7 +58,7 @@ app.post('/api/auth/signup', async (req, res) => {
 
 // login method
 app.post('/api/auth/login', async (req, res) => {
-
+    console.log('Received login request:', req.body);
     // get user information from form
     try {
         const { username, password } = req.body;
@@ -95,6 +97,6 @@ app.post('/api/auth/login', async (req, res) => {
     }
 });
 
-app.listen(process.env.PORT, () =>
-    console.log(`Auth API running on http://localhost:${process.env.PORT}`)
+app.listen(PORT, () =>
+    console.log(`Auth API running on http://localhost:${PORT}`)
 );

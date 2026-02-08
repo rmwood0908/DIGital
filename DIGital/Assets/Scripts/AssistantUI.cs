@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using LLMUnity;
+using System.Collections;
+using System.Text;
+using UnityEngine.Networking;
 
 public class AssistantUI : MonoBehaviour
 {
@@ -9,12 +12,14 @@ public class AssistantUI : MonoBehaviour
     public FirstPersonController fpsController;
 
     // AI STUFF
-    public LLMCharacter llmCharacter;
+    // public LLMCharacter llmCharacter;
     public InputField input;
     public Text AIText;
+    public string serverBaseUrl = "https://digital-ty59.onrender.com";
+    // public string serverBaseUrl = "http://localhost:4000";
 
     // RAG STUFF
-    public RAG rag;
+    // public RAG rag;
     [TextArea(3,10)]
     public string data;
 
@@ -30,7 +35,7 @@ public class AssistantUI : MonoBehaviour
         }
 
         // create RAG embeddings from data
-        ChunkData();
+        // ChunkData();
     }
 
     private void Update()
@@ -83,18 +88,19 @@ public class AssistantUI : MonoBehaviour
     {
         input.interactable = false;
         AIText.text = "...";
-        // Debug.Log("User: " + message);
-        
+        Debug.Log("User: " + message);
         
         // search RAG for revevant data
-        (string[] similarPhrases, float[] distances) = await rag.Search(message, 1);
-        string prompt = "Answer the user query based on the provided data.\n\n";
-        prompt += $"User query: {message}\n\n";
-        prompt += $"Data:\n";
-        foreach (string similarPhrase in similarPhrases) prompt += $"\n- {similarPhrase}";
+        // (string[] similarPhrases, float[] distances) = await rag.Search(message, 1);
+        // string prompt = "Answer the user query based on the provided data.\n\n";
+        // prompt += $"User query: {message}\n\n";
+        // prompt += $"Data:\n";
+        // foreach (string similarPhrase in similarPhrases) prompt += $"\n- {similarPhrase}";
 
         // Debug.Log("Prompt to LLM: " + prompt);
-        _ = llmCharacter.Chat(prompt, SetAIText, AIReplyComplete);
+        // _ = llmCharacter.Chat(prompt, SetAIText, AIReplyComplete);
+        PromptRequest data = new PromptRequest { prompt = message };
+        StartCoroutine(PostToApiCoroutine("/api/ai", data));
     }
 
     public void SetAIText(string text)
@@ -110,9 +116,60 @@ public class AssistantUI : MonoBehaviour
     }
 
     // RAG STUFF
-    async void ChunkData()
+    // async void ChunkData()
+    // {
+    //     // add the data to the RAG
+    //     await rag.Add(data);
+    // }
+
+    IEnumerator PostToApiCoroutine(string route, object payload)
     {
-        // add the data to the RAG
-        await rag.Add(data);
+        string url = $"{serverBaseUrl}{route}";
+        string json = JsonUtility.ToJson(payload);
+        byte[] body = Encoding.UTF8.GetBytes(json);
+
+        using (UnityWebRequest req = new UnityWebRequest(url, "POST"))
+        {
+            req.uploadHandler = new UploadHandlerRaw(body);
+            req.downloadHandler = new DownloadHandlerBuffer();
+            req.SetRequestHeader("Content-Type", "application/json");
+
+            Debug.Log($"[API] Sending POST to {url} with payload: {json}");
+            yield return req.SendWebRequest();
+
+            string responseText = req.downloadHandler != null
+                ? req.downloadHandler.text
+                : "(no downloadHandler)";
+
+            if (req.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError($"[API] Error {req.responseCode}: {req.error}");
+                Debug.LogError($"[API] Server response: {responseText}");
+                yield break;
+            }
+            ApiResponse response =
+                JsonUtility.FromJson<ApiResponse>(responseText);
+
+            SetAIText(response.reply);
+            AIReplyComplete();
+
+            // You can parse the response JSON here, depending on your API:
+            // Example for AI API:
+            // AIResponse response = JsonUtility.FromJson<AIResponse>(responseText);
+        }
+    }
+
+
+    [System.Serializable]
+    public class PromptRequest
+    {
+        public string prompt;
+    }
+
+    [System.Serializable]
+    public class ApiResponse
+    {
+        public bool ok;
+        public string reply;
     }
 }
