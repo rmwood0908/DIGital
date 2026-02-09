@@ -19,9 +19,9 @@ export default function Game()
         const buildUrl = '/DemoBuild'
         const config = 
         {
-          dataUrl: `${buildUrl}/WebGL.data.br`,
-          frameworkUrl: `${buildUrl}/WebGL.framework.js.br`,
-          codeUrl: `${buildUrl}/WebGL.wasm.br`,
+          dataUrl: `${buildUrl}/WebGL.data`,
+          frameworkUrl: `${buildUrl}/WebGL.framework.js`,
+          codeUrl: `${buildUrl}/WebGL.wasm`,
           loaderUrl: `${buildUrl}/WebGL.loader.js`,
           streamingAssetsUrl: 'StreamingAssets',
           companyName: 'DIGital',
