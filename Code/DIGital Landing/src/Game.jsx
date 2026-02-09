@@ -22,6 +22,7 @@ export default function Game()
           dataUrl: `${buildUrl}/WebGL.data.br`,
           frameworkUrl: `${buildUrl}/WebGL.framework.js.br`,
           codeUrl: `${buildUrl}/WebGL.wasm.br`,
+          loaderUrl: `${buildUrl}/WebGL.loader.js`,
           streamingAssetsUrl: 'StreamingAssets',
           companyName: 'DIGital',
           productName: 'Virtual Excavation',
