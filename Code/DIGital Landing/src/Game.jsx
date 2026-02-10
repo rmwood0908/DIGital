@@ -1,43 +1,37 @@
 import { useEffect, useRef, useState } from 'react'
 import './Game.css'
 
-export default function Game() 
-{
+export default function Game() {
   const canvasRef = useRef(null)
   const [isLoading, setIsLoading] = useState(true)
   const [loadingProgress, setLoadingProgress] = useState(0)
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [unityInstance, setUnityInstance] = useState(null)
 
-  useEffect(() => 
-  {
+  useEffect(() => {
     // Load Unity WebGL build
-    const loadUnityGame = async () => 
-    {
-      try 
-      {
+    const loadUnityGame = async () => {
+      try {
         const buildUrl = '/DemoBuild'
-        const config = 
+        const config =
         {
           dataUrl: `${buildUrl}/WebGL.data.br`,
           frameworkUrl: `${buildUrl}/WebGL.framework.js.br`,
           codeUrl: `${buildUrl}/WebGL.wasm.br`,
-          streamingAssetsUrl: 'StreamingAssets',
+          streamingAssetsUrl: `${buildUrl}/StreamingAssets`,
           companyName: 'DIGital',
           productName: 'Virtual Excavation',
           productVersion: '1.0',
         }
 
         // Load Unity loader script
-        if (!window.createUnityInstance) 
-        {
+        if (!window.createUnityInstance) {
           const script = document.createElement('script')
           script.src = `${buildUrl}/WebGL.loader.js`
           script.async = true
           document.body.appendChild(script)
-          
-          await new Promise((resolve) => 
-          {
+
+          await new Promise((resolve) => {
             script.onload = resolve
           })
         }
@@ -97,8 +91,8 @@ export default function Game()
                 <div className="spinner"></div>
                 <h2>Loading Virtual Excavation...</h2>
                 <div className="progress-bar">
-                  <div 
-                    className="progress-fill" 
+                  <div
+                    className="progress-fill"
                     style={{ width: `${loadingProgress}%` }}
                   ></div>
                 </div>
@@ -106,9 +100,9 @@ export default function Game()
               </div>
             </div>
           )}
-          
-          <canvas 
-            ref={canvasRef} 
+
+          <canvas
+            ref={canvasRef}
             id="unity-canvas"
             className={isLoading ? 'hidden' : ''}
           ></canvas>
