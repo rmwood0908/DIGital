@@ -50,7 +50,7 @@ public class ExcavationUIManager : MonoBehaviour
             var localized = new LocalizedString(table, userKey);
             localized.Arguments = new object[] { new { username = username } };
 
-            welcomeText.text = localized.GetLocalizedString();
+            welcomeText.text = localized.GetLocalizedString() + "\nExcavating " + SessionManager.Instance.selectedSite + "!";
         }
         else
         {
