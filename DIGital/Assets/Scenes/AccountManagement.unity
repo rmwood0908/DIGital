@@ -1346,7 +1346,7 @@ MonoBehaviour:
   CreateUsernameInput: {fileID: 1548972063}
   CreatePasswordInput: {fileID: 730872839}
   serverBaseUrl: https://digital-ty59.onrender.com
-  excavationSceneName: Walk&Excavate
+  excavationSceneName: SiteSelection
 --- !u!4 &396610860
 Transform:
   m_ObjectHideFlags: 0
@@ -1934,6 +1934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e889741e5a087094fa340a19d514ef1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SessionManager
+  selectedSite: 
 --- !u!4 &629366366
 Transform:
   m_ObjectHideFlags: 0

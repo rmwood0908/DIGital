@@ -8,6 +8,7 @@ public class SessionManager: MonoBehaviour
     // to be filled after login/singup
     public string UserId { get; private set; }
     public string Username { get; private set; }
+    public string selectedSite;
 
     public bool IsLoggedIn => !string.IsNullOrEmpty(UserId);
 
