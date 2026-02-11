@@ -24,7 +24,6 @@ function LandingPage()
             <a href="#about">About</a>
             <Link to="/game">Virtual Experience</Link>
             <a href="#quizzes">Learning Tools</a>
-            <a href="#assistant">AI Assistant</a>
             <a href="#dr-sharp">Meet Dr. Sharp</a>
             <a href="#team">Meet The Team</a>
           </nav>
@@ -190,8 +189,7 @@ function LandingPage()
         <div className="container">
           <div className="footer-content">
             <div className="footer-section">
-              <h4>DIGital</h4>
-              <p>A Virtual Excavation Experience</p>
+              <h4>DIGital a Virtual Excavation Experience</h4>
             </div>
             <div className="footer-section">
               <h4>Quick Links</h4>
@@ -199,15 +197,13 @@ function LandingPage()
                 <li><a href="#about">About</a></li>
                 <li><Link to="/game">Play Game</Link></li>
                 <li><a href="#quizzes">Quizzes</a></li>
-                <li><a href="#assistant">Assistant</a></li>
               </ul>
             </div>
             <div className="footer-section">
               <h4>Connect</h4>
               <ul>
-                <li><a href="#">GitHub</a></li>
-                <li><a href="#">Team Website</a></li>
-                <li><a href="#">LinkedIn</a></li>
+                <li><a href="https://github.com/Devin-Jay/DIGital" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <li><a href="https://sce.nau.edu/capstone/projects/CS/2026/DIGital_F25/" target="_blank" rel="noopener noreferrer">Team Website</a></li>
               </ul>
             </div>
             <div className="footer-section nau-section">
