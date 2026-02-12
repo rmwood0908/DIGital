@@ -14944,6 +14944,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   ui: {fileID: 868776318}
   fpsController: {fileID: 169532084}
+  excavationUI: {fileID: 548421995}
   input: {fileID: 808567766}
   AIText: {fileID: 1786518115}
   serverBaseUrl: https://digital-ty59.onrender.com

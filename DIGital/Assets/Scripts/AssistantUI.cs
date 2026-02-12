@@ -12,6 +12,8 @@ public class AssistantUI : MonoBehaviour
 
     public FirstPersonController fpsController;
 
+    public ExcavationUIManager excavationUI;
+
     // AI STUFF
     // public LLMCharacter llmCharacter;
     public InputField input;
@@ -63,6 +65,9 @@ public class AssistantUI : MonoBehaviour
 
         if (newState)
         {
+            // hide welcome text
+            if (excavationUI != null) excavationUI.SetWelcomeVisible(false);
+
             // OPEN: unlock cursor & optionally freeze FPS controller
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible   = true;
@@ -82,6 +87,9 @@ public class AssistantUI : MonoBehaviour
         }
         else
         {
+            // show welcome text
+            if (excavationUI != null) excavationUI.SetWelcomeVisible(true);
+
             // CLOSE: lock cursor again & re-enable FPS controller
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible   = false;
