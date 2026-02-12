@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.UI;
 
 public class GlobalLanguagePopup : MonoBehaviour
 {
@@ -28,16 +29,12 @@ public class GlobalLanguagePopup : MonoBehaviour
     // when entering artifact information
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            // if the player is typing in any TMP_InputField, ignore the hotkey
-            if (IsTypingInInputField()) return;
+        if (!Input.GetKeyDown(KeyCode.M)) return;
 
-            Toggle();
-        }
+        // if the player is typing in any TMP_InputField, ignore the hotkey
+        if (IsTypingInInputField()) return;
 
-        // let Esc close the popup
-        if (isOpen && Input.GetKeyDown(KeyCode.Escape)) Close();
+        Toggle();
     }
 
     private bool IsTypingInInputField()
@@ -48,7 +45,13 @@ public class GlobalLanguagePopup : MonoBehaviour
         if (selected == null) return false;
 
         // if the selected object is a TMP_InputField or inside one, treat as typing
-        return selected.GetComponentInParent<TMP_InputField>() != null;
+        if (selected.GetComponentInParent<TMP_InputField>() != null) return true;
+
+        // ADDED for AI assistant panel
+        if (selected.GetComponentInParent<InputField>() != null) return true;
+
+        // otherwise
+        return false;
     }
 
     public void Toggle()
