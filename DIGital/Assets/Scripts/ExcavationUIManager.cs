@@ -57,4 +57,13 @@ public class ExcavationUIManager : MonoBehaviour
             welcomeText.text = LocalizationSettings.StringDatabase.GetLocalizedString(table, guestKey);
         }
     }
+
+    // hide text when AI panel opens
+    public void SetWelcomeVisible(bool visible) {
+        
+        if (welcomeText == null) return;
+        welcomeText.gameObject.SetActive(visible);
+
+        if (visible) UpdateWelcome();
+    }
 }

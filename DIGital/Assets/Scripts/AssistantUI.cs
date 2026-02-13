@@ -4,12 +4,15 @@ using LLMUnity;
 using System.Collections;
 using System.Text;
 using UnityEngine.Networking;
+using UnityEngine.EventSystems;
 
 public class AssistantUI : MonoBehaviour
 {
     public GameObject ui;
 
     public FirstPersonController fpsController;
+
+    public ExcavationUIManager excavationUI;
 
     // AI STUFF
     // public LLMCharacter llmCharacter;
@@ -62,6 +65,9 @@ public class AssistantUI : MonoBehaviour
 
         if (newState)
         {
+            // hide welcome text
+            if (excavationUI != null) excavationUI.SetWelcomeVisible(false);
+
             // OPEN: unlock cursor & optionally freeze FPS controller
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible   = true;
@@ -70,9 +76,20 @@ public class AssistantUI : MonoBehaviour
             {
                 fpsController.enabled = false;
             }
+
+            // esnure input field is selected object (for global language popup)
+            if (input != null)
+            {
+                EventSystem.current.SetSelectedGameObject(input.gameObject);
+                input.ActivateInputField();
+                input.Select();
+            }
         }
         else
         {
+            // show welcome text
+            if (excavationUI != null) excavationUI.SetWelcomeVisible(true);
+
             // CLOSE: lock cursor again & re-enable FPS controller
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible   = false;
