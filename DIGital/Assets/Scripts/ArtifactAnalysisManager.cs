@@ -42,6 +42,10 @@ public class ArtifactAnalysisManager : MonoBehaviour
     [Header("Localization")]
     [SerializeField] private string table = "UI";
 
+    // artifact pivot
+    [Header("3D Preview Pivot")]
+    [SerializeField] private Transform artifactPivot;
+
     // localization table keys
     [SerializeField] private string LoadingList = "analysis_status_loading_list";
     [SerializeField] private string ErrorLoadingList = "analysis_status_error_loading_list";
@@ -452,6 +456,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
 
                     binding.modelObject.SetActive(true);
                     CurrentActiveModel = binding.modelObject;
+                    SetupPivotWithoutMovingModel(CurrentActiveModel);
                     foundMatch = true;
                     break;
                 }
@@ -467,5 +472,31 @@ public class ArtifactAnalysisManager : MonoBehaviour
             Debug.LogWarning("[ArtifactAnalysisManager] No modelBinding matched DB ID: '" +
                             dbId + "'");
         }
+    }
+
+    private void SetupPivotWithoutMovingModel(GameObject model)
+    {
+        if (artifactPivot == null || model == null) return;
+
+        // find visual center of model in world space
+        var renderers = model.GetComponentsInChildren<Renderer>();
+        
+        if (renderers.Length == 0) return;
+
+        Bounds bound = renderers[0].bounds;
+
+        for (int index = 1; index < renderers.Length; index++)
+        {
+            bound.Encapsulate(renderers[index].bounds);
+        }
+
+        // put pivot at model center
+        artifactPivot.position = bound.center;
+
+        // reset artifact rotation so each artifact starts upright
+        artifactPivot.rotation = Quaternion.identity;
+
+        // parent the model to the pivot
+        model.transform.SetParent(artifactPivot, worldPositionStays: true);
     }
 }
