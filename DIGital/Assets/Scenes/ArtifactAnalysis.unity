@@ -1857,11 +1857,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5f724607e0f355341b8bf03672abded3, type: 3}
   m_PrefabInstance: {fileID: 543109177}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &311303626 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5f724607e0f355341b8bf03672abded3, type: 3}
-  m_PrefabInstance: {fileID: 543109177}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &317320423
 GameObject:
   m_ObjectHideFlags: 0
@@ -3182,15 +3177,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 591620440}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 5f724607e0f355341b8bf03672abded3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -175
+      value: -183
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5f724607e0f355341b8bf03672abded3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -15
+      value: -14
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5f724607e0f355341b8bf03672abded3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3301,8 +3296,7 @@ Transform:
   m_LocalPosition: {x: -8, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 311303626}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &678570335
@@ -4320,6 +4314,7 @@ MonoBehaviour:
   StatusText: {fileID: 235039201}
   apiUrl: https://digital-ty59.onrender.com/api/artifacts
   table: UI
+  artifactPivot: {fileID: 591620440}
   LoadingList: analysis_status_loading_list
   ErrorLoadingList: analysis_status_error_loading_list
   NoArtifactsToAnalyze: analysis_status_no_artifacts_to_analyze
@@ -10897,5 +10892,6 @@ SceneRoots:
   - {fileID: 825878034}
   - {fileID: 2109041437}
   - {fileID: 591620440}
+  - {fileID: 543109177}
   - {fileID: 1223976491}
   - {fileID: 194404412}
