@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentLayer == 6)
+        if(currentLayer == 7)
         {
             currentStep++;
             currentLayer = -1;

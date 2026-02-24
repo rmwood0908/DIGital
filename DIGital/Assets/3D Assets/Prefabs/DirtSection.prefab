@@ -104,6 +104,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DiggableEarth
   textBox: {fileID: 0}
+  table: UI
+  digTipKey: walk_and_excavate_dig
 --- !u!65 &6211655125424370093
 BoxCollider:
   m_ObjectHideFlags: 0
