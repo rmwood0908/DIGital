@@ -4310,6 +4310,7 @@ MonoBehaviour:
   WeightInput: {fileID: 1391778345}
   BagNumberInput: {fileID: 1577367159}
   ArtifactIDInput: {fileID: 891547937}
+  accountManagementSceneName: AccountManagement
   SelectArtifact: {fileID: 1747613209}
   StatusText: {fileID: 235039201}
   apiUrl: https://digital-ty59.onrender.com/api/artifacts
@@ -8917,7 +8918,7 @@ GameObject:
   - component: {fileID: 1845090927}
   - component: {fileID: 1845090926}
   m_Layer: 5
-  m_Name: Button
+  m_Name: LogoutButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8940,8 +8941,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1253.1028, y: 405.13}
-  m_SizeDelta: {x: 183.7944, y: 49.741}
+  m_AnchoredPosition: {x: -1215.248, y: 392.54}
+  m_SizeDelta: {x: 259.5038, y: 74.921}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1845090926
 MonoBehaviour:
@@ -8986,7 +8987,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1845090927}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 825878035}
+        m_TargetAssemblyTypeName: ArtifactAnalysisManager, Assembly-CSharp
+        m_MethodName: OnLogoutButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1845090927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11015,6 +11028,7 @@ GameObject:
   - component: {fileID: 2118136943}
   - component: {fileID: 2118136945}
   - component: {fileID: 2118136944}
+  - component: {fileID: 2118136946}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -11140,6 +11154,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2118136942}
   m_CullTransparentMesh: 1
+--- !u!114 &2118136946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118136942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a588735742ede0488343dfd7193a026, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
+  target: {fileID: 2118136944}
+  table: UI
+  key: logout_button
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
