@@ -98,7 +98,7 @@ router.post('/', async (req, res) => {
 });
 
 // get route to show artifact to analyze
-router.get('/latest', async (req, res) => {
+router.get('/latest/:userId', async (req, res) => {
     try {
         const { userId } = req.params
 

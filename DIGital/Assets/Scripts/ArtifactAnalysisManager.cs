@@ -315,7 +315,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
         string userId = SessionManager.Instance.UserId;
         string url = $"{apiUrl}/mine/{UnityWebRequest.EscapeURL(userId)}";
 
-        using (UnityWebRequest request = UnityWebRequest.Get(apiUrl))
+        using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
             yield return request.SendWebRequest();
 
