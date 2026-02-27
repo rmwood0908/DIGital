@@ -100,17 +100,20 @@ router.post('/', async (req, res) => {
 // get route to show artifact to analyze
 router.get('/latest', async (req, res) => {
     try {
+        const { userId } = req.params
+
         const selectArtifactQuery =
             `SELECT id, date_discovered, investigator, area,
                 unit, layer, site, associated_features,
                 material_type, quantity, weight, bag_number,
                 artifact_id
          FROM artifacts
+         WHERE user_id = $1
          ORDER BY created_at DESC
          LIMIT 1;`;
 
         // send query to database
-        const result = await pool.query(selectArtifactQuery);
+        const result = await pool.query(selectArtifactQuery, [userId]);
 
         // error handling
         if (result.rows.length === 0) {
