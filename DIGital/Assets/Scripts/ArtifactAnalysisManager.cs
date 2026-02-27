@@ -304,6 +304,9 @@ public class ArtifactAnalysisManager : MonoBehaviour
     private IEnumerator LoadArtifactListCoroutine()
     {
         // use node app JS code
+        string userId = SessionManager.Instance.UserId;
+        string url = $"{apiUrl/mine/{UnityWebRequest.EscapeUrl(userId)}";
+
         using (UnityWebRequest request = UnityWebRequest.Get(apiUrl))
         {
             yield return request.SendWebRequest();
