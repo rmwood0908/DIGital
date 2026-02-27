@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 using TMPro;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
+using UnityEngine.SceneManagement;
 
 // class
 public class ArtifactAnalysisManager : MonoBehaviour
@@ -24,6 +25,9 @@ public class ArtifactAnalysisManager : MonoBehaviour
     [SerializeField] private TMP_InputField WeightInput;
     [SerializeField] private TMP_InputField BagNumberInput;
     [SerializeField] private TMP_InputField ArtifactIDInput;
+
+    [Header("Logout / Navigation")]
+    [SerializeField] private string accountManagementSceneName = "AccountManagement";
 
     // dropdown menu
     [Header("Dropdown")]
@@ -169,6 +173,13 @@ public class ArtifactAnalysisManager : MonoBehaviour
     // initialize analysis panel
     private void Start()
     {
+        /* // Guard: if not logged in, send them to account management
+        if (SessionManager.Instance == null || !SessionManager.Instance.IsLoggedIn)
+        {
+            SceneManager.LoadScene(accountManagementSceneName);
+            return;
+        } */
+
         // make input fields read only
         SetFieldsReadOnly(true);
 
@@ -199,6 +210,39 @@ public class ArtifactAnalysisManager : MonoBehaviour
         // uses Smart String in table
         lsServerErrorDetails.Arguments = new object[] { new { error } };
         StatusText.text = lsServerErrorDetails.GetLocalizedString();
+    }
+
+    // logout button
+    public void OnLogoutButtonClicked()
+    {
+        // hide any current active model(s)
+        CleanupActiveModelForLogout();
+
+        // clear session
+        if (SessionManager.Instance != null)
+        {
+            SessionManager.Instance.ClearUser();
+        }
+
+        // load account management scene
+        SceneManager.LoadScene(accountManagementSceneName);
+    }
+
+    // hide active models for logging out
+    private void CleanupActiveModelForLogout()
+    {
+        if (CurrentActiveModel == null) return;
+
+        // detach model pivot
+        CurrentActiveModel.transform.SetParent(null, worldPositionStays: true);
+        CurrentActiveModel.SetActive(false);
+        CurrentActiveModel = null;
+
+        // hide panel
+        if (BackgroundPanel != null)
+        {
+            BackgroundPanel.SetActive(true);
+        }
     }
 
     // analyze button
@@ -259,8 +303,19 @@ public class ArtifactAnalysisManager : MonoBehaviour
     // load artifact from database
     private IEnumerator LoadArtifactListCoroutine()
     {
+        // make sure user is logged in and has id
+        if ( SessionManager.Instance == null || string.IsNullOrEmpty(SessionManager.Instance.UserId))
+        {
+            Debug.LogError("[ArtifactAnalysisManager] No session userId found. Cannot load user artifacts.");
+            if (StatusText != null) SetStatus(ErrorLoadingList);
+            yield break;
+        }
+
         // use node app JS code
-        using (UnityWebRequest request = UnityWebRequest.Get(apiUrl))
+        string userId = SessionManager.Instance.UserId;
+        string url = $"{apiUrl}/mine/{UnityWebRequest.EscapeURL(userId)}";
+
+        using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
             yield return request.SendWebRequest();
 
