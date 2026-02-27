@@ -173,12 +173,12 @@ public class ArtifactAnalysisManager : MonoBehaviour
     // initialize analysis panel
     private void Start()
     {
-        // Guard: if not logged in, send them to account management
+        /* // Guard: if not logged in, send them to account management
         if (SessionManager.Instance == null || !SessionManager.Instance.IsLoggedIn)
         {
             SceneManager.LoadScene(accountManagementSceneName);
             return;
-        }
+        } */
 
         // make input fields read only
         SetFieldsReadOnly(true);
@@ -303,9 +303,17 @@ public class ArtifactAnalysisManager : MonoBehaviour
     // load artifact from database
     private IEnumerator LoadArtifactListCoroutine()
     {
+        // make sure user is logged in and has id
+        if ( SessionManager.Instance == null || string.IsNullOrEmpty(SessionManager.Instance.UserId))
+        {
+            Debug.LogError("[ArtifactAnalysisManager] No session userId found. Cannot load user artifacts.");
+            if (StatusText != null) SetStatus(ErrorLoadingList);
+            yield break;
+        }
+
         // use node app JS code
         string userId = SessionManager.Instance.UserId;
-        string url = $"{apiUrl/mine/{UnityWebRequest.EscapeUrl(userId)}";
+        string url = $"{apiUrl}/mine/{UnityWebRequest.EscapeURL(userId)}";
 
         using (UnityWebRequest request = UnityWebRequest.Get(apiUrl))
         {
