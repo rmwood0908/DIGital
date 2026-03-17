@@ -5,7 +5,9 @@ import dotenv from 'dotenv';
 import * as bcrypt from 'bcryptjs';
 import { pool } from './db.js';
 import artifactRoutes from './artifactRoutes.js';
+
 import aiRoutes from './aiRoutes.js';
+import vectorSearchRouter from './vectorSearchRouter.js';
 
 // server set up
 dotenv.config()
@@ -14,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/api/artifacts', artifactRoutes);
 app.use('/api/ai', aiRoutes);
+app.use('/search', vectorSearchRouter);  // raw vector search (returns chunks)
 
 const PORT = process.env.PORT || 4000;
 

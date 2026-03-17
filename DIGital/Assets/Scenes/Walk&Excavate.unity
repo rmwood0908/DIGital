@@ -33431,9 +33431,6 @@ GameObject:
   - component: {fileID: 2023515567}
   - component: {fileID: 2023515566}
   - component: {fileID: 2023515562}
-  - component: {fileID: 2023515563}
-  - component: {fileID: 2023515565}
-  - component: {fileID: 2023515564}
   m_Layer: 5
   m_Name: AI Assistant Logo
   m_TagString: Untagged
@@ -33458,76 +33455,8 @@ MonoBehaviour:
   excavationUI: {fileID: 548421995}
   input: {fileID: 808567766}
   AIText: {fileID: 1786518115}
-  serverBaseUrl: https://digital-ty59.onrender.com
-  data: "In the Lambayeque region, at well-known sites like Sipan and \xDAcupe, copper
-    and copper alloy artifacts (especially tumbaga) make up a large portion of the
-    materials recovered from the elite tombs of the northern Mochica. Unlike the
-    typical view of the Gallinazo based on evidence from the southern north coast
-    region, the Northern Gallinazo that occupied the Lambayeque appear to have been
-    not only a politically important regional polity, but also a metallurgically
-    important entity whose relationship with the Mochica were inextricably tied to
-    copper ore. What is the Northern Gallinazo? In the last 30 years, perspectives
-    on the Gallinazo and the Vir\xFA have changed significantly, but there is still
-    a lack of understanding of the Northern Gallinazo that lived in the Lambayeque
-    region. The archaeological definition I have put forth recently defines the Northern
-    Gallinazo based on four fundamental criteria that apply to their sites in the
-    Lambayeque region during the first millennium. These settlement pattern criteria
-    include:\r\n\r\n(1) iconic corporate (monumental) architecture,\r\n\r\n(2) mortuary
-    practices that include the presence of well-defined cemeteries,\r\n\r\n(3) a
-    distinctive art style that expresses shared beliefs, and\r\n\r\n(4) an association
-    with copper in terms of mining and smelting in particular\r\nThese characteristics
-    define the major sites of Huaca Letrada and Songoy-Cojal, situated in the valleys
-    of La Leche and Za\xF1a, respectively, potentially at other yet-to-be-studied
-    sites as well."
+  serverBaseUrl: http://localhost:4000
   toggleKey: 9
---- !u!114 &2023515563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2023515561}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2496546d1575771597fc8cbdd0d852d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: undream.llmunity.Runtime::LLMUnity.RAG
-  searchType: 1
-  search: {fileID: 2023515564}
-  chunkingType: 0
-  chunking: {fileID: 0}
---- !u!114 &2023515564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2023515561}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5102d32385d84d87f98c64d376cbcc90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: undream.llmunity.Runtime::LLMUnity.SimpleSearch
-  llmEmbedder: {fileID: 2023515565}
---- !u!114 &2023515565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2023515561}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6856fbefac554a38a7b8a4b353fd43d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: undream.llmunity.Runtime::LLMUnity.LLMEmbedder
-  advancedOptions: 0
-  remote: 0
-  _llm: {fileID: 681438550}
-  APIKey: 
-  host: localhost
-  port: 13333
-  numRetries: 10
 --- !u!114 &2023515566
 MonoBehaviour:
   m_ObjectHideFlags: 0

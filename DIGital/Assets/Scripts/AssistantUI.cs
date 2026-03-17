@@ -21,11 +21,6 @@ public class AssistantUI : MonoBehaviour
     public string serverBaseUrl = "https://digital-ty59.onrender.com";
     // public string serverBaseUrl = "http://localhost:4000";
 
-    // RAG STUFF
-    // public RAG rag;
-    [TextArea(3,10)]
-    public string data;
-
     // debug / options
     public KeyCode toggleKey = KeyCode.Tab;
 
@@ -36,9 +31,6 @@ public class AssistantUI : MonoBehaviour
         {
             ui.SetActive(false);
         }
-
-        // create RAG embeddings from data
-        // ChunkData();
     }
 
     private void Update()
@@ -105,17 +97,7 @@ public class AssistantUI : MonoBehaviour
     {
         input.interactable = false;
         AIText.text = "...";
-        Debug.Log("User: " + message);
-        
-        // search RAG for revevant data
-        // (string[] similarPhrases, float[] distances) = await rag.Search(message, 1);
-        // string prompt = "Answer the user query based on the provided data.\n\n";
-        // prompt += $"User query: {message}\n\n";
-        // prompt += $"Data:\n";
-        // foreach (string similarPhrase in similarPhrases) prompt += $"\n- {similarPhrase}";
 
-        // Debug.Log("Prompt to LLM: " + prompt);
-        // _ = llmCharacter.Chat(prompt, SetAIText, AIReplyComplete);
         PromptRequest data = new PromptRequest { prompt = message };
         StartCoroutine(PostToApiCoroutine("/api/ai", data));
     }
@@ -131,13 +113,6 @@ public class AssistantUI : MonoBehaviour
         input.Select();
         input.text = "";
     }
-
-    // RAG STUFF
-    // async void ChunkData()
-    // {
-    //     // add the data to the RAG
-    //     await rag.Add(data);
-    // }
 
     IEnumerator PostToApiCoroutine(string route, object payload)
     {
@@ -169,10 +144,6 @@ public class AssistantUI : MonoBehaviour
 
             SetAIText(response.reply);
             AIReplyComplete();
-
-            // You can parse the response JSON here, depending on your API:
-            // Example for AI API:
-            // AIResponse response = JsonUtility.FromJson<AIResponse>(responseText);
         }
     }
 
