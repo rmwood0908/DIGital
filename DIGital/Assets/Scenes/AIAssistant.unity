@@ -712,7 +712,8 @@ GameObject:
   - component: {fileID: 941569443}
   - component: {fileID: 941569445}
   - component: {fileID: 941569447}
-  - component: {fileID: 941569446}
+  - component: {fileID: 941569448}
+  - component: {fileID: 941569449}
   m_Layer: 5
   m_Name: AI Assistant Logo
   m_TagString: Untagged
@@ -796,6 +797,8 @@ MonoBehaviour:
   fpsController: {fileID: 0}
   input: {fileID: 1620914794}
   AIText: {fileID: 706150144}
+  serverBaseUrl: https://digital-ty59.onrender.com
+  rag: {fileID: 941569445}
   data: "In the Lambayeque region, at well-known sites like Sipan and \xDAcupe, copper
     and copper alloy artifacts (especially tumbaga) make up a large portion of the
     materials recovered from the elite tombs of the northern Mochica. Unlike the
@@ -880,28 +883,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 941569439}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a2496546d1575771597fc8cbdd0d852d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: undream.llmunity.Runtime::LLMUnity.RAG
   searchType: 1
-  search: {fileID: 941569446}
-  chunkingType: 0
-  chunking: {fileID: 0}
---- !u!114 &941569446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 941569439}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5102d32385d84d87f98c64d376cbcc90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: undream.llmunity.Runtime::LLMUnity.SimpleSearch
-  llmEmbedder: {fileID: 941569447}
+  search: {fileID: 941569448}
+  chunkingType: 1
+  chunking: {fileID: 941569449}
 --- !u!114 &941569447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -909,7 +899,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 941569439}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6856fbefac554a38a7b8a4b353fd43d, type: 3}
   m_Name: 
@@ -921,6 +911,32 @@ MonoBehaviour:
   host: localhost
   port: 13333
   numRetries: 10
+--- !u!114 &941569448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941569439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5102d32385d84d87f98c64d376cbcc90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: undream.llmunity.Runtime::LLMUnity.SimpleSearch
+  llmEmbedder: {fileID: 941569447}
+--- !u!114 &941569449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941569439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 783ce7a7cb52dc89eb18ad9d345ce68d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: undream.llmunity.Runtime::LLMUnity.TokenSplitter
+  numTokens: 10
 --- !u!1 &1016586772
 GameObject:
   m_ObjectHideFlags: 0
