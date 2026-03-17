@@ -4,6 +4,7 @@ public class GameManager : MonoBehaviour
 {
     public int currentStep = 2;
     public int currentLayer = 0;
+    public int maxLayers = 7;
 
     [SerializeField] public DirtPile dirtPile;
 
