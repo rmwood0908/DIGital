@@ -158,8 +158,7 @@ router.get('/mine/:userId', async (req, res) => {
         return res.status(200).json({
             ok: true,
             artifacts: result.rows,
-            error: null,
-            build: "mine_includes_null_v1"
+            error: null
         });
 
         // error handling
@@ -197,6 +196,24 @@ router.get('/', async (req, res) => {
         return res.status(500).json({
             ok: false, artifacts: [], error: "Internal server error.",
         });
+    }
+});
+
+// temp debug
+router.get('/debug/null-rows', async (req, res) => {
+    try {
+        const r = await pool.query(`
+            SELECT id, artifact_id, bag_number, user_id, created_at
+            FROM artifacts
+            WHERE user_id IS NULL
+            ORDER BY created_at DESC
+            LIMIT 20;
+        `);
+        res.json({ ok: true, rows: r.rows });
+    }
+
+    catch (error) {
+        res.status(500).json({ ok: false, error: String(error) });
     }
 });
 
