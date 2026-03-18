@@ -70,6 +70,10 @@ public class ArtifactAnalysisManager : MonoBehaviour
     // smart string error 
     [SerializeField] private string ServerErrorDetails = "analysis_status_server_error_details";
 
+    // registry
+    [SerializeField] private ArtifactSceneModelRegistry modelRegistry;
+    [SerializeField] private GameObject defaultModel; // optional fallback
+
     private LocalizedString lsServerErrorDetails;
     private LocalizedString lsDropdownLabel;
 
@@ -99,18 +103,6 @@ public class ArtifactAnalysisManager : MonoBehaviour
         public Artifact[] artifacts;
         public string error;
     }
-
-    // 3d model bindings
-    [System.Serializable]
-    private class ModelBinding
-    {
-        public string artifactId;
-        public GameObject modelObject;
-    }
-
-    [Header("3D Model Bindings")]
-    [SerializeField] private List<ModelBinding> modelBindings = 
-                                                new List<ModelBinding>();
 
     [Header("UI Panel")]
     [SerializeField] private GameObject BackgroundPanel;
@@ -460,17 +452,13 @@ public class ArtifactAnalysisManager : MonoBehaviour
 
     private void ShowModelForArtifact(Artifact artifact)
     {
-        // hide all bound models to start
-        if (modelBindings != null)
-        {
-            foreach (var binding in modelBindings)
-            {
-                if (binding != null && binding.modelObject != null)
-                {
-                    binding.modelObject.SetActive(false);
-                }
-            }
-        }
+        // turn off all models referenced by the registry (so only one shows)
+        if (modelRegistry != null)
+        modelRegistry.HideAll();
+
+        // hide default model (optional if we use one later)
+        if (defaultModel != null)
+            defaultModel.SetActive(false);
 
         CurrentActiveModel = null;
 
@@ -480,52 +468,27 @@ public class ArtifactAnalysisManager : MonoBehaviour
             return;
         }
 
-        string dbId = artifact.artifact_id != null
-            ? artifact.artifact_id.Trim()
-            : "(null)";
+        string id = (artifact.artifact_id ?? "").Trim();
+        Debug.Log($"[ArtifactAnalysisManager] ShowModelForArtifact called for artifact_id: '{id}'");
 
-        Debug.Log($"[ArtifactAnalysisManager] ShowModelForArtifact called for DB ID: '{dbId}'");
+        // look up the model in the registry
+        GameObject model = (modelRegistry != null) ? modelRegistry.GetModel(id) : null;
 
-        bool foundMatch = false;
-
-        if (modelBindings != null && modelBindings.Count > 0)
+        if (model != null)
         {
-            foreach (var binding in modelBindings)
-            {
-                if (binding == null || binding.modelObject == null)
-                    continue;
-
-                string bindingId = binding.artifactId != null
-                    ? binding.artifactId.Trim()
-                    : "(null)";
-
-                Debug.Log($"[ArtifactAnalysisManager] Checking binding: '{bindingId}' " +
-                        $"against DB ID: '{dbId}'");
-
-                if (string.Equals(bindingId,
-                                dbId,
-                                StringComparison.OrdinalIgnoreCase))
-                {
-                    Debug.Log("[ArtifactAnalysisManager] Match found! " +
-                            $"Enabling model: {binding.modelObject.name}");
-
-                    binding.modelObject.SetActive(true);
-                    CurrentActiveModel = binding.modelObject;
-                    SetupPivotWithoutMovingModel(CurrentActiveModel);
-                    foundMatch = true;
-                    break;
-                }
-            }
-        }
-        else
-        {
-            Debug.LogWarning("[ArtifactAnalysisManager] modelBindings list is empty or null.");
+            model.SetActive(true);
+            CurrentActiveModel = model;
+            SetupPivotWithoutMovingModel(CurrentActiveModel);
+            return;
         }
 
-        if (!foundMatch)
+        // fallback if no match
+        Debug.LogWarning($"[ArtifactAnalysisManager] No model found for artifact_id '{id}'. Using default model.");
+        if (defaultModel != null)
         {
-            Debug.LogWarning("[ArtifactAnalysisManager] No modelBinding matched DB ID: '" +
-                            dbId + "'");
+            defaultModel.SetActive(true);
+            CurrentActiveModel = defaultModel;
+            SetupPivotWithoutMovingModel(CurrentActiveModel);
         }
     }
 
