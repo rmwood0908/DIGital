@@ -158,7 +158,8 @@ router.get('/mine/:userId', async (req, res) => {
         return res.status(200).json({
             ok: true,
             artifacts: result.rows,
-            error: null
+            error: null,
+            build: "mine_includes_null_v1"
         });
 
         // error handling
