@@ -4206,6 +4206,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1215307839}
     m_Modifications:
+    - target: {fileID: 1673521039078981713, guid: 945eee826e32a7d47b6e338adf7c1f39, type: 3}
+      propertyPath: textBox
+      value: 
+      objectReference: {fileID: 107865248}
     - target: {fileID: 2029597750928232679, guid: 945eee826e32a7d47b6e338adf7c1f39, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5
@@ -21971,6 +21975,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1529950918044107700, guid: baeb2e5900e05074d984735b097e740f, type: 3}
+      propertyPath: textBox
+      value: 
+      objectReference: {fileID: 107865248}
+    - target: {fileID: 2667082244081862542, guid: baeb2e5900e05074d984735b097e740f, type: 3}
+      propertyPath: textBox
+      value: 
+      objectReference: {fileID: 107865248}
+    - target: {fileID: 3360683147052964035, guid: baeb2e5900e05074d984735b097e740f, type: 3}
+      propertyPath: textBox
+      value: 
+      objectReference: {fileID: 107865248}
     - target: {fileID: 7006312003869390875, guid: baeb2e5900e05074d984735b097e740f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -111.5
@@ -22042,6 +22058,7 @@ PrefabInstance:
     - {fileID: 8176351783597365046, guid: baeb2e5900e05074d984735b097e740f, type: 3}
     - {fileID: 7990204404888263755, guid: baeb2e5900e05074d984735b097e740f, type: 3}
     - {fileID: 2105320261418223579, guid: baeb2e5900e05074d984735b097e740f, type: 3}
+    - {fileID: 4961309929575762983, guid: baeb2e5900e05074d984735b097e740f, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7006312003869390875, guid: baeb2e5900e05074d984735b097e740f, type: 3}
       insertIndex: 1
@@ -28364,6 +28381,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1215307839}
     m_Modifications:
+    - target: {fileID: 1673521039078981713, guid: 945eee826e32a7d47b6e338adf7c1f39, type: 3}
+      propertyPath: textBox
+      value: 
+      objectReference: {fileID: 107865248}
     - target: {fileID: 2029597750928232679, guid: 945eee826e32a7d47b6e338adf7c1f39, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
