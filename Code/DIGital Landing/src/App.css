@@ -120,6 +120,101 @@ nav a:hover
   text-shadow: none;
 }
 
+/* Language Picker Dropdown */
+.lang-picker 
+{
+  position: relative;
+}
+
+.lang-picker-btn 
+{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: inherit;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.lang-picker-btn:hover 
+{
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.lang-flag 
+{
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.lang-caret 
+{
+  font-size: 0.75rem;
+  transition: transform 0.2s;
+  display: inline-block;
+}
+
+.lang-caret.open 
+{
+  transform: rotate(180deg);
+}
+
+.lang-dropdown 
+{
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: var(--primary-dark);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 6px;
+  list-style: none;
+  padding: 4px 0;
+  min-width: 140px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  z-index: 2000;
+  animation: dropdownFade 0.15s ease;
+}
+
+@keyframes dropdownFade 
+{
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.lang-option 
+{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.15s, color 0.15s;
+}
+
+.lang-option:hover 
+{
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.lang-option.active 
+{
+  color: var(--accent);
+  font-weight: 600;
+}
+
 /* Mobile Menu */
 @media (max-width: 768px) 
 {
@@ -143,15 +238,38 @@ nav a:hover
   }
 
   nav.open 
-  d
   {
-    max-height: 400px;
+    max-height: 500px;
   }
 
   nav a 
   {
     padding: 1rem 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+  }
+
+  .lang-picker
+  {
+    padding: 0.75rem 20px;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .lang-picker-btn
+  {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .lang-dropdown
+  {
+    position: static;
+    box-shadow: none;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.2);
     width: 100%;
   }
 }
@@ -780,25 +898,5 @@ nav a:hover
   nav 
   {
     gap: 0;
-  }
-
-  .lang-toggle 
-  {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  color: white;
-  padding: 4px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: all 0.3s;
-  }
-
-.lang-toggle:hover 
-  {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: var(--accent);
-  color: var(--accent);
   }
 }
