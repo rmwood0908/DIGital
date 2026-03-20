@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import './App.css'
@@ -6,11 +6,62 @@ import Game from './Game'
 const digitalLogo = '/DIGitalLogo.png'
 const nauLogo = '/NAULogo.png'
 
+const LANGUAGES = [
+  { code: 'en', label: 'English', flag: '🇺🇸' },
+  { code: 'es', label: 'Español', flag: '🇪🇸' },
+  { code: 'de', label: 'Deutsch', flag: '🇩🇪' },
+]
+
+export function LanguagePicker() {
+  const { i18n } = useTranslation()
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+
+  const current = LANGUAGES.find(l => l.code === i18n.language) || LANGUAGES[0]
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  return (
+    <div className="lang-picker" ref={ref}>
+      <button
+        className="lang-picker-btn"
+        onClick={() => setOpen(o => !o)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+      >
+        <span className="lang-flag">{current.flag}</span>
+        <span className="lang-label">{current.label}</span>
+        <span className={`lang-caret ${open ? 'open' : ''}`}>▾</span>
+      </button>
+      {open && (
+        <ul className="lang-dropdown" role="listbox">
+          {LANGUAGES.map(lang => (
+            <li
+              key={lang.code}
+              role="option"
+              aria-selected={lang.code === i18n.language}
+              className={`lang-option ${lang.code === i18n.language ? 'active' : ''}`}
+              onClick={() => { i18n.changeLanguage(lang.code); setOpen(false) }}
+            >
+              <span className="lang-flag">{lang.flag}</span>
+              <span>{lang.label}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
+}
+
 function LandingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { t, i18n } = useTranslation()
-
-  const toggleLang = () => i18n.changeLanguage(i18n.language === 'en' ? 'es' : 'en')
+  const { t } = useTranslation()
 
   return (
     <div className="landing-page">
@@ -26,9 +77,7 @@ function LandingPage() {
             <a href="#quizzes">{t('nav.learningTools')}</a>
             <a href="#dr-sharp">{t('nav.meetDrSharp')}</a>
             <a href="#team">{t('nav.meetTeam')}</a>
-            <button onClick={toggleLang} className="lang-toggle">
-              {i18n.language === 'en' ? 'Español' : 'English'}
-            </button>
+            <LanguagePicker />
           </nav>
         </div>
       </header>
