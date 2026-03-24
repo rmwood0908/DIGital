@@ -96,7 +96,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 708959842234368
-    m_Key: artifact_collection_cancel_button
+    m_Key: artifact_collection_continue_button
     m_Metadata:
       m_Items: []
   - m_Id: 709051194175488
