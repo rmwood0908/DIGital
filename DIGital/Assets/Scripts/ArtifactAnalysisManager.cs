@@ -32,6 +32,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
     // dropdown menu
     [Header("Dropdown")]
     [SerializeField] private TMP_Dropdown SelectArtifact;
+    [SerializeField] private string dropdownPlaceholderText = "Select an artifact from this dropdown menu";
 
     // status text
     [Header("Status Text")]
@@ -124,11 +125,21 @@ public class ArtifactAnalysisManager : MonoBehaviour
     private void OnEnable()
     {
         LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+
+        if (SelectArtifact != null)
+        {
+            SelectArtifact.onValueChanged.AddListener(OnArtifactDropdownChanged);
+        }
     }
 
     private void OnDisable()
     {
         LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
+
+        if (SelectArtifact != null)
+        {
+            SelectArtifact.onValueChanged.RemoveListener(OnArtifactDropdownChanged);
+        }
     }
 
     private void OnLocaleChanged(Locale _)
@@ -237,28 +248,40 @@ public class ArtifactAnalysisManager : MonoBehaviour
         }
     }
 
-    // analyze button
-    public void OnAnalyzeButtonClicked()
+    // CHANGED from analyze button to analyze on dropdown clicked
+    public void OnArtifactDropdownChanged(int index)
     {
         // error handling
-        if( _artifacts.Count == 0 )
+        if( _artifacts == null || _artifacts.Count == 0 )
         {
             SetStatus(NoArtifactsToAnalyze);
             return;
         }
 
-        // initalize index
-        int index = SelectArtifact != null ? SelectArtifact.value : 0;
+        // index placeholder
+        if (index == 0)
+        {
+            ClearUI();
+
+            if (StatusText != null)
+            {
+                SetStatus(SelectAndAnalyze);
+            }
+
+            return;
+        }
+
+        int artifactIndex = index - 1;
 
         // error handling
-        if ( index < 0 || index >= _artifacts.Count )
+        if ( artifactIndex < 0 || artifactIndex >= _artifacts.Count )
         {
             SetStatus(InvalidSelection);
             return;
         }
 
         // select artifact
-        Artifact selectedArtifact = _artifacts[index];
+        Artifact selectedArtifact = _artifacts[artifactIndex];
         PopulateUI(selectedArtifact);
 
         // hide background panel TEMP WORKAROUND TO SHOW 3D MODEL
@@ -289,6 +312,40 @@ public class ArtifactAnalysisManager : MonoBehaviour
             if( field == null ) continue;
             field.readOnly = readOnly;
             field.interactable = !readOnly;
+        }
+    }
+
+    // clear fields when placeholder is selected
+    private void ClearUI()
+    {
+        DateDiscoveredInput.text = "";
+        InvestigatorInput.text = "";
+        AreaInput.text = "";
+        UnitInput.text = "";
+        LayerInput.text = "";
+        SiteInput.text = "";
+        AssociatedFeaturesInput.text = "";
+        MaterialTypeInput.text = "";
+        QuantityInput.text = "";
+        WeightInput.text = "";
+        BagNumberInput.text = "";
+        ArtifactIDInput.text = "";
+
+        if (modelRegistry != null)
+        {
+            modelRegistry.HideAll();
+        }
+
+        if (defaultModel != null)
+        {
+            defaultModel.SetActive(false);
+        }
+
+        CurrentActiveModel = null;
+
+        if (BackgroundPanel != null)
+        {
+            BackgroundPanel.SetActive(true);
         }
     }
 
@@ -395,6 +452,9 @@ public class ArtifactAnalysisManager : MonoBehaviour
 
         var options = new List<TMP_Dropdown.OptionData>();
 
+        // placeholder
+        options.Add(new TMP_Dropdown.OptionData(dropdownPlaceholderText));
+
         foreach (var artifact in _artifacts)
         {
             string rawDate = artifact.date_discovered ?? "";
@@ -417,8 +477,10 @@ public class ArtifactAnalysisManager : MonoBehaviour
 
         SelectArtifact.ClearOptions();
         SelectArtifact.AddOptions(options);
-        SelectArtifact.value = 0;
+        SelectArtifact.SetValueWithoutNotify(0);
         SelectArtifact.RefreshShownValue();
+
+        ClearUI();
     }
 
     // populate input fields
