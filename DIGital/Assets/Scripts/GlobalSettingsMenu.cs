@@ -63,8 +63,10 @@ public class GlobalSettingsMenu : MonoBehaviour
     private void Start()
     {
         // set intial behavior and start with menu closed
-        ApplySceneMode(SceneManager.GetActiveScene().name);
+        string sceneName = SceneManager.GetActiveScene().name;
+        ApplySceneMode(sceneName);
         CloseAll();
+        ApplySceneCursorState(sceneName);
     }
 
     private void Update()
@@ -75,9 +77,12 @@ public class GlobalSettingsMenu : MonoBehaviour
             return;
         }
 
+        Debug.Log("[GlobalSettingsMenu] M key detected.");
+
         // do not open the menu if the user is typing in an input field
         if (IsTypingInInputField()) 
         {
+            Debug.Log("[GlobalSettingsMenu] Ignored because input field is selected.");
             return;
         }
 
@@ -90,11 +95,31 @@ public class GlobalSettingsMenu : MonoBehaviour
         // start with meny closed
         ApplySceneMode(scene.name);
         CloseAll();
+        ApplySceneCursorState(scene.name);
     }
 
     private bool IsAccountManagementScene()
     {
         return SceneManager.GetActiveScene().name == accountManagementSceneName;
+    }
+
+    // check for no camera/gameplay scenes
+    private bool IsUICursorScene(string sceneName)
+    {
+        return sceneName == accountManagementSceneName ||
+            sceneName == siteSelectionSceneName;
+    }
+
+    private void ApplySceneCursorState(string sceneName)
+    {
+        if (IsUICursorScene(sceneName))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            if (pauseWithTimeScale)
+                Time.timeScale = 1f;
+        }
     }
 
     // prepares menu for different scenes (account vs. everything else)
@@ -182,12 +207,14 @@ public class GlobalSettingsMenu : MonoBehaviour
         // account management opens language only, other scenes open main settings first
         if (IsAccountManagementScene())
         {
+            Debug.Log("[GlobalSettingsMenu] Opening language panel for AccountManagement.");
             mainSettingsPanel.SetActive(false);
             languagePanel.SetActive(true);
         }
 
         else
         {
+            Debug.Log("[GlobalSettingsMenu] Opening main settings panel.");
             mainSettingsPanel.SetActive(true);
             languagePanel.SetActive(false);
         }
@@ -261,6 +288,14 @@ public class GlobalSettingsMenu : MonoBehaviour
             SessionManager.Instance.ClearUser();
         }
 
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        if (pauseWithTimeScale)
+        {
+            Time.timeScale = 1f;
+        }
+
         SceneManager.LoadScene(accountManagementSceneName);
     }
 
@@ -268,6 +303,15 @@ public class GlobalSettingsMenu : MonoBehaviour
     public void OnBackToSiteSelectionClicked()
     {
         CloseAll();
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        if (pauseWithTimeScale)
+        {
+            Time.timeScale = 1f;
+        }
+
         SceneManager.LoadScene(siteSelectionSceneName);
     }
 
