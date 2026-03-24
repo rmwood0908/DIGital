@@ -262,7 +262,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 754872149241856
-    m_Localized: Select an artifact and press Analyze.
+    m_Localized: Select an artifact to analyze.
     m_Metadata:
       m_Items: []
   - m_Id: 754873294286848
