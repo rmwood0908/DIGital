@@ -279,6 +279,10 @@ MonoBehaviour:
     m_Localized: "Cerrar sesi\xF3n"
     m_Metadata:
       m_Items: []
+  - m_Id: 18861429021896704
+    m_Localized: "Seleccione un artefacto de este men\xFA desplegable..."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

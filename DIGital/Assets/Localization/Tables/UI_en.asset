@@ -279,6 +279,10 @@ MonoBehaviour:
     m_Localized: Logout
     m_Metadata:
       m_Items: []
+  - m_Id: 18861429021896704
+    m_Localized: Select an artifact from this dropdown menu...
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
