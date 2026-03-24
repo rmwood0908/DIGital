@@ -47,6 +47,9 @@ public class ArtifactFormManager : MonoBehaviour
     // cache to not recreate error message each time
     private LocalizedString errorLocalizedString;
 
+    // artifact interactable reference
+    private ArtifactInteractable currentArtifactInteractable;
+
     // input field types
     [System.Serializable]
     private class ArtifactData
@@ -98,8 +101,10 @@ public class ArtifactFormManager : MonoBehaviour
         StatusText.text = errorLocalizedString.GetLocalizedString();
     }
 
-    public void OpenForm()
+    public void OpenForm(ArtifactInteractable artifactInteractable)
     {
+        currentArtifactInteractable = artifactInteractable;
+
         if (PanelRoot != null)
         {
             Debug.Log("[ArtifactFormManager] OpenForm() - enabling PanelRoot");
@@ -112,6 +117,7 @@ public class ArtifactFormManager : MonoBehaviour
             // pause game while form is open
             Time.timeScale = 0f;
         }
+
         else
         {
             Debug.LogWarning("[ArtifactFormManager] PanelRoot is not assigned!");
@@ -182,6 +188,7 @@ public class ArtifactFormManager : MonoBehaviour
         Debug.Log("[ArtifactFormManager] Cancel button clicked");
         ClearForm();
         StatusText.text = "";
+        currentArtifactInteractable = null;
         CloseForm();
     }
 
@@ -246,6 +253,14 @@ public class ArtifactFormManager : MonoBehaviour
                 SetStatus("artifact_collection_status_success");
 
                 ClearForm();
+
+                if (currentArtifactInteractable != null)
+                {
+                    currentArtifactInteractable.MarkAsRecorded();
+                    currentArtifactInteractable = null;
+                }
+
+                CloseForm();
             }
 
             else
