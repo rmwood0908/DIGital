@@ -108,7 +108,7 @@ router.get('/latest/:userId', async (req, res) => {
                 material_type, quantity, weight, bag_number,
                 artifact_id
          FROM artifacts
-         WHERE user_id = $1
+         WHERE user_id = $1 OR user_id IS NULL
          ORDER BY created_at DESC
          LIMIT 1;`;
 
@@ -196,24 +196,6 @@ router.get('/', async (req, res) => {
         return res.status(500).json({
             ok: false, artifacts: [], error: "Internal server error.",
         });
-    }
-});
-
-// temp debug
-router.get('/debug/null-rows', async (req, res) => {
-    try {
-        const r = await pool.query(`
-            SELECT id, artifact_id, bag_number, user_id, created_at
-            FROM artifacts
-            WHERE user_id IS NULL
-            ORDER BY created_at DESC
-            LIMIT 20;
-        `);
-        res.json({ ok: true, rows: r.rows });
-    }
-
-    catch (error) {
-        res.status(500).json({ ok: false, error: String(error) });
     }
 });
 
