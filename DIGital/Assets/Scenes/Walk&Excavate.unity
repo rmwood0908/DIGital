@@ -14319,7 +14319,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -308, y: 318}
+  m_AnchoredPosition: {x: -308, y: 376}
   m_SizeDelta: {x: 1279.9, y: 235.0206}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &851658333
@@ -20736,7 +20736,7 @@ GameObject:
   - component: {fileID: 1184175751}
   - component: {fileID: 1184175750}
   m_Layer: 5
-  m_Name: CancelButton
+  m_Name: ContinueButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20759,8 +20759,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 742.77783, y: 352.99997}
-  m_SizeDelta: {x: 303.9309, y: 82.8416}
+  m_AnchoredPosition: {x: 747.1941, y: 353.00018}
+  m_SizeDelta: {x: 338.7819, y: 82.842}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1184175750
 MonoBehaviour:
@@ -22338,7 +22338,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Cancel
+  m_text: Continue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -22431,7 +22431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AutoLocalizeTMP
   target: {fileID: 0}
   table: UI
-  key: artifact_collection_cancel_button
+  key: artifact_collection_continue_button
 --- !u!1 &1229007560
 GameObject:
   m_ObjectHideFlags: 0
@@ -35703,7 +35703,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 894, y: 388}
+  m_AnchoredPosition: {x: 894, y: 448}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &2026866140

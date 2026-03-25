@@ -101,7 +101,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 708959842234368
-    m_Localized: Cancelar
+    m_Localized: Continuar
     m_Metadata:
       m_Items: []
   - m_Id: 709051194175488
@@ -262,7 +262,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 754872149241856
-    m_Localized: Seleccione un artefacto y presione Analizar.
+    m_Localized: Seleccione un artefacto para analizar.
     m_Metadata:
       m_Items: []
   - m_Id: 754873294286848
@@ -277,6 +277,30 @@ MonoBehaviour:
       - rid: 745707523204972612
   - m_Id: 9493069234597888
     m_Localized: "Cerrar sesi\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18861429021896704
+    m_Localized: "Seleccione un artefacto de este men\xFA desplegable..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18888314967715840
+    m_Localized: "Configuraci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18888329366761472
+    m_Localized: Idioma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18888355207868416
+    m_Localized: "Volver a la selecci\xF3n del sitio"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18888380486938624
+    m_Localized: "Cerrar sesi\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18888397629059072
+    m_Localized: Cerrar
     m_Metadata:
       m_Items: []
   references:

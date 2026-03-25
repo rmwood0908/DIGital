@@ -96,7 +96,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 708959842234368
-    m_Key: artifact_collection_cancel_button
+    m_Key: artifact_collection_continue_button
     m_Metadata:
       m_Items: []
   - m_Id: 709051194175488
@@ -269,6 +269,30 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 9493069234597888
     m_Key: logout_button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18861429021896704
+    m_Key: analysis_dropdown_placeholder
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18888314967715840
+    m_Key: settings_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18888329366761472
+    m_Key: settings_language_button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18888355207868416
+    m_Key: settings_site_selection_button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18888380486938624
+    m_Key: settings_logout_button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18888397629059072
+    m_Key: settings_close_button
     m_Metadata:
       m_Items: []
   m_Metadata:

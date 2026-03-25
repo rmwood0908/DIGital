@@ -101,7 +101,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 708959842234368
-    m_Localized: Cancel
+    m_Localized: Continue
     m_Metadata:
       m_Items: []
   - m_Id: 709051194175488
@@ -262,7 +262,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 754872149241856
-    m_Localized: Select an artifact and press Analyze.
+    m_Localized: Select an artifact to analyze.
     m_Metadata:
       m_Items: []
   - m_Id: 754873294286848
@@ -277,6 +277,30 @@ MonoBehaviour:
       - rid: 745707523204972611
   - m_Id: 9493069234597888
     m_Localized: Logout
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18861429021896704
+    m_Localized: Select an artifact from this dropdown menu...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18888314967715840
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18888329366761472
+    m_Localized: Langauge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18888355207868416
+    m_Localized: Back to Site Selection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18888380486938624
+    m_Localized: Logout
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18888397629059072
+    m_Localized: Close
     m_Metadata:
       m_Items: []
   references:

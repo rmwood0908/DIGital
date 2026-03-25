@@ -20,12 +20,16 @@ public class ArtifactInteractable : MonoBehaviour, Interactable
         if (formManager != null)
         {
             Debug.Log("[ArtifactInteractable] Interact() called, opening form.");
+
             if (textBox != null)
             {
                 textBox.text = "";
             }
-            formManager.OpenForm();
+
+            // pass artifact into form manager
+            formManager.OpenForm(this);
         }
+
         else
         {
             Debug.LogWarning("[ArtifactInteractable] formManager is not assigned on "
@@ -54,6 +58,7 @@ public class ArtifactInteractable : MonoBehaviour, Interactable
                 textBox.text = LocalizationSettings.StringDatabase.GetLocalizedString(table, tooltipKey);
             }
         }
+
         else
         {
             if (textBox != null)
@@ -64,5 +69,17 @@ public class ArtifactInteractable : MonoBehaviour, Interactable
         }
 
         textDisplayedTime -= Time.deltaTime;
+    }
+
+    // hide artifact after data collection
+    public void MarkAsRecorded()
+    {
+        if (textBox != null )
+        {
+            textBox.text = "";
+        }
+
+        checkForText = false;
+        gameObject.SetActive(false);
     }
 }
