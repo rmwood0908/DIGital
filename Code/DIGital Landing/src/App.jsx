@@ -178,7 +178,7 @@ function LandingPage() {
           <p className="section-subtitle">{t('team.subtitle')}</p>
             <div className="team-grid">
               <div className="team-member">
-                <img src="/Devin.JPEG" alt="Devin Jay San Nicolas" className"member-photo" />
+                <img src="/Devin.JPEG" alt="Devin Jay San Nicolas" className="member-photo" />
                 <h3>Devin Jay San Nicolas</h3>
                 <p>{t('team.dj')}</p>
               </div>
