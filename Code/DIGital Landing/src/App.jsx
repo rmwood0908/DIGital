@@ -120,12 +120,43 @@ function LandingPage() {
         <div className="container">
           <h2>{t('features.heading')}</h2>
           <p className="section-subtitle">{t('features.subtitle')}</p>
-          <div className="feature-grid">
-            <div className="feature-card"><h3>{t('features.f1Title')}</h3><p>{t('features.f1Desc')}</p></div>
-            <div className="feature-card"><h3>{t('features.f2Title')}</h3><p>{t('features.f2Desc')}</p></div>
-            <div className="feature-card"><h3>{t('features.f3Title')}</h3><p>{t('features.f3Desc')}</p></div>
-            <div className="feature-card"><h3>{t('features.f4Title')}</h3><p>{t('features.f4Desc')}</p></div>
-            <div className="feature-card"><h3>{t('features.f5Title')}</h3><p>{t('features.f5Desc')}</p></div>
+          <div className="feature-list">
+
+            <div className="feature-row">
+              <div className="feature-visual">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+              </div>
+              <div className="feature-text"><h3>{t('features.f1Title')}</h3><p>{t('features.f1Desc')}</p></div>
+            </div>
+
+            <div className="feature-row flip">
+              <div className="feature-visual">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              </div>
+              <div className="feature-text"><h3>{t('features.f2Title')}</h3><p>{t('features.f2Desc')}</p></div>
+            </div>
+
+            <div className="feature-row">
+              <div className="feature-visual">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+              </div>
+              <div className="feature-text"><h3>{t('features.f3Title')}</h3><p>{t('features.f3Desc')}</p></div>
+            </div>
+
+            <div className="feature-row flip">
+              <div className="feature-visual">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12"/></svg>
+              </div>
+              <div className="feature-text"><h3>{t('features.f4Title')}</h3><p>{t('features.f4Desc')}</p></div>
+            </div>
+
+            <div className="feature-row">
+              <div className="feature-visual">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 3h18M3 12h18M3 21h18"/></svg>
+              </div>
+              <div className="feature-text"><h3>{t('features.f5Title')}</h3><p>{t('features.f5Desc')}</p></div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -145,12 +176,28 @@ function LandingPage() {
         <div className="container">
           <h2>{t('team.heading')}</h2>
           <p className="section-subtitle">{t('team.subtitle')}</p>
-          <div className="team-grid">
-            <div className="team-member"><div className="member-avatar">DJ</div><h3>Devin Jay San Nicolas</h3><p>{t('team.dj')}</p></div>
-            <div className="team-member"><div className="member-avatar">RW</div><h3>Ryan Wood</h3><p>{t('team.rw')}</p></div>
-            <div className="team-member"><div className="member-avatar">TW</div><h3>Tate Whittaker</h3><p>{t('team.tw')}</p></div>
-            <div className="team-member"><div className="member-avatar">JC</div><h3>Jarom Craghead</h3><p>{t('team.jc')}</p></div>
-          </div>
+            <div className="team-grid">
+              <div className="team-member">
+                <img src="/Devin.JPEG" alt="Devin Jay San Nicolas" className="member-photo" />
+                <h3>Devin Jay San Nicolas</h3>
+                <p>{t('team.dj')}</p>
+              </div>
+              <div className="team-member">
+                <img src="/Ryan.jpg" alt="Ryan Wood" className="member-photo" />
+                <h3>Ryan Wood</h3>
+                <p>{t('team.rw')}</p>
+              </div>
+              <div className="team-member">
+                <img src="/Tate.jpg" alt="Tate Whittaker" className="member-photo" />
+                <h3>Tate Whittaker</h3>
+                <p>{t('team.tw')}</p>
+              </div>
+              <div className="team-member">
+              <img src="/Jarom.jpg" alt="Jarom Craghead" className="member-photo" />
+              <h3>Jarom Craghead</h3>
+              <p>{t('team.jc')}</p>
+              </div>
+            </div>
           <div className="client-section">
             <h3>{t('team.collab')}</h3>
             <p className="client-name">Dr. Kayleigh Sharp</p>
