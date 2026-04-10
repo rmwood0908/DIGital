@@ -60,6 +60,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
     [SerializeField] private string NoArtifactsInDb = "analysis_status_no_artifacts_in_db";
     [SerializeField] private string SelectAndAnalyze = "analysis_status_select_and_analyze";
     [SerializeField] private string DropdownLabelKey = "analysis_dropdown_label";
+    [SerializeField] private string DropdownPlaceholderKey = "analysis_dropdown_placeholder";
 
     // re-translation
     private enum StatusMode { None, Key, ServerError }
@@ -70,8 +71,13 @@ public class ArtifactAnalysisManager : MonoBehaviour
     // smart string error 
     [SerializeField] private string ServerErrorDetails = "analysis_status_server_error_details";
 
+    // registry
+    [SerializeField] private ArtifactSceneModelRegistry modelRegistry;
+    [SerializeField] private GameObject defaultModel; // optional fallback
+
     private LocalizedString lsServerErrorDetails;
     private LocalizedString lsDropdownLabel;
+    private LocalizedString lsDropdownPlaceholder;
 
     // node app variables
     [System.Serializable]
@@ -100,18 +106,6 @@ public class ArtifactAnalysisManager : MonoBehaviour
         public string error;
     }
 
-    // 3d model bindings
-    [System.Serializable]
-    private class ModelBinding
-    {
-        public string artifactId;
-        public GameObject modelObject;
-    }
-
-    [Header("3D Model Bindings")]
-    [SerializeField] private List<ModelBinding> modelBindings = 
-                                                new List<ModelBinding>();
-
     [Header("UI Panel")]
     [SerializeField] private GameObject BackgroundPanel;
 
@@ -127,16 +121,27 @@ public class ArtifactAnalysisManager : MonoBehaviour
         // intialize error string and dropdown
         lsServerErrorDetails = new LocalizedString(table, ServerErrorDetails);
         lsDropdownLabel = new LocalizedString(table, DropdownLabelKey);
+        lsDropdownPlaceholder = new LocalizedString(table, DropdownPlaceholderKey);
     }
 
     private void OnEnable()
     {
         LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+
+        if (SelectArtifact != null)
+        {
+            SelectArtifact.onValueChanged.AddListener(OnArtifactDropdownChanged);
+        }
     }
 
     private void OnDisable()
     {
         LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
+
+        if (SelectArtifact != null)
+        {
+            SelectArtifact.onValueChanged.RemoveListener(OnArtifactDropdownChanged);
+        }
     }
 
     private void OnLocaleChanged(Locale _)
@@ -245,28 +250,40 @@ public class ArtifactAnalysisManager : MonoBehaviour
         }
     }
 
-    // analyze button
-    public void OnAnalyzeButtonClicked()
+    // CHANGED from analyze button to analyze on dropdown clicked
+    public void OnArtifactDropdownChanged(int index)
     {
         // error handling
-        if( _artifacts.Count == 0 )
+        if( _artifacts == null || _artifacts.Count == 0 )
         {
             SetStatus(NoArtifactsToAnalyze);
             return;
         }
 
-        // initalize index
-        int index = SelectArtifact != null ? SelectArtifact.value : 0;
+        // index placeholder
+        if (index == 0)
+        {
+            ClearUI();
+
+            if (StatusText != null)
+            {
+                SetStatus(SelectAndAnalyze);
+            }
+
+            return;
+        }
+
+        int artifactIndex = index - 1;
 
         // error handling
-        if ( index < 0 || index >= _artifacts.Count )
+        if ( artifactIndex < 0 || artifactIndex >= _artifacts.Count )
         {
             SetStatus(InvalidSelection);
             return;
         }
 
         // select artifact
-        Artifact selectedArtifact = _artifacts[index];
+        Artifact selectedArtifact = _artifacts[artifactIndex];
         PopulateUI(selectedArtifact);
 
         // hide background panel TEMP WORKAROUND TO SHOW 3D MODEL
@@ -297,6 +314,40 @@ public class ArtifactAnalysisManager : MonoBehaviour
             if( field == null ) continue;
             field.readOnly = readOnly;
             field.interactable = !readOnly;
+        }
+    }
+
+    // clear fields when placeholder is selected
+    private void ClearUI()
+    {
+        DateDiscoveredInput.text = "";
+        InvestigatorInput.text = "";
+        AreaInput.text = "";
+        UnitInput.text = "";
+        LayerInput.text = "";
+        SiteInput.text = "";
+        AssociatedFeaturesInput.text = "";
+        MaterialTypeInput.text = "";
+        QuantityInput.text = "";
+        WeightInput.text = "";
+        BagNumberInput.text = "";
+        ArtifactIDInput.text = "";
+
+        if (modelRegistry != null)
+        {
+            modelRegistry.HideAll();
+        }
+
+        if (defaultModel != null)
+        {
+            defaultModel.SetActive(false);
+        }
+
+        CurrentActiveModel = null;
+
+        if (BackgroundPanel != null)
+        {
+            BackgroundPanel.SetActive(true);
         }
     }
 
@@ -403,6 +454,9 @@ public class ArtifactAnalysisManager : MonoBehaviour
 
         var options = new List<TMP_Dropdown.OptionData>();
 
+        // localized placeholder
+        options.Add(new TMP_Dropdown.OptionData(lsDropdownPlaceholder.GetLocalizedString()));
+
         foreach (var artifact in _artifacts)
         {
             string rawDate = artifact.date_discovered ?? "";
@@ -425,8 +479,10 @@ public class ArtifactAnalysisManager : MonoBehaviour
 
         SelectArtifact.ClearOptions();
         SelectArtifact.AddOptions(options);
-        SelectArtifact.value = 0;
+        SelectArtifact.SetValueWithoutNotify(0);
         SelectArtifact.RefreshShownValue();
+
+        ClearUI();
     }
 
     // populate input fields
@@ -460,17 +516,13 @@ public class ArtifactAnalysisManager : MonoBehaviour
 
     private void ShowModelForArtifact(Artifact artifact)
     {
-        // hide all bound models to start
-        if (modelBindings != null)
-        {
-            foreach (var binding in modelBindings)
-            {
-                if (binding != null && binding.modelObject != null)
-                {
-                    binding.modelObject.SetActive(false);
-                }
-            }
-        }
+        // turn off all models referenced by the registry (so only one shows)
+        if (modelRegistry != null)
+        modelRegistry.HideAll();
+
+        // hide default model (optional if we use one later)
+        if (defaultModel != null)
+            defaultModel.SetActive(false);
 
         CurrentActiveModel = null;
 
@@ -480,52 +532,27 @@ public class ArtifactAnalysisManager : MonoBehaviour
             return;
         }
 
-        string dbId = artifact.artifact_id != null
-            ? artifact.artifact_id.Trim()
-            : "(null)";
+        string id = (artifact.artifact_id ?? "").Trim();
+        Debug.Log($"[ArtifactAnalysisManager] ShowModelForArtifact called for artifact_id: '{id}'");
 
-        Debug.Log($"[ArtifactAnalysisManager] ShowModelForArtifact called for DB ID: '{dbId}'");
+        // look up the model in the registry
+        GameObject model = (modelRegistry != null) ? modelRegistry.GetModel(id) : null;
 
-        bool foundMatch = false;
-
-        if (modelBindings != null && modelBindings.Count > 0)
+        if (model != null)
         {
-            foreach (var binding in modelBindings)
-            {
-                if (binding == null || binding.modelObject == null)
-                    continue;
-
-                string bindingId = binding.artifactId != null
-                    ? binding.artifactId.Trim()
-                    : "(null)";
-
-                Debug.Log($"[ArtifactAnalysisManager] Checking binding: '{bindingId}' " +
-                        $"against DB ID: '{dbId}'");
-
-                if (string.Equals(bindingId,
-                                dbId,
-                                StringComparison.OrdinalIgnoreCase))
-                {
-                    Debug.Log("[ArtifactAnalysisManager] Match found! " +
-                            $"Enabling model: {binding.modelObject.name}");
-
-                    binding.modelObject.SetActive(true);
-                    CurrentActiveModel = binding.modelObject;
-                    SetupPivotWithoutMovingModel(CurrentActiveModel);
-                    foundMatch = true;
-                    break;
-                }
-            }
-        }
-        else
-        {
-            Debug.LogWarning("[ArtifactAnalysisManager] modelBindings list is empty or null.");
+            model.SetActive(true);
+            CurrentActiveModel = model;
+            SetupPivotWithoutMovingModel(CurrentActiveModel);
+            return;
         }
 
-        if (!foundMatch)
+        // fallback if no match
+        Debug.LogWarning($"[ArtifactAnalysisManager] No model found for artifact_id '{id}'. Using default model.");
+        if (defaultModel != null)
         {
-            Debug.LogWarning("[ArtifactAnalysisManager] No modelBinding matched DB ID: '" +
-                            dbId + "'");
+            defaultModel.SetActive(true);
+            CurrentActiveModel = defaultModel;
+            SetupPivotWithoutMovingModel(CurrentActiveModel);
         }
     }
 

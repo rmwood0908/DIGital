@@ -1,5 +1,4 @@
 name: Build/Update Unity WebGL
-
 on:
   pull_request:
     types:
@@ -12,7 +11,6 @@ jobs:
     name: Build Unity WebGL
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -28,13 +26,6 @@ jobs:
           restore-keys: |
             Library-WebGL-
             Library-
-
-      - name: Activate Unity License
-        uses: buildalon/activate-unity-license@v1
-        with:
-          license: 'Personal'
-          username: ${{ secrets.UNITY_EMAIL }}
-          password: ${{ secrets.UNITY_PASSWORD }}
 
       - name: Build Unity WebGL
         uses: game-ci/unity-builder@v4
@@ -52,24 +43,21 @@ jobs:
         run: |
           BUILD_SRC="build/WebGL/WebGL/Build"
           BUILD_DEST="Code/DIGital Landing/public/DemoBuild"
-
           cp "$BUILD_SRC/WebGL.data.br"         "$BUILD_DEST/WebGL.data.br"
           cp "$BUILD_SRC/WebGL.framework.js.br" "$BUILD_DEST/WebGL.framework.js.br"
-          cp "$BUILD_SRC/WebGL.loader.js"       "$BUILD_DEST/WebGL.loader.js"
-          cp "$BUILD_SRC/WebGL.wasm.br"         "$BUILD_DEST/WebGL.wasm.br"
-
-          # Update StreamingAssets/aa
+          cp "$BUILD_SRC/WebGL.loader.js"        "$BUILD_DEST/WebGL.loader.js"
+          cp "$BUILD_SRC/WebGL.wasm.br"          "$BUILD_DEST/WebGL.wasm.br"
           rm -rf "$BUILD_DEST/StreamingAssets/aa"
           cp -r "build/WebGL/WebGL/StreamingAssets/aa" "$BUILD_DEST/StreamingAssets/aa"
 
-      - name: Check if the build files actually changed
+      - name: Check if build files changed
         id: check_changes
         run: |
           git diff --quiet "Code/DIGital Landing/public/DemoBuild/" \
             && echo "changed=false" >> $GITHUB_OUTPUT \
             || echo "changed=true" >> $GITHUB_OUTPUT
 
-      - name: Commit then push if changed
+      - name: Commit and push if changed
         if: steps.check_changes.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"

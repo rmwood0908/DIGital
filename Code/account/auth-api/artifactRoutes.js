@@ -108,7 +108,7 @@ router.get('/latest/:userId', async (req, res) => {
                 material_type, quantity, weight, bag_number,
                 artifact_id
          FROM artifacts
-         WHERE user_id = $1
+         WHERE user_id = $1 OR user_id IS NULL
          ORDER BY created_at DESC
          LIMIT 1;`;
 
@@ -142,11 +142,6 @@ router.get('/mine/:userId', async (req, res) => {
     try {
         const { userId } = req.params;
 
-        // error handling
-        if (!userId) {
-            return res.status(400).json({ ok: false, artifacts: [], error: "Missing userId." });
-        }
-
         // sql query
         const query =
             `SELECT id, date_discovered, investigator,
@@ -154,7 +149,7 @@ router.get('/mine/:userId', async (req, res) => {
                 material_type, quantity, weight, bag_number,
                 artifact_id
          FROM artifacts
-         WHERE user_id = $1
+         WHERE user_id = $1 OR user_id IS NULL
          ORDER BY created_at DESC;`;
 
         const result = await pool.query(query, [userId]);

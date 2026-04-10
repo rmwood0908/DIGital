@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 using TMPro;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
+using System.Collections.Generic;
 
 // class
 public class ArtifactFormManager : MonoBehaviour
@@ -22,7 +23,7 @@ public class ArtifactFormManager : MonoBehaviour
     [SerializeField] private TMP_InputField QuantityInput;
     [SerializeField] private TMP_InputField WeightInput;
     [SerializeField] private TMP_InputField BagNumberInput;
-    [SerializeField] private TMP_InputField ArtifactIDInput;
+    [SerializeField] private TMP_Dropdown ArtifactIdDropdown;
 
     // popup panel game object  
     [Header("UI Feedback")]
@@ -39,8 +40,15 @@ public class ArtifactFormManager : MonoBehaviour
     [SerializeField] private string table = "UI";
     [SerializeField] private string errorDetailsKey = "artifact_collection_status_error_details";
 
+    // registry
+    [Header("Registry")]
+    [SerializeField] private ArtifactIdRegistry idRegistry;
+
     // cache to not recreate error message each time
     private LocalizedString errorLocalizedString;
+
+    // artifact interactable reference
+    private ArtifactInteractable currentArtifactInteractable;
 
     // input field types
     [System.Serializable]
@@ -74,6 +82,8 @@ public class ArtifactFormManager : MonoBehaviour
         {
             PanelRoot.SetActive(false);
         }
+
+        PopulateArtifactIdDropdown();
     }
 
     // status text with localization
@@ -91,8 +101,10 @@ public class ArtifactFormManager : MonoBehaviour
         StatusText.text = errorLocalizedString.GetLocalizedString();
     }
 
-    public void OpenForm()
+    public void OpenForm(ArtifactInteractable artifactInteractable)
     {
+        currentArtifactInteractable = artifactInteractable;
+
         if (PanelRoot != null)
         {
             Debug.Log("[ArtifactFormManager] OpenForm() - enabling PanelRoot");
@@ -105,6 +117,7 @@ public class ArtifactFormManager : MonoBehaviour
             // pause game while form is open
             Time.timeScale = 0f;
         }
+
         else
         {
             Debug.LogWarning("[ArtifactFormManager] PanelRoot is not assigned!");
@@ -136,6 +149,14 @@ public class ArtifactFormManager : MonoBehaviour
             return;
         }
 
+        string enteredId = GetSelectedArtifactId();
+        
+        if (string.IsNullOrEmpty(enteredId))
+        {
+            SetStatus("artifact_collection_status_invalid_artifact_id");
+            return;
+        }
+
         SetStatus("artifact_collection_status_submit");
 
         ArtifactData data = new ArtifactData
@@ -151,7 +172,7 @@ public class ArtifactFormManager : MonoBehaviour
             quantity = Quantity,
             weight = WeightInput.text.Trim(),
             bag_number = BagNumberInput.text.Trim(),
-            artifact_id = ArtifactIDInput.text.Trim(),
+            artifact_id = enteredId,
             userId = (SessionManager.Instance != null &&
                         SessionManager.Instance.IsLoggedIn)
                         ? SessionManager.Instance.UserId
@@ -167,6 +188,7 @@ public class ArtifactFormManager : MonoBehaviour
         Debug.Log("[ArtifactFormManager] Cancel button clicked");
         ClearForm();
         StatusText.text = "";
+        currentArtifactInteractable = null;
         CloseForm();
     }
 
@@ -184,8 +206,8 @@ public class ArtifactFormManager : MonoBehaviour
             string.IsNullOrWhiteSpace(MaterialTypeInput.text) ||
             string.IsNullOrWhiteSpace(QuantityInput.text) ||
             string.IsNullOrWhiteSpace(WeightInput.text) ||
-            string.IsNullOrWhiteSpace(BagNumberInput.text) ||
-            string.IsNullOrWhiteSpace(ArtifactIDInput.text))
+            string.IsNullOrWhiteSpace(BagNumberInput.text))
+
         {
             SetStatus("artifact_collection_status_missing_fields");
             return false;
@@ -231,6 +253,14 @@ public class ArtifactFormManager : MonoBehaviour
                 SetStatus("artifact_collection_status_success");
 
                 ClearForm();
+
+                if (currentArtifactInteractable != null)
+                {
+                    currentArtifactInteractable.MarkAsRecorded();
+                    currentArtifactInteractable = null;
+                }
+
+                CloseForm();
             }
 
             else
@@ -257,6 +287,45 @@ public class ArtifactFormManager : MonoBehaviour
         QuantityInput.text = "";
         WeightInput.text = "";
         BagNumberInput.text = "";
-        ArtifactIDInput.text = "";
+    }
+
+    private void PopulateArtifactIdDropdown()
+    {
+        if (ArtifactIdDropdown == null || idRegistry == null || idRegistry.entries == null)
+        {
+            Debug.LogWarning("[ArtifactFormManager] Dropdown or ID registry not assigned.");
+            return;
+        }
+
+        var options = new List<TMP_Dropdown.OptionData>();
+
+        foreach (var entry in idRegistry.entries)
+        {
+            if (entry == null || string.IsNullOrWhiteSpace(entry.artifactId)) continue;
+
+            string id = entry.artifactId.Trim();
+            string label = !string.IsNullOrWhiteSpace(entry.displayName)
+                ? $"{entry.displayName} ({id})"
+                : id;
+
+            options.Add(new TMP_Dropdown.OptionData(label));
+        }
+
+        ArtifactIdDropdown.ClearOptions();
+        ArtifactIdDropdown.AddOptions(options);
+        ArtifactIdDropdown.value = 0;
+        ArtifactIdDropdown.RefreshShownValue();
+    }
+
+    private string GetSelectedArtifactId()
+    {
+        if (ArtifactIdDropdown == null || idRegistry == null || idRegistry.entries == null)
+            return null;
+
+        int index = ArtifactIdDropdown.value;
+        if (index < 0 || index >= idRegistry.entries.Count)
+            return null;
+
+        return idRegistry.entries[index]?.artifactId?.Trim();
     }
 }

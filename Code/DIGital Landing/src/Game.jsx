@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { LanguagePicker } from './App'
 import './Game.css'
 
 export default function Game() {
@@ -7,9 +9,9 @@ export default function Game() {
   const [loadingProgress, setLoadingProgress] = useState(0)
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [unityInstance, setUnityInstance] = useState(null)
+  const { t } = useTranslation()
 
   useEffect(() => {
-    // Load Unity WebGL build
     const loadUnityGame = async () => {
       try {
         const buildUrl = '/DemoBuild'
@@ -73,11 +75,12 @@ export default function Game() {
     <div className="game-page">
       {/* Navigation Bar */}
       <nav className="game-nav">
-        <a href="/" className="back-link">← Back to Home</a>
-        <h1>DIGital Virtual Excavation</h1>
+        <a href="/" className="back-link">{t('game.backHome')}</a>
+        <h1>{t('game.title')}</h1>
         <div className="nav-controls">
+          <LanguagePicker />
           <button onClick={toggleFullscreen} className="fullscreen-btn">
-            {isFullscreen ? '⊡ Exit Fullscreen' : '⛶ Fullscreen'}
+            {isFullscreen ? t('game.exitFullscreen') : t('game.fullscreen')}
           </button>
         </div>
       </nav>
@@ -89,7 +92,7 @@ export default function Game() {
             <div className="loading-overlay">
               <div className="loading-content">
                 <div className="spinner"></div>
-                <h2>Loading Virtual Excavation...</h2>
+                <h2>{t('game.loadingTitle')}</h2>
                 <div className="progress-bar">
                   <div
                     className="progress-fill"
@@ -111,39 +114,38 @@ export default function Game() {
         {/* Game Info Sidebar */}
         <div className="game-info">
           <div className="info-section">
-            <h3>🎮 Controls</h3>
+            <h3>{t('game.controls')}</h3>
             <ul>
-              <li><strong>WASD</strong> - Move around</li>
-              <li><strong>Mouse</strong> - Look around</li>
+              <li><strong>WASD</strong> - {t('game.move')}</li>
+              <li><strong>Mouse</strong> - {t('game.look')}</li>
             </ul>
           </div>
 
           <div className="info-section">
-            <h3>📚 Objectives</h3>
+            <h3>{t('game.objectives')}</h3>
             <ul>
-              <li>Explore the archaeological site</li>
-              <li>Identify and document artifacts</li>
-              <li>Learn proper excavation techniques</li>
-              <li>Complete The Archaeology Process!</li>
+              <li>{t('game.obj1')}</li>
+              <li>{t('game.obj2')}</li>
+              <li>{t('game.obj3')}</li>
+              <li>{t('game.obj4')}</li>
             </ul>
           </div>
 
           <div className="info-section">
-            <h3>💡 Tips</h3>
+            <h3>{t('game.tips')}</h3>
             <ul>
-              <li>Take your time examining each area</li>
-              <li>Use the AI assistant for guidance</li>
-              <li>Document everything you find</li>
+              <li>{t('game.tip1')}</li>
+              <li>{t('game.tip2')}</li>
+              <li>{t('game.tip3')}</li>
             </ul>
           </div>
-
         </div>
       </div>
 
       {/* Footer */}
       <footer className="game-footer">
         <p>
-          Need help? Check out the <a href="/tutorial">Tutorial</a>
+          {t('game.footerHelp')} <a href="/tutorial">{t('game.tutorial')}</a>
         </p>
       </footer>
     </div>
