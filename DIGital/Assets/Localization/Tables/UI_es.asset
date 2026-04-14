@@ -332,6 +332,11 @@ MonoBehaviour:
     m_Localized: Haga clic izquierdo para usar Drone
     m_Metadata:
       m_Items: []
+  - m_Id: 26458016589967360
+    m_Localized: "WASD / Flechas: Mover  |   Q / E: Girar  |   R / F: \xC1ngulo 
+      |   Rueda del rat\xF3n: Zoom  |   Espacio: Salir"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

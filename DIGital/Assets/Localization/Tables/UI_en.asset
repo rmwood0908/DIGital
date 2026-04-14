@@ -334,6 +334,11 @@ MonoBehaviour:
     m_Localized: Left Click to use Drone
     m_Metadata:
       m_Items: []
+  - m_Id: 26458016589967360
+    m_Localized: 'WASD / Arrows Move:   |   Q / E: Rotate   |   R / F: Angle   |  
+      Mouse Wheel: Zoom   |   Space: Exit'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

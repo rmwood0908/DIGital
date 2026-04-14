@@ -311,6 +311,10 @@ MonoBehaviour:
     m_Key: walk_and_excavate_drone_tooltip
     m_Metadata:
       m_Items: []
+  - m_Id: 26458016589967360
+    m_Key: walk_and_excavate_survey_instructions
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

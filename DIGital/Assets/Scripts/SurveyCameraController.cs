@@ -32,7 +32,6 @@ public class SurveyCameraController : MonoBehaviour
 
     [Header("Keys")]
     [SerializeField] private KeyCode exitKey = KeyCode.Space;
-    [SerializeField] private KeyCode alternateExitKey = KeyCode.Escape;
     [SerializeField] private KeyCode rotateLeftKey = KeyCode.Q;
     [SerializeField] private KeyCode rotateRightKey = KeyCode.E;
     [SerializeField] private KeyCode tiltMoreTopDownKey = KeyCode.R;
@@ -85,7 +84,7 @@ public class SurveyCameraController : MonoBehaviour
 
     private void HandleExit()
     {
-        if (Input.GetKeyDown(exitKey) || Input.GetKeyDown(alternateExitKey))
+        if (Input.GetKeyDown(exitKey))
         {
             if (owner != null)
             {

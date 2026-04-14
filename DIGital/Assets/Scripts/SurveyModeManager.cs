@@ -21,6 +21,10 @@ public class SurveyModeManager : MonoBehaviour
     [SerializeField] private bool relockCursorOnExit = true;
     [SerializeField] private bool hideCursorOnExit = true;
 
+    // instruction bar
+    [Header("UI")]
+    [SerializeField] private GameObject droneInstructionBar;
+
     public bool IsSurveyModeActive { get; private set; }
 
     private CursorLockMode previousLockState;
@@ -42,6 +46,11 @@ public class SurveyModeManager : MonoBehaviour
         if (surveyRigRoot != null)
         {
             surveyRigRoot.SetActive(false);
+        }
+
+        if (droneInstructionBar != null)
+        {
+            droneInstructionBar.SetActive(false);
         }
     }
 
@@ -83,6 +92,11 @@ public class SurveyModeManager : MonoBehaviour
             surveyRigRoot.SetActive(true);
         }
 
+        if (droneInstructionBar != null)
+        {
+            droneInstructionBar.SetActive(true);
+        }
+
         if (surveyController != null)
         {
             surveyController.BeginSurveyMode(this);
@@ -109,6 +123,11 @@ public class SurveyModeManager : MonoBehaviour
         if (surveyRigRoot != null)
         {
             surveyRigRoot.SetActive(false);
+        }
+
+        if (droneInstructionBar != null)
+        {
+            droneInstructionBar.SetActive(false);
         }
 
         if (playerCameraRoot != null)
