@@ -295,6 +295,18 @@ MonoBehaviour:
     m_Key: settings_close_button
     m_Metadata:
       m_Items: []
+  - m_Id: 26387813197836288
+    m_Key: walk_excavate_intro_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26388008295886848
+    m_Key: walk_excavate_intro_body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26388156040245248
+    m_Key: walk_excavate_intro_continue
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

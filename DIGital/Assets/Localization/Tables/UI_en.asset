@@ -303,6 +303,30 @@ MonoBehaviour:
     m_Localized: Close
     m_Metadata:
       m_Items: []
+  - m_Id: 26387813197836288
+    m_Localized: Welcome to the Survey Area
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26388008295886848
+    m_Localized: 'Before archaeologists excavate, they begin with a pedestrian survey.
+      This is the first look at a site before even marking out where you are planning
+      to dig. The goal is to get an idea of where surface features are located, document
+      surface artifacts, and orient yourself with your team within a site.
+
+
+      The
+      traditional method for a pedestrian survey uses transect lines. Team members
+      will line up about three or four meters apart along the edge of the site or
+      area you are focusing on. Slowly, the team will walk the length of the site
+      and scan the ground for any surface artifacts or features and record them properly.
+      Due to the singleplayer aspect of this experience, we accomplish this with
+      drone work.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26388156040245248
+    m_Localized: Continue
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
