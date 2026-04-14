@@ -3645,7 +3645,7 @@ Transform:
   m_GameObject: {fileID: 169532083}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -125.82, y: 5.14, z: -51.47}
+  m_LocalPosition: {x: -125.82, y: 4.33, z: -51.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14894,7 +14894,7 @@ MonoBehaviour:
     dig. The goal is to get an idea of where surface features are located, document
     surface artifacts, and orient yourself with your team within a site.
 
-    
+
 
     The
     traditional method for a pedestrian survey uses transect lines. Team members
