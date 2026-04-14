@@ -313,9 +313,9 @@ MonoBehaviour:
       to dig. The goal is to get an idea of where surface features are located, document
       surface artifacts, and orient yourself with your team within a site.
 
-      
 
-      
+
+
 
       The
       traditional method for a pedestrian survey uses transect lines. Team members
@@ -328,6 +328,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 26388156040245248
     m_Localized: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26454059964592128
+    m_Localized: Left Click to use Drone
     m_Metadata:
       m_Items: []
   references:

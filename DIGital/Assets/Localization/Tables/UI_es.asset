@@ -328,6 +328,10 @@ MonoBehaviour:
     m_Localized: Continuar
     m_Metadata:
       m_Items: []
+  - m_Id: 26454059964592128
+    m_Localized: Haga clic izquierdo para usar Drone
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
