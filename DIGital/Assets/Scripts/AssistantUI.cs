@@ -35,6 +35,11 @@ public class AssistantUI : MonoBehaviour
 
     private void Update()
     {
+        if (WalkExcavateIntroController.IsIntroOpen)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(toggleKey))
         {
             ToggleAssistant();
@@ -43,6 +48,11 @@ public class AssistantUI : MonoBehaviour
 
     public void ToggleAssistant()
     {
+        if (WalkExcavateIntroController.IsIntroOpen)
+        {
+            return;
+        }
+
         Debug.Log("[AssistantUI] ToggleAssistant called");
 
         if (ui == null)
