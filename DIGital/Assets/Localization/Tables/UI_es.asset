@@ -303,6 +303,40 @@ MonoBehaviour:
     m_Localized: Cerrar
     m_Metadata:
       m_Items: []
+  - m_Id: 26387813197836288
+    m_Localized: "Bienvenido al \xC1rea de Encuesta"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26388008295886848
+    m_Localized: "Antes de realizar una excavaci\xF3n, los arque\xF3logos comienzan
+      con un reconocimiento a pie. Esta constituye la primera inspecci\xF3n del sitio,
+      realizada incluso antes de delimitar las zonas donde se tiene previsto excavar.
+      El objetivo es hacerse una idea de la ubicaci\xF3n de los elementos superficiales,
+      documentar los artefactos visibles en la superficie y orientarse \u2014junto
+      con el equipo\u2014 dentro del sitio.\n\n\nEl m\xE9todo tradicional para realizar
+      un reconocimiento a pie emplea l\xEDneas de transecto. Los miembros del equipo
+      se alinean, manteniendo una separaci\xF3n de unos tres o cuatro metros entre
+      s\xED, a lo largo del borde del sitio o del \xE1rea de estudio. A paso lento,
+      el equipo recorre toda la extensi\xF3n del sitio, escudri\xF1ando el terreno
+      en busca de cualquier artefacto o rasgo superficial para registrarlo adecuadamente.
+      Dado el car\xE1cter individual de esta experiencia, nosotros llevamos a cabo
+      esta tarea mediante el uso de un dron. Por favor, haga clic en el dron para
+      iniciar el reconocimiento a pie."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26388156040245248
+    m_Localized: Continuar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26454059964592128
+    m_Localized: Haga clic izquierdo para usar Drone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26458016589967360
+    m_Localized: "WASD / Flechas: Mover  |   Q / E: Girar  |   R / F: \xC1ngulo 
+      |   Rueda del rat\xF3n: Zoom  |   Espacio: Salir"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

@@ -5,6 +5,27 @@ using UnityEngine.Networking;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+[System.Serializable]
+public class AuthApiResponse
+{
+    public bool ok;
+    public string error;
+    public string message;
+    public string userId;
+    public string username;
+    public string email;
+    public SignupUser user;
+}
+
+[System.Serializable]
+public class SignupUser
+{
+    public string user_id;
+    public string email;
+    public string username;
+    public string created_at;
+}
+
 // authentication manager class for login and signup
 public class AuthManager : MonoBehaviour
 {
@@ -19,17 +40,59 @@ public class AuthManager : MonoBehaviour
     public TMP_InputField CreateUsernameInput;
     public TMP_InputField CreatePasswordInput;
 
+    [Header("Status UI")]
+    [SerializeField] private TMP_Text authStatusText;
+    [SerializeField] private GameObject authStatusBox;
+
     [Header("Server Settings")]
     public string serverBaseUrl = "https://digital-ty59.onrender.com";
 
     [Header("Scenes")]
     public string excavationSceneName = "Walk&Excavate";
 
+    private void Start()
+    {
+        ClearStatus();
+    }
+
+    private void ClearStatus()
+    {
+        authStatusText.text = "";
+
+        if (authStatusBox != null)
+        {
+            authStatusBox.gameObject.SetActive(false);
+        }
+    }
+
+    private void ShowStatus(string message)
+    {
+        authStatusText.text = message;
+
+        if (authStatusBox != null)
+        {
+            authStatusBox.gameObject.SetActive(true);
+        }
+
+        else
+        {
+            Debug.LogWarning("[AuthManager] authStatusBox  is not assigned in the Inspector.");
+        }
+    }
+
     // called by Login button
     public void OnLoginButtonClicked()
     {
         string username = UsernameInput.text;
         string password = PasswordInput.text;
+
+        ClearStatus();
+
+        if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+        {
+            ShowStatus("Please enter both username and password.");
+            return;
+        }
 
         StartCoroutine(LoginCoroutine(username, password));
     }
@@ -41,6 +104,16 @@ public class AuthManager : MonoBehaviour
         string username = CreateUsernameInput.text;
         string password = CreatePasswordInput.text;
 
+        ClearStatus();
+
+        if (string.IsNullOrWhiteSpace(email) ||
+            string.IsNullOrWhiteSpace(username) ||
+            string.IsNullOrWhiteSpace(password))
+        {
+            ShowStatus("Please fill in all required fields.");
+            return;
+        }
+
         StartCoroutine(SignupCoroutine(email, username, password));
     }
 
@@ -51,7 +124,6 @@ public class AuthManager : MonoBehaviour
         Debug.Log($"[AuthManager] Login URL: {url}");
         Debug.Log($"[AuthManager] Username entered: '{username}' (len={username?.Length ?? 0})");
 
-        // Extra safety: if serverBaseUrl is empty in Inspector, warn loudly
         if (string.IsNullOrWhiteSpace(serverBaseUrl))
         {
             Debug.LogError("[AuthManager] serverBaseUrl is EMPTY. " +
@@ -71,66 +143,63 @@ public class AuthManager : MonoBehaviour
 
         using (UnityWebRequest req = new UnityWebRequest(url, "POST"))
         {
-            req.uploadHandler   = new UploadHandlerRaw(body);
+            req.uploadHandler = new UploadHandlerRaw(body);
             req.downloadHandler = new DownloadHandlerBuffer();
             req.SetRequestHeader("Content-Type", "application/json");
 
             Debug.Log("[AuthManager] Sending login request...");
-
-            // NO try/catch around yield — this avoids CS1626
             yield return req.SendWebRequest();
-
-            Debug.Log($"[AuthManager] Request finished. " +
-                    $"Result={req.result}, Code={req.responseCode}");
 
             string responseText = req.downloadHandler != null
                 ? req.downloadHandler.text
-                : "(no downloadHandler)";
+                : "";
 
-            if (req.result != UnityWebRequest.Result.Success)
+            Debug.Log($"[AuthManager] Login finished. " +
+                    $"Result={req.result}, Code={req.responseCode}");
+            Debug.Log($"[AuthManager] Login raw response: {responseText}");
+
+            if (req.result == UnityWebRequest.Result.ConnectionError ||
+                req.result == UnityWebRequest.Result.DataProcessingError)
             {
-                Debug.LogError($"[AuthManager] Login error: {req.responseCode} - {req.error}");
-                Debug.LogError($"[AuthManager] Server response text: {responseText}");
+                Debug.LogError($"[AuthManager] Login transport error: {req.error}");
+                ShowStatus("Unable to reach server. Please try again.");
                 yield break;
             }
 
-            Debug.Log("[AuthManager] Login raw response: " + responseText);
+            AuthApiResponse response = TryParseResponse(responseText);
 
-            LoginResponse response = null;
-            try
+            // 401/400/etc. should still show backend message if present.
+            if (req.responseCode >= 400 || response == null || !response.ok)
             {
-                response = JsonUtility.FromJson<LoginResponse>(responseText);
-            }
-            catch (System.Exception ex)
-            {
-                Debug.LogError("[AuthManager] EXCEPTION parsing JSON: " + ex);
+                string errorMessage = GetBestErrorMessage(
+                    response,
+                    "Incorrect username/password"
+                );
+
+                Debug.LogError("[AuthManager] Login failed: " + errorMessage);
+                ShowStatus(errorMessage);
                 yield break;
             }
 
-            if (response != null && response.ok)
+            string returnedUsername = !string.IsNullOrWhiteSpace(response.username)
+                ? response.username
+                : username;
+
+            Debug.Log("[AuthManager] Login successful, userId = " + response.userId);
+
+            if (SessionManager.Instance != null)
             {
-                Debug.Log("[AuthManager] Login successful, userId = " + response.userId);
-
-                if (SessionManager.Instance != null)
-                {
-                    SessionManager.Instance.SetUser(response.userId, username);
-                }
-                else
-                {
-                    Debug.LogWarning("[AuthManager] SessionManager.Instance is null in login scene.");
-                }
-
-                Debug.Log("[AuthManager] Loading excavation scene: " + excavationSceneName);
-                SceneManager.LoadScene(excavationSceneName);
+                SessionManager.Instance.SetUser(response.userId, returnedUsername);
             }
+
             else
             {
-                Debug.LogError("[AuthManager] Login failed: " +
-                            (response != null ? response.error : "Invalid or null JSON"));
+                Debug.LogWarning("[AuthManager] SessionManager.Instance is null in login scene.");
             }
+
+            SceneManager.LoadScene(excavationSceneName);
         }
     }
-
 
     // coroutine for signup
     IEnumerator SignupCoroutine(string email,
@@ -140,6 +209,13 @@ public class AuthManager : MonoBehaviour
         // uses existing .js code for signup route
         string url = $"{serverBaseUrl}/api/auth/signup";
         Debug.Log($"Signup URL: {url}");
+
+        if (string.IsNullOrWhiteSpace(serverBaseUrl))
+        {
+            Debug.LogError("[AuthManager] serverBaseUrl is EMPTY. Set it in the Inspector.");
+            ShowStatus("Server URL is not configured.");
+            yield break;
+        }
 
         // create request data
         SignupRequest data = new SignupRequest
@@ -160,40 +236,95 @@ public class AuthManager : MonoBehaviour
             req.downloadHandler = new DownloadHandlerBuffer();
             req.SetRequestHeader("Content-Type", "application/json");
 
+            Debug.Log("[AuthManager] Sending signup request...");
             yield return req.SendWebRequest();
 
-            if (req.result != UnityWebRequest.Result.Success)
+            string responseText = req.downloadHandler != null
+                ? req.downloadHandler.text
+                : "";
+
+            Debug.Log($"[AuthManager] Signup finished. Result={req.result}, Code={req.responseCode}");
+            Debug.Log($"[AuthManager] Signup raw response: {responseText}");
+
+            if (req.result == UnityWebRequest.Result.ConnectionError ||
+                req.result == UnityWebRequest.Result.DataProcessingError)
             {
-                Debug.LogError($"Signup error: {req.responseCode} - {req.error}");
-                Debug.LogError($"Server response: {req.downloadHandler.text}");
+                Debug.LogError($"[AuthManager] Signup transport error: {req.error}");
+                ShowStatus("Unable to reach server. Please try again.");
                 yield break;
             }
 
-            Debug.Log("Signup raw response: " + req.downloadHandler.text);
+            AuthApiResponse response = TryParseResponse(responseText);
 
-            SignupResponse response = 
-                          JsonUtility.FromJson<SignupResponse>(req.downloadHandler.text);
-
-            if( response != null && response.ok )
+            if (req.responseCode >= 400 || response == null || !response.ok)
             {
-                Debug.Log("Signup successful for: " + response.user.username);
+                string errorMessage = GetBestErrorMessage(
+                    response,
+                    "Email/Username already taken"
+                );
 
-                if (SessionManager.Instance != null )
+                Debug.LogError("[AuthManager] Signup failed: " + errorMessage);
+                ShowStatus(errorMessage);
+                yield break;
+            }
+
+            if (response.user != null)
+            {
+                Debug.Log("[AuthManager] Signup successful for: " + response.user.username);
+
+                if (SessionManager.Instance != null)
                 {
-                    SessionManager.Instance.SetUser(response.user.user_id,
-                                                    response.user.username);
+                    SessionManager.Instance.SetUser(
+                        response.user.user_id,
+                        response.user.username
+                    );
                 }
 
-                // auto login AKA go to scene
                 SceneManager.LoadScene(excavationSceneName);
             }
 
             else
             {
-                Debug.LogError("Signup failed: " +
-                              (response != null ? response.error : "Invalid JSON"));
+                Debug.LogError("[AuthManager] Signup succeeded but user payload was missing.");
+                ShowStatus("Signup failed.");
             }
         }
+    }
+
+    private AuthApiResponse TryParseResponse(string json)
+    {
+        if (string.IsNullOrWhiteSpace(json))
+        {
+            return null;
+        }
+
+        try
+        {
+            return JsonUtility.FromJson<AuthApiResponse>(json);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError("[AuthManager] JSON parse error: " + ex.Message);
+            return null;
+        }
+    }
+
+    private string GetBestErrorMessage(AuthApiResponse response, string fallback)
+    {
+        if (response != null)
+        {
+            if (!string.IsNullOrWhiteSpace(response.error))
+            {
+                return response.error;
+            }
+
+            if (!string.IsNullOrWhiteSpace(response.message))
+            {
+                return response.message;
+            }
+        }
+
+        return fallback;
     }
 
     [System.Serializable]
@@ -209,31 +340,5 @@ public class AuthManager : MonoBehaviour
         public string email;
         public string username;
         public string password;
-    }
-
-    [System.Serializable]
-    public class LoginResponse
-    {
-        public bool ok;
-        public string userId;
-        public string error;
-    }
-
-    [System.Serializable]
-    public class SignupResponse
-    {
-        public bool ok;
-        public SignupUser user;
-        public string error;
-    }
-
-    [System.Serializable]
-    public class SignupUser
-    {
-        // use same field names Node sends: user_id, email, username, created_at
-        public string user_id;
-        public string email;
-        public string username;
-        public string created_at;
     }
 }

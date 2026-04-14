@@ -28,9 +28,37 @@ app.post('/api/auth/signup', async (req, res) => {
         const { email, username, password } = req.body;
 
         // error check for missing information
-        if( !email || !username || !password ) {
-            return res.status(400).json({ ok: false, 
-                                          error: 'Missing field(s).' });
+        if (!email || !username || !password) {
+            return res.status(400).json({
+                ok: false,
+                error: 'Missing field(s).'
+            });
+        }
+
+        // trim inputs
+        const trimmedEmail = email.trim();
+        const trimmedUsername = username.trim();
+
+        // check if email or username already exists
+        const existingUserQuery = `
+            SELECT user_id
+            FROM users
+            WHERE email = $1 OR username = $2
+            LIMIT 1
+        `;
+
+        // send query
+        const existingUserResult = await pool.query(existingUserQuery, [
+            trimmedEmail,
+            trimmedUsername
+        ]);
+
+        // return message if names already taken
+        if (existingUserResult.rows.length > 0) {
+            return res.status(409).json({
+                ok: false,
+                error: 'Email/Username already taken'
+            });
         }
 
         // hash password
@@ -43,15 +71,17 @@ app.post('/api/auth/signup', async (req, res) => {
                        RETURNING user_id, email, username, created_at`;
 
         // send query to Postgres
-        const { rows } = await pool.query(query, [email.trim(), username.trim(), hashedPassword]);
+        const { rows } = await pool.query(query, [trimmedEmail, trimmedUsername, hashedPassword]);
         res.json({ ok: true, user: rows[0] });
     }
 
     // error handling
-    catch(error) {
+    catch (error) {
         if (/(unique)/i.test(String(error.message))) {
-            return res.status(409).json({ ok: false, 
-                                          error: 'Email or username already exists.' })
+            return res.status(409).json({
+                ok: false,
+                error: 'Email or username already exists.'
+            })
         }
 
         console.error(error);
@@ -66,10 +96,15 @@ app.post('/api/auth/login', async (req, res) => {
     try {
         const { username, password } = req.body;
 
-        if( !username || !password ) {
-            return res.status(400).json({ ok: false,
-                                            error: 'Missing field(s).'});
-            }
+        if (!username || !password) {
+            return res.status(400).json({
+                ok: false,
+                error: 'Missing field(s).'
+            });
+        }
+
+        // trim input
+        const trimmedUsername = username.trim();
 
         // sql query
         const query = `SELECT user_id, password_hash
@@ -77,24 +112,24 @@ app.post('/api/auth/login', async (req, res) => {
                        WHERE username = $1`;
 
         // send query to Postgres
-        const { rows } = await pool.query(query, [username.trim()]);
+        const { rows } = await pool.query(query, [trimmedUsername]);
 
         // error check user information
         if (rows.length === 0) {
-            return res.status(401).json({ ok: false, error: 'Invalid credentials.'});
+            return res.status(401).json({ ok: false, error: 'Incorrect username/password.' });
         }
 
         // compare password and hashed password
         const match = await bcrypt.compare(password, rows[0].password_hash);
         if (!match) {
-            return res.status(401).json({ ok: false, error: 'Invalid credentials.'});
+            return res.status(401).json({ ok: false, error: 'Incorrect username/password.' });
         }
 
         res.json({ ok: true, userId: rows[0].user_id });
     }
 
     // error handling
-    catch(error) {
+    catch (error) {
         console.error(error);
         res.status(500).json({ ok: false, error: 'Server error.' });
     }
