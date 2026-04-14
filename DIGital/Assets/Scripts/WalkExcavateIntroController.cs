@@ -5,6 +5,8 @@ public class WalkExcavateIntroController : MonoBehaviour
 {
     public static bool IsIntroOpen { get; private set; }
 
+    public static WalkExcavateIntroController Instance { get; private set; }
+
     [Header("Popup")]
     [SerializeField] private GameObject popupRoot;
     [SerializeField] private Button continueButton;
@@ -19,6 +21,8 @@ public class WalkExcavateIntroController : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
+
         if (continueButton != null)
         {
             continueButton.onClick.AddListener(CloseIntro);
@@ -87,6 +91,22 @@ public class WalkExcavateIntroController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
         {
             CloseIntro();
+        }
+    }
+
+    public void HideIntroVisuals()
+    {
+        if (popupRoot != null)
+        {
+            popupRoot.SetActive(false);
+        }
+    }
+
+    public void ShowIntroVisuals()
+    {
+        if (IsIntroOpen && popupRoot != null)
+        {
+            popupRoot.SetActive(true);
         }
     }
 }

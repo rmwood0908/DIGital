@@ -196,6 +196,12 @@ public class GlobalSettingsMenu : MonoBehaviour
 
         isOpen = true;
 
+        // if intro popup is open, hide it when M is pressed
+        if (WalkExcavateIntroController.IsIntroOpen && WalkExcavateIntroController.Instance != null)
+        {
+            WalkExcavateIntroController.Instance.HideIntroVisuals();
+        }
+
         // save current cursor/time state so it can be restored later
         prevLock = Cursor.lockState;
         prevVisible = Cursor.visible;
@@ -351,7 +357,13 @@ public class GlobalSettingsMenu : MonoBehaviour
         if (pauseWithTimeScale)
         {
             Time.timeScale = prevTimeScale;
-        } 
+        }
+
+        // show intro popup after settings menu is closed
+        if (WalkExcavateIntroController.IsIntroOpen && WalkExcavateIntroController.Instance != null)
+        {
+            WalkExcavateIntroController.Instance.ShowIntroVisuals();
+        }
     }
 
     public void ChooseEnglish()
