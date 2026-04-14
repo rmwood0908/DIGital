@@ -308,18 +308,20 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 26388008295886848
-    m_Localized: "Antes de excavar, los arque\xF3logos comienzan con un estudio de
-      los peatones. Este es el primer vistazo a un sitio antes incluso de marcar
-      d\xF3nde planea excavar. El objetivo es tener una idea de d\xF3nde se encuentran
-      las caracter\xEDsticas de la superficie, documentar los artefactos de la superficie
-      y orientarse con su equipo dentro de un sitio.\n\nEl m\xE9todo tradicional
-      para una encuesta de peatones utiliza l\xEDneas transversales. Los miembros
-      del equipo se alinear\xE1n a unos tres o cuatro metros de distancia a lo largo
-      del borde del sitio o \xE1rea en la que se est\xE1 concentrando. Lentamente,
-      el equipo caminar\xE1 a lo largo del sitio y escanear\xE1 el suelo en busca
-      de artefactos o caracter\xEDsticas de la superficie y los registrar\xE1 adecuadamente.
-      Debido al aspecto de esta experiencia para un jugador, lo logramos con trabajo
-      con drones."
+    m_Localized: "Antes de realizar una excavaci\xF3n, los arque\xF3logos comienzan
+      con un reconocimiento a pie. Esta constituye la primera inspecci\xF3n del sitio,
+      realizada incluso antes de delimitar las zonas donde se tiene previsto excavar.
+      El objetivo es hacerse una idea de la ubicaci\xF3n de los elementos superficiales,
+      documentar los artefactos visibles en la superficie y orientarse \u2014junto
+      con el equipo\u2014 dentro del sitio.\n\n\nEl m\xE9todo tradicional para realizar
+      un reconocimiento a pie emplea l\xEDneas de transecto. Los miembros del equipo
+      se alinean, manteniendo una separaci\xF3n de unos tres o cuatro metros entre
+      s\xED, a lo largo del borde del sitio o del \xE1rea de estudio. A paso lento,
+      el equipo recorre toda la extensi\xF3n del sitio, escudri\xF1ando el terreno
+      en busca de cualquier artefacto o rasgo superficial para registrarlo adecuadamente.
+      Dado el car\xE1cter individual de esta experiencia, nosotros llevamos a cabo
+      esta tarea mediante el uso de un dron. Por favor, haga clic en el dron para
+      iniciar el reconocimiento a pie."
     m_Metadata:
       m_Items: []
   - m_Id: 26388156040245248

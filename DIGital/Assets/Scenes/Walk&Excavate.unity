@@ -877,7 +877,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030518, y: 354.97424}
+  m_AnchoredPosition: {x: 0.000030518, y: 420.42}
   m_SizeDelta: {x: 718.5921, y: 48.2682}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &36994742
@@ -14866,7 +14866,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000085831, y: -76.5613}
+  m_AnchoredPosition: {x: 0.000052452, y: 23}
   m_SizeDelta: {x: 692.9759, y: 513.1227}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &844984276
@@ -14894,7 +14894,9 @@ MonoBehaviour:
     dig. The goal is to get an idea of where surface features are located, document
     surface artifacts, and orient yourself with your team within a site.
 
+    
 
+    
 
     The
     traditional method for a pedestrian survey uses transect lines. Team members
@@ -14902,7 +14904,7 @@ MonoBehaviour:
     you are focusing on. Slowly, the team will walk the length of the site and scan
     the ground for any surface artifacts or features and record them properly. Due
     to the singleplayer aspect of this experience, we accomplish this with drone
-    work.'
+    work. Please click on the drone to begin the pedestrian survey.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -16225,7 +16227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &894078663
 RectTransform:
   m_ObjectHideFlags: 0

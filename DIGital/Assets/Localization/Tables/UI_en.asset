@@ -313,6 +313,9 @@ MonoBehaviour:
       to dig. The goal is to get an idea of where surface features are located, document
       surface artifacts, and orient yourself with your team within a site.
 
+      
+
+      
 
       The
       traditional method for a pedestrian survey uses transect lines. Team members
@@ -320,7 +323,7 @@ MonoBehaviour:
       area you are focusing on. Slowly, the team will walk the length of the site
       and scan the ground for any surface artifacts or features and record them properly.
       Due to the singleplayer aspect of this experience, we accomplish this with
-      drone work.'
+      drone work. Please click on the drone to begin the pedestrian survey.'
     m_Metadata:
       m_Items: []
   - m_Id: 26388156040245248
