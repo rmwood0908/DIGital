@@ -137,7 +137,8 @@ public class ArtifactFormManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible   = false;
 
-            // resume game if you paused it
+            // restore cursor and resume game if you paused it
+            RestoreCursorAfterForm();
             Time.timeScale = 1f;
         }
     }
@@ -367,5 +368,26 @@ public class ArtifactFormManager : MonoBehaviour
         }
 
         Debug.LogWarning($"[ArtifactFormManager] Could not find artifact ID '{targetId}' in ArtifactIdRegistry.");
+    }
+
+    // restore cursor so user can interact with artifacts
+    // after collection form closed
+    private void RestoreCursorAfterForm()
+    {
+        bool surveyModeActive =
+            SurveyModeManager.Instance != null &&
+            SurveyModeManager.Instance.IsSurveyModeActive;
+
+        if (surveyModeActive)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 }

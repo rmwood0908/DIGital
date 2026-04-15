@@ -35,7 +35,8 @@ public class AssistantUI : MonoBehaviour
 
     private void Update()
     {
-        if (WalkExcavateIntroController.IsIntroOpen)
+        if (WalkExcavateIntroController.IsIntroOpen || 
+           (SurveyModeManager.Instance != null && SurveyModeManager.Instance.IsSurveyModeActive))
         {
             return;
         }
@@ -48,7 +49,8 @@ public class AssistantUI : MonoBehaviour
 
     public void ToggleAssistant()
     {
-        if (WalkExcavateIntroController.IsIntroOpen)
+        if (WalkExcavateIntroController.IsIntroOpen || 
+           (SurveyModeManager.Instance != null && SurveyModeManager.Instance.IsSurveyModeActive))
         {
             return;
         }
