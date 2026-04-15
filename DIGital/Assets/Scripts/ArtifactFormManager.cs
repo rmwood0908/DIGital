@@ -105,6 +105,9 @@ public class ArtifactFormManager : MonoBehaviour
     {
         currentArtifactInteractable = artifactInteractable;
 
+        // preselect artifact ID for the collecton form
+        PreselectArtifactIdFromInteractable();
+
         if (PanelRoot != null)
         {
             Debug.Log("[ArtifactFormManager] OpenForm() - enabling PanelRoot");
@@ -327,5 +330,42 @@ public class ArtifactFormManager : MonoBehaviour
             return null;
 
         return idRegistry.entries[index]?.artifactId?.Trim();
+    }
+
+    private void PreselectArtifactIdFromInteractable()
+    {
+        if (currentArtifactInteractable == null || ArtifactIdDropdown == null || 
+            idRegistry == null || idRegistry.entries == null)
+            {
+                return;
+            }
+
+        string targetId = currentArtifactInteractable.ArtifactId;
+
+        if (string.IsNullOrWhiteSpace(targetId))
+        {
+            return;
+        }
+
+        targetId = targetId.trim();
+
+        for ( int index = 0; index < idRegistry.entries.Count; index++ )
+        {
+            var entry = idRegistry.entries[index];
+            
+            if (entry == null || string.IsNullOrWhiteSpace(entry.ArtifactId))
+            {
+                continue;
+            }
+
+            if (string.Equals(entry.artifactId.Trim(), targetId, System.StringComparison.OrdinalIgnoreCase))
+            {
+                ArtifactIdDropdown.SetValueWithoutNotify(index);
+                ArtifactIdDropdown.RefreshShownValue();
+                return;
+            }
+        }
+
+        Debug.LogWarning($"[ArtifactFormManager] Could not find artifact ID '{targetId}' in ArtifactIdRegistry.");
     }
 }

@@ -846,7 +846,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7236692585540215105, guid: a954d4f5bd8fe01448c6739ae7f107b8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 845089080}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7908517213103241883, guid: a954d4f5bd8fe01448c6739ae7f107b8, type: 3}
       insertIndex: -1
@@ -4063,6 +4066,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2029597750928232679, guid: aa9a0056854bb824c8b4d14f7e796171, type: 3}
   m_PrefabInstance: {fileID: 189894722}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &193622412
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 193622413}
+  m_Layer: 0
+  m_Name: flagSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &193622413
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193622412}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.075170726, y: -0.002517309, z: 0.033374265, w: 0.99660885}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 943839033}
+  m_LocalEulerAnglesHint: {x: 8.627, y: 0, z: 3.836}
 --- !u!1001 &206764199
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6828,6 +6862,37 @@ MonoBehaviour:
   target: {fileID: 0}
   table: UI
   key: artifact_collection_date
+--- !u!1 &369697359
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 369697360}
+  m_Layer: 0
+  m_Name: flagSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &369697360
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369697359}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.041006017, y: -0.17114824, z: -0.13833217, w: 0.9746235}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1663819497}
+  m_LocalEulerAnglesHint: {x: -7.313, y: -18.96, z: -14.934}
 --- !u!1001 &374152433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9778,7 +9843,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8826043025182602361, guid: a259d4f02da38d44ba49687f2874c8bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 369697360}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -453309145757697885, guid: a259d4f02da38d44ba49687f2874c8bb, type: 3}
       insertIndex: -1
@@ -12277,7 +12345,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -3159113903757936259, guid: 88716b5c276349746bfb743a9c74153a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 193622413}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 633334688332580723, guid: 88716b5c276349746bfb743a9c74153a, type: 3}
       insertIndex: -1
@@ -15669,6 +15740,37 @@ MonoBehaviour:
   target: {fileID: 844984276}
   table: UI
   key: walk_excavate_intro_body
+--- !u!1 &845089079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 845089080}
+  m_Layer: 0
+  m_Name: flagSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &845089080
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845089079}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.3446544, y: -0, z: -0, w: 0.93872964}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1843469250}
+  m_LocalEulerAnglesHint: {x: 40.321, y: 0, z: 0}
 --- !u!1 &850027165
 GameObject:
   m_ObjectHideFlags: 0
@@ -17800,6 +17902,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 633334688332580723, guid: 88716b5c276349746bfb743a9c74153a, type: 3}
   m_PrefabInstance: {fileID: 679792749}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &943839033 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3159113903757936259, guid: 88716b5c276349746bfb743a9c74153a, type: 3}
+  m_PrefabInstance: {fileID: 679792749}
+  m_PrefabAsset: {fileID: 0}
 --- !u!65 &943839036
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17835,6 +17942,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArtifactInteractable
   textBox: {fileID: 107865248}
   formManager: {fileID: 1967557269}
+  visualRoot: {fileID: 943839032}
+  collidersToDisable:
+  - {fileID: 943839036}
+  redFlagPrefab: {fileID: -6689036041284674117, guid: 7de863a7f17d4f54e9714c34d5fe3123, type: 3}
+  flagSpawnPoint: {fileID: 193622413}
   table: UI
   tooltipKey: walk_and_excavate_record_artifact
 --- !u!1001 &948772306
@@ -18624,7 +18736,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -3364131894405081398, guid: 7acba44afda76c74ab97d06d171ea825, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1397788184}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3441136308559300650, guid: 7acba44afda76c74ab97d06d171ea825, type: 3}
       insertIndex: -1
@@ -19755,6 +19870,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8426953588917180415, guid: 871d9815b63c7ff4eab12f911a08992d, type: 3}
   m_PrefabInstance: {fileID: 1484837189}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1030890678 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2441840076491412904, guid: 871d9815b63c7ff4eab12f911a08992d, type: 3}
+  m_PrefabInstance: {fileID: 1484837189}
+  m_PrefabAsset: {fileID: 0}
 --- !u!65 &1030890681
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19790,6 +19910,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArtifactInteractable
   textBox: {fileID: 107865248}
   formManager: {fileID: 1967557269}
+  visualRoot: {fileID: 1030890677}
+  collidersToDisable:
+  - {fileID: 1030890681}
+  redFlagPrefab: {fileID: -6689036041284674117, guid: 7de863a7f17d4f54e9714c34d5fe3123, type: 3}
+  flagSpawnPoint: {fileID: 1888274813}
   table: UI
   tooltipKey: walk_and_excavate_record_artifact
 --- !u!1001 &1036960788
@@ -21031,6 +21156,37 @@ MonoBehaviour:
   target: {fileID: 0}
   table: UI
   key: artifact_collection_unit
+--- !u!1 &1107179183
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1107179184}
+  m_Layer: 0
+  m_Name: flagSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1107179184
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1107179183}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.06737763, y: 0.0037050433, z: 0.10810508, w: 0.9918467}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1695111784}
+  m_LocalEulerAnglesHint: {x: -7.727, y: -0.417, z: 12.469}
 --- !u!1001 &1115032733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27208,6 +27364,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2029597750928232679, guid: aa9a0056854bb824c8b4d14f7e796171, type: 3}
   m_PrefabInstance: {fileID: 1394208972}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1397788183
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1397788184}
+  m_Layer: 0
+  m_Name: flagSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1397788184
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397788183}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.00000008940696, y: 0.3469014, z: -0.00000008940696, w: 0.9379016}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1970277760}
+  m_LocalEulerAnglesHint: {x: 0, y: 40.596, z: 0}
 --- !u!1001 &1402066993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28525,7 +28712,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -2441840076491412904, guid: 871d9815b63c7ff4eab12f911a08992d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1888274813}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8426953588917180415, guid: 871d9815b63c7ff4eab12f911a08992d, type: 3}
       insertIndex: -1
@@ -31835,7 +32025,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4604876429882977932, guid: 51b5af75a235b1c408d6fe2cb5dd4c20, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1107179184}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -9058988815887468956, guid: 51b5af75a235b1c408d6fe2cb5dd4c20, type: 3}
       insertIndex: -1
@@ -31990,6 +32183,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: -453309145757697885, guid: a259d4f02da38d44ba49687f2874c8bb, type: 3}
   m_PrefabInstance: {fileID: 523620163}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1663819497 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8826043025182602361, guid: a259d4f02da38d44ba49687f2874c8bb, type: 3}
+  m_PrefabInstance: {fileID: 523620163}
+  m_PrefabAsset: {fileID: 0}
 --- !u!65 &1663819500
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32025,6 +32223,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArtifactInteractable
   textBox: {fileID: 107865248}
   formManager: {fileID: 1967557269}
+  visualRoot: {fileID: 1663819496}
+  collidersToDisable:
+  - {fileID: 1663819500}
+  redFlagPrefab: {fileID: -6689036041284674117, guid: 7de863a7f17d4f54e9714c34d5fe3123, type: 3}
+  flagSpawnPoint: {fileID: 369697360}
   table: UI
   tooltipKey: walk_and_excavate_record_artifact
 --- !u!1001 &1666487579
@@ -32468,6 +32671,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArtifactInteractable
   textBox: {fileID: 107865248}
   formManager: {fileID: 1967557269}
+  visualRoot: {fileID: 1693421779}
+  collidersToDisable:
+  - {fileID: 1693421781}
+  redFlagPrefab: {fileID: -6689036041284674117, guid: 7de863a7f17d4f54e9714c34d5fe3123, type: 3}
+  flagSpawnPoint: {fileID: 0}
   table: UI
   tooltipKey: walk_and_excavate_record_artifact
 --- !u!1001 &1694809272
@@ -32537,6 +32745,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: -9058988815887468956, guid: 51b5af75a235b1c408d6fe2cb5dd4c20, type: 3}
   m_PrefabInstance: {fileID: 1653406367}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1695111784 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4604876429882977932, guid: 51b5af75a235b1c408d6fe2cb5dd4c20, type: 3}
+  m_PrefabInstance: {fileID: 1653406367}
+  m_PrefabAsset: {fileID: 0}
 --- !u!65 &1695111787
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32572,6 +32785,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArtifactInteractable
   textBox: {fileID: 107865248}
   formManager: {fileID: 1967557269}
+  visualRoot: {fileID: 1695111783}
+  collidersToDisable:
+  - {fileID: 1695111787}
+  redFlagPrefab: {fileID: -6689036041284674117, guid: 7de863a7f17d4f54e9714c34d5fe3123, type: 3}
+  flagSpawnPoint: {fileID: 1107179184}
   table: UI
   tooltipKey: walk_and_excavate_record_artifact
 --- !u!1 &1703914207
@@ -35111,6 +35329,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7908517213103241883, guid: a954d4f5bd8fe01448c6739ae7f107b8, type: 3}
   m_PrefabInstance: {fileID: 36074747}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1843469250 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7236692585540215105, guid: a954d4f5bd8fe01448c6739ae7f107b8, type: 3}
+  m_PrefabInstance: {fileID: 36074747}
+  m_PrefabAsset: {fileID: 0}
 --- !u!65 &1843469253
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -35146,6 +35369,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArtifactInteractable
   textBox: {fileID: 107865248}
   formManager: {fileID: 1967557269}
+  visualRoot: {fileID: 1843469249}
+  collidersToDisable:
+  - {fileID: 1843469253}
+  redFlagPrefab: {fileID: -6689036041284674117, guid: 7de863a7f17d4f54e9714c34d5fe3123, type: 3}
+  flagSpawnPoint: {fileID: 845089080}
   table: UI
   tooltipKey: walk_and_excavate_record_artifact
 --- !u!1 &1844553170
@@ -35955,6 +36183,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 169532086}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1888274812
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1888274813}
+  m_Layer: 0
+  m_Name: flagSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1888274813
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888274812}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.000000029802322, y: 0.372379, z: 0.00000001816079, w: 0.9280808}
+  m_LocalPosition: {x: 28.8, y: -0, z: -27.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1030890678}
+  m_LocalEulerAnglesHint: {x: 0, y: 43.725, z: 0}
 --- !u!1001 &1890336440
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37172,6 +37431,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3441136308559300650, guid: 7acba44afda76c74ab97d06d171ea825, type: 3}
   m_PrefabInstance: {fileID: 969934021}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1970277760 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3364131894405081398, guid: 7acba44afda76c74ab97d06d171ea825, type: 3}
+  m_PrefabInstance: {fileID: 969934021}
+  m_PrefabAsset: {fileID: 0}
 --- !u!65 &1970277763
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37207,6 +37471,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArtifactInteractable
   textBox: {fileID: 107865248}
   formManager: {fileID: 1967557269}
+  visualRoot: {fileID: 1970277759}
+  collidersToDisable:
+  - {fileID: 1970277763}
+  redFlagPrefab: {fileID: -6689036041284674117, guid: 7de863a7f17d4f54e9714c34d5fe3123, type: 3}
+  flagSpawnPoint: {fileID: 1397788184}
   table: UI
   tooltipKey: walk_and_excavate_record_artifact
 --- !u!1001 &1973817517
