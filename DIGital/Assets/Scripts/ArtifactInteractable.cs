@@ -68,7 +68,7 @@ public class ArtifactInteractable : MonoBehaviour, Interactable
         checkForText = true;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (!checkForText)
         {
