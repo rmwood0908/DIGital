@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int requiredSurfaceArtifacts = 6;
     [SerializeField] private int recordedSurfaceArtifacts = 0;
 
+    [Header("Surface Survey UI")]
+    [SerializeField] private SurfaceSurveyProgressUI surveyProgressUI;
+
     [Header("Scene Objects")]
     [SerializeField] private GameObject excavationBoundary;
 
@@ -29,6 +32,11 @@ public class GameManager : MonoBehaviour
         if (excavationBoundary != null)
         {
             excavationBoundary.SetActive(false);
+        }
+
+        if (surveyProgressUI != null)
+        {
+            surveyProgressUI.Refresh(recordedSurfaceArtifacts, requiredSurfaceArtifacts);
         }
     }
 
@@ -54,6 +62,11 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log($"[GameManager] Surface artifacts recorded: {recordedSurfaceArtifacts}/{requiredSurfaceArtifacts}");
+
+        if (surveyProgressUI != null)
+        {
+            surveyProgressUI.Refresh(recordedSurfaceArtifacts, requiredSurfaceArtifacts);
+        }
 
         if (recordedSurfaceArtifacts >= requiredSurfaceArtifacts)
         {

@@ -44,9 +44,14 @@ public class ArtifactFormManager : MonoBehaviour
     [Header("Registry")]
     [SerializeField] private ArtifactIdRegistry idRegistry;
 
-    [Header("Optional Input Suspension")]
-    [SerializeField] private SurveyCameraController surveyCameraController;
-    [SerializeField] private ArtifactClickManager artifactClickManager;
+    // warning
+    [Header("Continue Warning")]
+    [SerializeField] private GameObject ContinueWarningPanel;
+    [SerializeField] private TMP_Text ContinueWarningText;
+
+    [Header("Input Suspension")]
+    [SerializeField] private MonoBehaviour[] playerScriptsToDisable;
+    [SerializeField] private MonoBehaviour[] surveyScriptsToDisable;
 
     // cache to not recreate error message each time
     private LocalizedString errorLocalizedString;
@@ -87,6 +92,7 @@ public class ArtifactFormManager : MonoBehaviour
             PanelRoot.SetActive(false);
         }
 
+        HideContinueWarning();
         PopulateArtifactIdDropdown();
     }
 
@@ -113,21 +119,16 @@ public class ArtifactFormManager : MonoBehaviour
         // preselect artifact ID for the collecton form
         PreselectArtifactIdFromInteractable();
 
+        // hide continue warning when first opening
+        HideContinueWarning();
+
         if (PanelRoot != null)
         {
             Debug.Log("[ArtifactFormManager] OpenForm() - enabling PanelRoot");
             PanelRoot.SetActive(true);
 
-            // disable when form is open
-            if (surveyCameraController != null)
-            {
-                surveyCameraController.enabled = false;
-            }
-
-            if (artifactClickManager != null)
-            {
-                artifactClickManager.enabled = false;
-            }
+            // handle scripts
+            SetInteractionScriptsEnabled(false);
 
             // unlock cursor for UI interaction
             Cursor.lockState = CursorLockMode.None;
@@ -150,16 +151,9 @@ public class ArtifactFormManager : MonoBehaviour
             PanelRoot.SetActive(false);
         }
 
-        // re-enable after form closes
-        if (surveyCameraController != null)
-        {
-            surveyCameraController.enabled = true;
-        }
-
-        if (artifactClickManager != null)
-        {
-            artifactClickManager.enabled = true;
-        }
+        // hide warning and handle scripts
+        HideContinueWarning();
+        SetInteractionScriptsEnabled(true);
 
         // restore cursor and resume game if you paused it
         RestoreCursorAfterForm();
@@ -209,14 +203,50 @@ public class ArtifactFormManager : MonoBehaviour
         StartCoroutine(SubmitArtifactCoroutine(data));
     }
 
-    // cancel button clicked
+    // continue button clicked
     public void OnCancelButtonClicked()
     {
-        Debug.Log("[ArtifactFormManager] Cancel button clicked");
+        Debug.Log("[ArtifactFormManager] Continue button clicked");
+        ResetStatusUI();
+
+        // set text
+        if (ContinueWarningText != null)
+        {
+            ContinueWarningText.text = "Pressing Continue will remove the artifact from the site " +
+                                        "without any recordings, and nothing will be sent to the " +
+                                        "database. Are you sure you'd like to proceed?";
+        }
+
+        // display panel
+        if (ContinueWarningPanel != null)
+        {
+            ContinueWarningPanel.SetActive(true);
+        }
+    }
+
+    // yes button in warning
+    public void OnConfirmContinueWithoutRecording()
+    {
+        Debug.Log("[ArtifactFormManager] Continue confirmed");
+
+        if (currentArtifactInteractable != null)
+        {
+            currentArtifactInteractable.MarkAsRecorded();
+            currentArtifactInteractable = null;
+        }
+
+        // clear, reset, and close form
         ClearForm();
-        StatusText.text = "";
-        currentArtifactInteractable = null;
+        ResetStatusUI();
         CloseForm();
+    }
+
+    // no button in warning
+    public void OnCancelContinueWarning()
+    {
+        // back to form
+        Debug.Log("[ArtifactFormManager] Continue warning canceled");
+        HideContinueWarning();
     }
 
     private bool ValidateInputs( out int Quantity )
@@ -426,6 +456,59 @@ public class ArtifactFormManager : MonoBehaviour
         if (StatusText != null)
         {
             StatusText.text = "";
+        }
+    }
+
+    // handle scripts while warning is active
+    private void SetInteractionScriptsEnabled(bool enabledState)
+    {
+        bool surveyModeActive =
+        SurveyModeManager.Instance != null &&
+        SurveyModeManager.Instance.IsSurveyModeActive;
+
+        if (!enabledState)
+        {
+            // form is opening: disable everything that could interfere
+            SetScriptsEnabled(playerScriptsToDisable, false);
+            SetScriptsEnabled(surveyScriptsToDisable, false);
+            return;
+        }
+
+        // form is closing: only restore the scripts for the current mode
+        if (surveyModeActive)
+        {
+            // stay in drone mode: keep player scripts disabled
+            SetScriptsEnabled(playerScriptsToDisable, false);
+            SetScriptsEnabled(surveyScriptsToDisable, true);
+        }
+        else
+        {
+            // back in player mode: re-enable player scripts
+            SetScriptsEnabled(playerScriptsToDisable, true);
+            SetScriptsEnabled(surveyScriptsToDisable, false);
+        }
+    }
+
+    // hide warning panel
+    private void HideContinueWarning()
+    {
+        if (ContinueWarningPanel != null)
+        {
+            ContinueWarningPanel.SetActive(false);
+        }
+    }
+
+    // enable/disable script helper
+    private void SetScriptsEnabled(MonoBehaviour[] scripts, bool enabledState)
+    {
+        if (scripts == null) return;
+
+        foreach (MonoBehaviour script in scripts)
+        {
+            if (script != null)
+            {
+                script.enabled = enabledState;
+            }
         }
     }
 }
