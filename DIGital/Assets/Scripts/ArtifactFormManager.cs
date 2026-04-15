@@ -44,6 +44,17 @@ public class ArtifactFormManager : MonoBehaviour
     [Header("Registry")]
     [SerializeField] private ArtifactIdRegistry idRegistry;
 
+    // warning
+    [Header("Continue Warning")]
+    [SerializeField] private GameObject ContinueWarningPanel;
+    [SerializeField] private TMP_Text ContinueWarningText;
+
+    [Header("Input Suspension")]
+    [SerializeField] private MonoBehaviour[] playerScriptsToDisable;
+    [SerializeField] private MonoBehaviour[] surveyScriptsToDisable;
+
+    private readonly Dictionary<MonoBehaviour, bool> savedScriptStates = new Dictionary<MonoBehaviour, bool>();
+
     // cache to not recreate error message each time
     private LocalizedString errorLocalizedString;
 
@@ -83,6 +94,7 @@ public class ArtifactFormManager : MonoBehaviour
             PanelRoot.SetActive(false);
         }
 
+        HideContinueWarning();
         PopulateArtifactIdDropdown();
     }
 
@@ -104,11 +116,21 @@ public class ArtifactFormManager : MonoBehaviour
     public void OpenForm(ArtifactInteractable artifactInteractable)
     {
         currentArtifactInteractable = artifactInteractable;
+        ResetStatusUI();
+
+        // preselect artifact ID for the collecton form
+        PreselectArtifactIdFromInteractable();
+
+        // hide continue warning when first opening
+        HideContinueWarning();
 
         if (PanelRoot != null)
         {
             Debug.Log("[ArtifactFormManager] OpenForm() - enabling PanelRoot");
             PanelRoot.SetActive(true);
+
+            // handle scripts
+            DisableScriptsForForm();
 
             // unlock cursor for UI interaction
             Cursor.lockState = CursorLockMode.None;
@@ -129,14 +151,15 @@ public class ArtifactFormManager : MonoBehaviour
         if (PanelRoot != null)
         {
             PanelRoot.SetActive(false);
-
-            // restore FPS controls
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible   = false;
-
-            // resume game if you paused it
-            Time.timeScale = 1f;
         }
+
+        // hide warning and handle scripts
+        HideContinueWarning();
+        RestoreScriptsAfterForm();
+
+        // restore cursor and resume game if you paused it
+        RestoreCursorAfterForm();
+        Time.timeScale = 1f;
     }
 
 
@@ -182,14 +205,50 @@ public class ArtifactFormManager : MonoBehaviour
         StartCoroutine(SubmitArtifactCoroutine(data));
     }
 
-    // cancel button clicked
+    // continue button clicked
     public void OnCancelButtonClicked()
     {
-        Debug.Log("[ArtifactFormManager] Cancel button clicked");
+        Debug.Log("[ArtifactFormManager] Continue button clicked");
+        ResetStatusUI();
+
+        // set text
+        if (ContinueWarningText != null)
+        {
+            ContinueWarningText.text = "Pressing Continue will remove the artifact from the site " +
+                                        "without any recordings, and nothing will be sent to the " +
+                                        "database. Are you sure you'd like to proceed?";
+        }
+
+        // display panel
+        if (ContinueWarningPanel != null)
+        {
+            ContinueWarningPanel.SetActive(true);
+        }
+    }
+
+    // yes button in warning
+    public void OnConfirmContinueWithoutRecording()
+    {
+        Debug.Log("[ArtifactFormManager] Continue confirmed");
+
+        if (currentArtifactInteractable != null)
+        {
+            currentArtifactInteractable.MarkAsRecorded();
+            currentArtifactInteractable = null;
+        }
+
+        // clear, reset, and close form
         ClearForm();
-        StatusText.text = "";
-        currentArtifactInteractable = null;
+        ResetStatusUI();
         CloseForm();
+    }
+
+    // no button in warning
+    public void OnCancelContinueWarning()
+    {
+        // back to form
+        Debug.Log("[ArtifactFormManager] Continue warning canceled");
+        HideContinueWarning();
     }
 
     private bool ValidateInputs( out int Quantity )
@@ -327,5 +386,142 @@ public class ArtifactFormManager : MonoBehaviour
             return null;
 
         return idRegistry.entries[index]?.artifactId?.Trim();
+    }
+
+    private void PreselectArtifactIdFromInteractable()
+    {
+        if (currentArtifactInteractable == null || ArtifactIdDropdown == null || 
+            idRegistry == null || idRegistry.entries == null)
+            {
+                return;
+            }
+
+        string targetId = currentArtifactInteractable.ArtifactId;
+
+        if (string.IsNullOrWhiteSpace(targetId))
+        {
+            return;
+        }
+
+        targetId = targetId.Trim();
+
+        for ( int index = 0; index < idRegistry.entries.Count; index++ )
+        {
+            var entry = idRegistry.entries[index];
+            
+            if (entry == null || string.IsNullOrWhiteSpace(entry.artifactId))
+            {
+                continue;
+            }
+
+            if (string.Equals(entry.artifactId.Trim(), targetId, System.StringComparison.OrdinalIgnoreCase))
+            {
+                ArtifactIdDropdown.SetValueWithoutNotify(index);
+                ArtifactIdDropdown.RefreshShownValue();
+                return;
+            }
+        }
+
+        Debug.LogWarning($"[ArtifactFormManager] Could not find artifact ID '{targetId}' in ArtifactIdRegistry.");
+    }
+
+    // restore cursor so user can interact with artifacts
+    // after collection form closed
+    private void RestoreCursorAfterForm()
+    {
+        bool surveyModeActive =
+            SurveyModeManager.Instance != null &&
+            SurveyModeManager.Instance.IsSurveyModeActive;
+
+        if (surveyModeActive)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
+
+    // bool to disable hotkeys while form is open
+    public bool IsFormOpen
+    {
+        get { return PanelRoot != null && PanelRoot.activeInHierarchy; }
+    }
+
+    // reset status text after form has been closed
+    private void ResetStatusUI()
+    {
+        if (StatusText != null)
+        {
+            StatusText.text = "";
+        }
+    }
+
+    // hide warning panel
+    private void HideContinueWarning()
+    {
+        if (ContinueWarningPanel != null)
+        {
+            ContinueWarningPanel.SetActive(false);
+        }
+    }
+
+    // enable/disable script helper
+    private void SetScriptsEnabled(MonoBehaviour[] scripts, bool enabledState)
+    {
+        if (scripts == null) return;
+
+        foreach (MonoBehaviour script in scripts)
+        {
+            if (script != null)
+            {
+                script.enabled = enabledState;
+            }
+        }
+    }
+
+    // helper function to disable scripts when form opens
+    private void DisableScriptsForForm()
+    {
+        savedScriptStates.Clear();
+
+        SaveAndDisable(playerScriptsToDisable);
+        SaveAndDisable(surveyScriptsToDisable);
+    }
+
+    // remember which scripts were disabled
+    private void SaveAndDisable(MonoBehaviour[] scripts)
+    {
+        if (scripts == null) return;
+
+        foreach (MonoBehaviour script in scripts)
+        {
+            if (script == null) continue;
+
+            if (!savedScriptStates.ContainsKey(script))
+            {
+                savedScriptStates[script] = script.enabled;
+            }
+
+            script.enabled = false;
+        }
+    }
+
+    // helper to restore saved scripts that were disabled
+    private void RestoreScriptsAfterForm()
+    {
+        foreach (var pair in savedScriptStates)
+        {
+            if (pair.Key != null)
+            {
+                pair.Key.enabled = pair.Value;
+            }
+        }
+
+        savedScriptStates.Clear();
     }
 }

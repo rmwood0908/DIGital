@@ -72,12 +72,14 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 695464761389056
-    m_Localized: "\xA1Bienvenido, {username}!"
+    m_Localized: "\xA1Bienvenido, {username}! Pulsa 'M' para abrir la configuraci\xF3n;
+      'Tab' para abrir el asistente de AI."
     m_Metadata:
       m_Items:
       - rid: 745707523204972612
   - m_Id: 696095794425856
-    m_Localized: "\xA1Bienvenido, arque\xF3logo!"
+    m_Localized: "\xA1Bienvenido, arque\xF3logo! Pulsa 'M' para abrir la configuraci\xF3n;
+      'Tab' para abrir el asistente de IA."
     m_Metadata:
       m_Items: []
   - m_Id: 702131037171712
@@ -312,16 +314,18 @@ MonoBehaviour:
       con un reconocimiento a pie. Esta constituye la primera inspecci\xF3n del sitio,
       realizada incluso antes de delimitar las zonas donde se tiene previsto excavar.
       El objetivo es hacerse una idea de la ubicaci\xF3n de los elementos superficiales,
-      documentar los artefactos visibles en la superficie y orientarse \u2014junto
-      con el equipo\u2014 dentro del sitio.\n\n\nEl m\xE9todo tradicional para realizar
-      un reconocimiento a pie emplea l\xEDneas de transecto. Los miembros del equipo
-      se alinean, manteniendo una separaci\xF3n de unos tres o cuatro metros entre
-      s\xED, a lo largo del borde del sitio o del \xE1rea de estudio. A paso lento,
-      el equipo recorre toda la extensi\xF3n del sitio, escudri\xF1ando el terreno
-      en busca de cualquier artefacto o rasgo superficial para registrarlo adecuadamente.
-      Dado el car\xE1cter individual de esta experiencia, nosotros llevamos a cabo
-      esta tarea mediante el uso de un dron. Por favor, haga clic en el dron para
-      iniciar el reconocimiento a pie."
+      documentar los artefactos visibles en la superficie y orientarse, junto con
+      el equipo, dentro del sitio.\n\nEl m\xE9todo tradicional para realizar un reconocimiento
+      a pie emplea l\xEDneas de transecto. Los miembros del equipo se alinean, manteniendo
+      una separaci\xF3n de unos tres o cuatro metros entre s\xED, a lo largo del
+      borde del sitio o del \xE1rea de estudio. Lentamente, el equipo recorre toda
+      la extensi\xF3n del sitio, escudri\xF1ando el suelo en busca de cualquier artefacto
+      o rasgo superficial para registrarlo adecuadamente. Debido a que esta experiencia
+      est\xE1 dise\xF1ada para un solo jugador, nosotros llevamos a cabo esta tarea
+      mediante el uso de un dron. Por favor, haga clic en el dron para iniciar el
+      reconocimiento a pie, o bien recorra el sitio usted mismo para registrar la
+      informaci\xF3n sobre los artefactos superficiales. \xA1Hay un total de 6 elementos
+      que deben ser registrados antes de que pueda dar comienzo la excavaci\xF3n!"
     m_Metadata:
       m_Items: []
   - m_Id: 26388156040245248
@@ -335,6 +339,32 @@ MonoBehaviour:
   - m_Id: 26458016589967360
     m_Localized: "WASD / Flechas: Mover  |   Q / E: Girar  |   R / F: \xC1ngulo 
       |   Rueda del rat\xF3n: Zoom  |   Espacio: Salir"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26802534212333568
+    m_Localized: Complete el levantamiento peatonal antes de excavar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26830016894365696
+    m_Localized: Progreso del estudio peatonal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26841174288265216
+    m_Localized: "\xA1Advertencia!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26841371835789312
+    m_Localized: "Al presionar \xABContinuar\xBB, se eliminar\xE1 el artefacto del
+      sitio sin ninguna grabaci\xF3n, y no se enviar\xE1 nada a la base de datos.
+      \xBFEst\xE1 seguro de que desea continuar?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26841465268105216
+    m_Localized: "S\xED"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26841495517425664
+    m_Localized: No
     m_Metadata:
       m_Items: []
   references:

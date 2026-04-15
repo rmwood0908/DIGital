@@ -315,6 +315,30 @@ MonoBehaviour:
     m_Key: walk_and_excavate_survey_instructions
     m_Metadata:
       m_Items: []
+  - m_Id: 26802534212333568
+    m_Key: walk_and_excavate_complete_survey_first
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26830016894365696
+    m_Key: survey_progress_text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26841174288265216
+    m_Key: artifact_collection_form_warning_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26841371835789312
+    m_Key: artifact_collection_form_warning_body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26841465268105216
+    m_Key: artifact_collection_form_warning_yes_button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26841495517425664
+    m_Key: artifact_collection_form_warning_no_button
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

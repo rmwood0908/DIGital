@@ -25,6 +25,9 @@ public class SurveyModeManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject droneInstructionBar;
 
+    // reference to artifact collection form
+    [SerializeField] private ArtifactFormManager artifactFormManager;
+
     public bool IsSurveyModeActive { get; private set; }
 
     private CursorLockMode previousLockState;
@@ -114,6 +117,11 @@ public class SurveyModeManager : MonoBehaviour
     public void ExitSurveyMode()
     {
         if (!IsSurveyModeActive)
+        {
+            return;
+        }
+
+        if (artifactFormManager != null && artifactFormManager.IsFormOpen)
         {
             return;
         }

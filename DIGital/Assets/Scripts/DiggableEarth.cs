@@ -16,6 +16,7 @@ public class DiggableEarth : MonoBehaviour, Interactable
     [Header("Localization")]
     [SerializeField] private string table = "UI";
     [SerializeField] private string digTipKey = "walk_and_excavate_dig";
+    [SerializeField] private string surveyBlockedKey = "walk_and_excavate_complete_survey_first";
 
     void Start()
     {
@@ -25,6 +26,18 @@ public class DiggableEarth : MonoBehaviour, Interactable
 
     public void Interact()
     {
+        if (manager == null)
+        {
+            return;
+        }
+
+        // block excavation until pedestrian survey is complete
+        if (!manager.CanExcavate)
+        {
+            textBox.text = LocalizationSettings.StringDatabase.GetLocalizedString(table, surveyBlockedKey);
+            return;
+        }
+
         if (manager.currentLayer == digLayer)
         {
             textBox.text = "";
@@ -36,11 +49,23 @@ public class DiggableEarth : MonoBehaviour, Interactable
 
     void FixedUpdate()
     {
-        if(checkForText)
+        if (checkForText)
         {
             if(textDisplayedTime > 0)
             {
-                textBox.text = LocalizationSettings.StringDatabase.GetLocalizedString(table, digTipKey);
+                // switcfh text depending on if excavation is allowed
+                if (!manager.CanExcavate)
+                {
+                    textBox.text = LocalizationSettings.StringDatabase.GetLocalizedString(table, surveyBlockedKey);
+                }
+                else if (manager.currentLayer == digLayer)
+                {
+                    textBox.text = LocalizationSettings.StringDatabase.GetLocalizedString(table, digTipKey);
+                }
+                else
+                {
+                    textBox.text = "";
+                }
             }
 
             else
@@ -55,10 +80,12 @@ public class DiggableEarth : MonoBehaviour, Interactable
 
     public void displayTooltip()
     {
-        if (manager.currentLayer == digLayer)
+        if (manager == null)
         {
-            textDisplayedTime = 0.03f;
-            checkForText = true;
+            return;
         }
+
+        textDisplayedTime = 0.03f;
+        checkForText = true;
     }
 }

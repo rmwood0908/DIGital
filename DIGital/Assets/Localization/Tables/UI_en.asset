@@ -72,12 +72,14 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 695464761389056
-    m_Localized: Welcome, {username}!
+    m_Localized: Welcome, {username}! Press 'M' to open settings, "Tab" to open AI
+      assistant.
     m_Metadata:
       m_Items:
       - rid: 745707523204972611
   - m_Id: 696095794425856
-    m_Localized: Welcome, archaeologist!
+    m_Localized: Welcome, archeologist! Press 'M' to open settings, "Tab" to open
+      AI assistant.
     m_Metadata:
       m_Items: []
   - m_Id: 702131037171712
@@ -314,14 +316,15 @@ MonoBehaviour:
       surface artifacts, and orient yourself with your team within a site.
 
 
-
       The
       traditional method for a pedestrian survey uses transect lines. Team members
       will line up about three or four meters apart along the edge of the site or
       area you are focusing on. Slowly, the team will walk the length of the site
       and scan the ground for any surface artifacts or features and record them properly.
       Due to the singleplayer aspect of this experience, we accomplish this with
-      drone work. Please click on the drone to begin the pedestrian survey.'
+      drone work. Please click on the drone to begin the pedestrian survey, or walk
+      the site and record information about surface artifacts. There are 6 in total
+      that need to be recorded before excavation can begin!'
     m_Metadata:
       m_Items: []
   - m_Id: 26388156040245248
@@ -335,6 +338,32 @@ MonoBehaviour:
   - m_Id: 26458016589967360
     m_Localized: 'WASD / Arrows Move:   |   Q / E: Rotate   |   R / F: Angle   |  
       Mouse Wheel: Zoom   |   Space: Exit'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26802534212333568
+    m_Localized: Complete the pedestrian survey before excavating.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26830016894365696
+    m_Localized: Pedestrian Survey Progress
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26841174288265216
+    m_Localized: Warning!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26841371835789312
+    m_Localized: Pressing Continue will remove the artifact from the site without
+      any recordings, and nothing will be sent to the database. Are you sure you'd
+      like to proceed?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26841465268105216
+    m_Localized: Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26841495517425664
+    m_Localized: No
     m_Metadata:
       m_Items: []
   references:
