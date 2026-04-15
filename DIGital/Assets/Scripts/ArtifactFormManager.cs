@@ -53,6 +53,8 @@ public class ArtifactFormManager : MonoBehaviour
     [SerializeField] private MonoBehaviour[] playerScriptsToDisable;
     [SerializeField] private MonoBehaviour[] surveyScriptsToDisable;
 
+    private readonly Dictionary<MonoBehaviour, bool> savedScriptStates = new Dictionary<MonoBehaviour, bool>();
+
     // cache to not recreate error message each time
     private LocalizedString errorLocalizedString;
 
@@ -128,7 +130,7 @@ public class ArtifactFormManager : MonoBehaviour
             PanelRoot.SetActive(true);
 
             // handle scripts
-            SetInteractionScriptsEnabled(false);
+            DisableScriptsForForm();
 
             // unlock cursor for UI interaction
             Cursor.lockState = CursorLockMode.None;
@@ -153,7 +155,7 @@ public class ArtifactFormManager : MonoBehaviour
 
         // hide warning and handle scripts
         HideContinueWarning();
-        SetInteractionScriptsEnabled(true);
+        RestoreScriptsAfterForm();
 
         // restore cursor and resume game if you paused it
         RestoreCursorAfterForm();
@@ -459,36 +461,6 @@ public class ArtifactFormManager : MonoBehaviour
         }
     }
 
-    // handle scripts while warning is active
-    private void SetInteractionScriptsEnabled(bool enabledState)
-    {
-        bool surveyModeActive =
-        SurveyModeManager.Instance != null &&
-        SurveyModeManager.Instance.IsSurveyModeActive;
-
-        if (!enabledState)
-        {
-            // form is opening: disable everything that could interfere
-            SetScriptsEnabled(playerScriptsToDisable, false);
-            SetScriptsEnabled(surveyScriptsToDisable, false);
-            return;
-        }
-
-        // form is closing: only restore the scripts for the current mode
-        if (surveyModeActive)
-        {
-            // stay in drone mode: keep player scripts disabled
-            SetScriptsEnabled(playerScriptsToDisable, false);
-            SetScriptsEnabled(surveyScriptsToDisable, true);
-        }
-        else
-        {
-            // back in player mode: re-enable player scripts
-            SetScriptsEnabled(playerScriptsToDisable, true);
-            SetScriptsEnabled(surveyScriptsToDisable, false);
-        }
-    }
-
     // hide warning panel
     private void HideContinueWarning()
     {
@@ -510,5 +482,46 @@ public class ArtifactFormManager : MonoBehaviour
                 script.enabled = enabledState;
             }
         }
+    }
+
+    // helper function to disable scripts when form opens
+    private void DisableScriptsForForm()
+    {
+        savedScriptStates.Clear();
+
+        SaveAndDisable(playerScriptsToDisable);
+        SaveAndDisable(surveyScriptsToDisable);
+    }
+
+    // remember which scripts were disabled
+    private void SaveAndDisable(MonoBehaviour[] scripts)
+    {
+        if (scripts == null) return;
+
+        foreach (MonoBehaviour script in scripts)
+        {
+            if (script == null) continue;
+
+            if (!savedScriptStates.ContainsKey(script))
+            {
+                savedScriptStates[script] = script.enabled;
+            }
+
+            script.enabled = false;
+        }
+    }
+
+    // helper to restore saved scripts that were disabled
+    private void RestoreScriptsAfterForm()
+    {
+        foreach (var pair in savedScriptStates)
+        {
+            if (pair.Key != null)
+            {
+                pair.Key.enabled = pair.Value;
+            }
+        }
+
+        savedScriptStates.Clear();
     }
 }
