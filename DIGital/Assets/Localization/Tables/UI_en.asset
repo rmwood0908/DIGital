@@ -337,6 +337,10 @@ MonoBehaviour:
       Mouse Wheel: Zoom   |   Space: Exit'
     m_Metadata:
       m_Items: []
+  - m_Id: 26802534212333568
+    m_Localized: Complete the pedestrian survey before excavating.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

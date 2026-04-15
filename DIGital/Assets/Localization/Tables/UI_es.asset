@@ -337,6 +337,10 @@ MonoBehaviour:
       |   Rueda del rat\xF3n: Zoom  |   Espacio: Salir"
     m_Metadata:
       m_Items: []
+  - m_Id: 26802534212333568
+    m_Localized: Complete el levantamiento peatonal antes de excavar.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

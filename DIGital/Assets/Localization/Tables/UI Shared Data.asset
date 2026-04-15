@@ -315,6 +315,10 @@ MonoBehaviour:
     m_Key: walk_and_excavate_survey_instructions
     m_Metadata:
       m_Items: []
+  - m_Id: 26802534212333568
+    m_Key: walk_and_excavate_complete_survey_first
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

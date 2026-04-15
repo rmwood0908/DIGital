@@ -24,6 +24,10 @@ public class ArtifactInteractable : MonoBehaviour, Interactable
     [SerializeField] private string table = "UI";
     [SerializeField] private string tooltipKey = "walk_and_excavate_record_artifact";
 
+    [Header("Survey Progress")]
+    [SerializeField] private GameManager manager;
+    [SerializeField] private bool countsTowardSurfaceSurvey = true;
+
     private float textDisplayedTime = 0f;
     private bool checkForText = false;
     private bool isRecorded = false;
@@ -101,6 +105,13 @@ public class ArtifactInteractable : MonoBehaviour, Interactable
         if (isRecorded)
         {
             return;
+        }
+
+        isRecorded = true;
+
+        if (countsTowardSurfaceSurvey && manager != null)
+        {
+            manager.RegisterSurfaceArtifactRecorded();
         }
 
         if (textBox != null )

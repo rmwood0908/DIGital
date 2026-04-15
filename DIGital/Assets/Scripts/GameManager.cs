@@ -8,10 +8,31 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public DirtPile dirtPile;
 
+    [Header("Surface Survey Artifacts")]
+    [SerializeField] private int requiredSurfaceArtifacts = 6;
+    [SerializeField] private int recordedSurfaceArtifacts = 0;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
+    }
+
+    // track diggable tile and number of recordered vs. required artifacts
+    public bool CanExcavate => recordedSurfaceArtifacts >= requiredSurfaceArtifacts;
+    public int RecordedSurfaceArtifacts => recordedSurfaceArtifacts;
+    public int RequiredSurfaceArtifacts => requiredSurfaceArtifacts;
+
+    public void RegisterSurfaceArtifactRecorded()
+    {
+        recordedSurfaceArtifacts++;
+
+        if (recordedSurfaceArtifacts > requiredSurfaceArtifacts)
+        {
+            recordedSurfaceArtifacts = requiredSurfaceArtifacts;
+        }
+
+        Debug.Log($"[GameManager] Surface artifacts recorded: {recordedSurfaceArtifacts}/{requiredSurfaceArtifacts}");
     }
 
     // Update is called once per frame
