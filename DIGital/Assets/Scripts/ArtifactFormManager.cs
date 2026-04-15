@@ -383,11 +383,17 @@ public class ArtifactFormManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
-        
+
         else
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+    }
+
+    // bool to disable hotkeys while form is open
+    public bool IsFormOpen
+    {
+        get { return PanelRoot != null && PanelRoot.activeInHierarchy; }
     }
 }

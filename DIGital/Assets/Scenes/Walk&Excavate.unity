@@ -844,6 +844,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7908517213103241883, guid: a954d4f5bd8fe01448c6739ae7f107b8, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -4075,7 +4079,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 193622413}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flagSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4551,6 +4555,7 @@ MonoBehaviour:
   rotateRightKey: 101
   tiltMoreTopDownKey: 114
   tiltMoreShallowKey: 102
+  artifactFormManager: {fileID: 0}
 --- !u!4 &257842129
 Transform:
   m_ObjectHideFlags: 0
@@ -6871,7 +6876,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 369697360}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flagSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9789,6 +9794,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sw_pot (artifact 4)
       objectReference: {fileID: 0}
+    - target: {fileID: -453309145757697885, guid: a259d4f02da38d44ba49687f2874c8bb, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2774220344278030320, guid: a259d4f02da38d44ba49687f2874c8bb, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.01
@@ -12290,6 +12299,10 @@ PrefabInstance:
     - target: {fileID: -6689036041284674117, guid: 88716b5c276349746bfb743a9c74153a, type: 3}
       propertyPath: m_Name
       value: acoma_poly (artifact 6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 633334688332580723, guid: 88716b5c276349746bfb743a9c74153a, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2774220344278030320, guid: 88716b5c276349746bfb743a9c74153a, type: 3}
       propertyPath: m_LocalScale.x
@@ -15749,7 +15762,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 845089080}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flagSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18735,6 +18748,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 3441136308559300650, guid: 7acba44afda76c74ab97d06d171ea825, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -21167,7 +21184,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1107179184}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flagSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27375,7 +27392,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1397788184}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flagSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28712,6 +28729,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 8426953588917180415, guid: 871d9815b63c7ff4eab12f911a08992d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -29706,6 +29727,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArtifactClickManager
   playerCamera: {fileID: 2143970435}
+  surveyCamera: {fileID: 677042425}
+  surveyModeManager: {fileID: 1732443925}
   maxDistance: 100
   artifactLayerMask:
     serializedVersion: 2
@@ -29713,6 +29736,7 @@ MonoBehaviour:
   dirtLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  showTooltipFromThisManager: 1
 --- !u!4 &1527703919
 Transform:
   m_ObjectHideFlags: 0
@@ -31969,6 +31993,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9058988815887468956, guid: 51b5af75a235b1c408d6fe2cb5dd4c20, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -6689036041284674117, guid: 51b5af75a235b1c408d6fe2cb5dd4c20, type: 3}
       propertyPath: m_Name
       value: stone_citru (artifact 3)
@@ -36198,7 +36226,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1888274813}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: flagSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

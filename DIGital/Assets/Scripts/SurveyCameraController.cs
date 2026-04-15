@@ -37,6 +37,8 @@ public class SurveyCameraController : MonoBehaviour
     [SerializeField] private KeyCode tiltMoreTopDownKey = KeyCode.R;
     [SerializeField] private KeyCode tiltMoreShallowKey = KeyCode.F;
 
+    [SerializeField] private ArtifactFormManager artifactFormManager;
+
     private SurveyModeManager owner;
     private float fixedY;
 
@@ -75,6 +77,11 @@ public class SurveyCameraController : MonoBehaviour
 
     private void Update()
     {
+        if (artifactFormManager != null && artifactFormManager.IsFormOpen)
+        {
+            return;
+        }
+
         HandleExit();
         HandleMovement();
         HandleYawAndPitch();
