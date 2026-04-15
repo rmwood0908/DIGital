@@ -790,7 +790,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6689036041284674117, guid: a954d4f5bd8fe01448c6739ae7f107b8, type: 3}
       propertyPath: m_Name
-      value: new_qlone
+      value: new_qlone (artifact 5)
       objectReference: {fileID: 0}
     - target: {fileID: 2774220344278030320, guid: a954d4f5bd8fe01448c6739ae7f107b8, type: 3}
       propertyPath: m_LocalScale.x
@@ -9716,7 +9716,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6689036041284674117, guid: a259d4f02da38d44ba49687f2874c8bb, type: 3}
       propertyPath: m_Name
-      value: sw_pot
+      value: sw_pot (artifact 4)
       objectReference: {fileID: 0}
     - target: {fileID: 2774220344278030320, guid: a259d4f02da38d44ba49687f2874c8bb, type: 3}
       propertyPath: m_LocalScale.x
@@ -12209,7 +12209,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6689036041284674117, guid: 88716b5c276349746bfb743a9c74153a, type: 3}
       propertyPath: m_Name
-      value: acoma_poly
+      value: acoma_poly (artifact 6)
       objectReference: {fileID: 0}
     - target: {fileID: 2774220344278030320, guid: 88716b5c276349746bfb743a9c74153a, type: 3}
       propertyPath: m_LocalScale.x
@@ -16434,7 +16434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5f724607e0f355341b8bf03672abded3, type: 3}
       propertyPath: m_Name
-      value: artifact1
+      value: whole_vessel (artifact 1)
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5f724607e0f355341b8bf03672abded3, type: 3}
       propertyPath: m_Layer
@@ -18508,7 +18508,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6689036041284674117, guid: 7acba44afda76c74ab97d06d171ea825, type: 3}
       propertyPath: m_Name
-      value: new_qlone_plate
+      value: new_qlone_plate (artfiact 7)
       objectReference: {fileID: 0}
     - target: {fileID: 2774220344278030320, guid: 7acba44afda76c74ab97d06d171ea825, type: 3}
       propertyPath: m_LocalScale.x
@@ -28361,7 +28361,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6689036041284674117, guid: 871d9815b63c7ff4eab12f911a08992d, type: 3}
       propertyPath: m_Name
-      value: incised_stone
+      value: incised_stone (artifact 2)
       objectReference: {fileID: 0}
     - target: {fileID: 2774220344278030320, guid: 871d9815b63c7ff4eab12f911a08992d, type: 3}
       propertyPath: m_LocalScale.x
@@ -31665,7 +31665,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -6689036041284674117, guid: 51b5af75a235b1c408d6fe2cb5dd4c20, type: 3}
       propertyPath: m_Name
-      value: stone_citru
+      value: stone_citru (artifact 3)
       objectReference: {fileID: 0}
     - target: {fileID: 2774220344278030320, guid: 51b5af75a235b1c408d6fe2cb5dd4c20, type: 3}
       propertyPath: m_LocalScale.x
@@ -41334,6 +41334,9 @@ SceneRoots:
   - {fileID: 1484837189}
   - {fileID: 1653406367}
   - {fileID: 523620163}
+  - {fileID: 36074747}
+  - {fileID: 679792749}
+  - {fileID: 969934021}
   - {fileID: 2137939140}
   - {fileID: 1225070332}
   - {fileID: 548421996}
@@ -41349,6 +41352,3 @@ SceneRoots:
   - {fileID: 777866859}
   - {fileID: 1732443926}
   - {fileID: 1703914211}
-  - {fileID: 36074747}
-  - {fileID: 679792749}
-  - {fileID: 969934021}
