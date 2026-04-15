@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,17 +13,37 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int requiredSurfaceArtifacts = 6;
     [SerializeField] private int recordedSurfaceArtifacts = 0;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [Header("Scene Objects")]
+    [SerializeField] private GameObject excavationBoundary;
+
+    private readonly List<GameObject> spawnedSurveyFlags = new List<GameObject>();
 
     // track diggable tile and number of recordered vs. required artifacts
     public bool CanExcavate => recordedSurfaceArtifacts >= requiredSurfaceArtifacts;
     public int RecordedSurfaceArtifacts => recordedSurfaceArtifacts;
     public int RequiredSurfaceArtifacts => requiredSurfaceArtifacts;
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        if (excavationBoundary != null)
+        {
+            excavationBoundary.SetActive(false);
+        }
+    }
+
+    // track spawned flags
+    public void RegisterSpawnedSurveyFlag(GameObject flag)
+    {
+        if (flag == null)
+        {
+            return;
+        }
+
+        spawnedSurveyFlags.Add(flag);
+    }
+
+    // track surface artifact recording
     public void RegisterSurfaceArtifactRecorded()
     {
         recordedSurfaceArtifacts++;
@@ -33,6 +54,30 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log($"[GameManager] Surface artifacts recorded: {recordedSurfaceArtifacts}/{requiredSurfaceArtifacts}");
+
+        if (recordedSurfaceArtifacts >= requiredSurfaceArtifacts)
+        {
+            OnSurfaceSurveyCompleted();
+        }
+    }
+
+    // after all artifacts have been recorded
+    private void OnSurfaceSurveyCompleted()
+    {
+        // hide all spawned red flags
+        foreach (GameObject flag in spawnedSurveyFlags)
+        {
+            if (flag != null)
+            {
+                flag.SetActive(false);
+            }
+        }
+
+        // show the pre-placed excavation boundary
+        if (excavationBoundary != null)
+        {
+            excavationBoundary.SetActive(true);
+        }
     }
 
     // Update is called once per frame

@@ -109,11 +109,6 @@ public class ArtifactInteractable : MonoBehaviour, Interactable
 
         isRecorded = true;
 
-        if (countsTowardSurfaceSurvey && manager != null)
-        {
-            manager.RegisterSurfaceArtifactRecorded();
-        }
-
         if (textBox != null )
         {
             textBox.text = "";
@@ -128,6 +123,11 @@ public class ArtifactInteractable : MonoBehaviour, Interactable
             Quaternion spawnRotation = flagSpawnPoint != null ? flagSpawnPoint.rotation : Quaternion.identity;
 
             spawnedFlag = Instantiate(redFlagPrefab, spawnPosition, spawnRotation);
+
+            if (manager != null)
+            {
+                manager.RegisterSpawnedSurveyFlag(spawnedFlag);
+            }
         }
 
         // then hide artifact visuals
@@ -165,6 +165,12 @@ public class ArtifactInteractable : MonoBehaviour, Interactable
             {
                 col.enabled = false;
             }
+        }
+
+        // record artifact last
+        if (countsTowardSurfaceSurvey && manager != null)
+        {
+            manager.RegisterSurfaceArtifactRecorded();
         }
     }
 }

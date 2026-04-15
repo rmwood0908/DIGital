@@ -72,12 +72,14 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 695464761389056
-    m_Localized: Welcome, {username}!
+    m_Localized: Welcome, {username}! Press 'M' to open settings, "Tab" to open AI
+      assistant.
     m_Metadata:
       m_Items:
       - rid: 745707523204972611
   - m_Id: 696095794425856
-    m_Localized: Welcome, archaeologist!
+    m_Localized: Welcome, archeologist! Press 'M' to open settings, "Tab" to open
+      AI assistant.
     m_Metadata:
       m_Items: []
   - m_Id: 702131037171712
