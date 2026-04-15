@@ -44,6 +44,10 @@ public class ArtifactFormManager : MonoBehaviour
     [Header("Registry")]
     [SerializeField] private ArtifactIdRegistry idRegistry;
 
+    [Header("Optional Input Suspension")]
+    [SerializeField] private SurveyCameraController surveyCameraController;
+    [SerializeField] private ArtifactClickManager artifactClickManager;
+
     // cache to not recreate error message each time
     private LocalizedString errorLocalizedString;
 
@@ -104,6 +108,7 @@ public class ArtifactFormManager : MonoBehaviour
     public void OpenForm(ArtifactInteractable artifactInteractable)
     {
         currentArtifactInteractable = artifactInteractable;
+        ResetStatusUI();
 
         // preselect artifact ID for the collecton form
         PreselectArtifactIdFromInteractable();
@@ -112,6 +117,17 @@ public class ArtifactFormManager : MonoBehaviour
         {
             Debug.Log("[ArtifactFormManager] OpenForm() - enabling PanelRoot");
             PanelRoot.SetActive(true);
+
+            // disable when form is open
+            if (surveyCameraController != null)
+            {
+                surveyCameraController.enabled = false;
+            }
+
+            if (artifactClickManager != null)
+            {
+                artifactClickManager.enabled = false;
+            }
 
             // unlock cursor for UI interaction
             Cursor.lockState = CursorLockMode.None;
@@ -132,15 +148,22 @@ public class ArtifactFormManager : MonoBehaviour
         if (PanelRoot != null)
         {
             PanelRoot.SetActive(false);
-
-            // restore FPS controls
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible   = false;
-
-            // restore cursor and resume game if you paused it
-            RestoreCursorAfterForm();
-            Time.timeScale = 1f;
         }
+
+        // re-enable after form closes
+        if (surveyCameraController != null)
+        {
+            surveyCameraController.enabled = true;
+        }
+
+        if (artifactClickManager != null)
+        {
+            artifactClickManager.enabled = true;
+        }
+
+        // restore cursor and resume game if you paused it
+        RestoreCursorAfterForm();
+        Time.timeScale = 1f;
     }
 
 
@@ -395,5 +418,14 @@ public class ArtifactFormManager : MonoBehaviour
     public bool IsFormOpen
     {
         get { return PanelRoot != null && PanelRoot.activeInHierarchy; }
+    }
+
+    // reset status text after form has been closed
+    private void ResetStatusUI()
+    {
+        if (StatusText != null)
+        {
+            StatusText.text = "";
+        }
     }
 }
