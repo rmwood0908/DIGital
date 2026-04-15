@@ -17942,6 +17942,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArtifactInteractable
   textBox: {fileID: 107865248}
   formManager: {fileID: 1967557269}
+  artifactId: 6
   visualRoot: {fileID: 943839032}
   collidersToDisable:
   - {fileID: 943839036}
@@ -19910,6 +19911,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArtifactInteractable
   textBox: {fileID: 107865248}
   formManager: {fileID: 1967557269}
+  artifactId: 2
   visualRoot: {fileID: 1030890677}
   collidersToDisable:
   - {fileID: 1030890681}
@@ -32223,6 +32225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArtifactInteractable
   textBox: {fileID: 107865248}
   formManager: {fileID: 1967557269}
+  artifactId: 4
   visualRoot: {fileID: 1663819496}
   collidersToDisable:
   - {fileID: 1663819500}
@@ -32671,6 +32674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArtifactInteractable
   textBox: {fileID: 107865248}
   formManager: {fileID: 1967557269}
+  artifactId: 1
   visualRoot: {fileID: 1693421779}
   collidersToDisable:
   - {fileID: 1693421781}
@@ -32785,6 +32789,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArtifactInteractable
   textBox: {fileID: 107865248}
   formManager: {fileID: 1967557269}
+  artifactId: 3
   visualRoot: {fileID: 1695111783}
   collidersToDisable:
   - {fileID: 1695111787}
@@ -35369,6 +35374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArtifactInteractable
   textBox: {fileID: 107865248}
   formManager: {fileID: 1967557269}
+  artifactId: 5
   visualRoot: {fileID: 1843469249}
   collidersToDisable:
   - {fileID: 1843469253}
@@ -37471,6 +37477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArtifactInteractable
   textBox: {fileID: 107865248}
   formManager: {fileID: 1967557269}
+  artifactId: 7
   visualRoot: {fileID: 1970277759}
   collidersToDisable:
   - {fileID: 1970277763}

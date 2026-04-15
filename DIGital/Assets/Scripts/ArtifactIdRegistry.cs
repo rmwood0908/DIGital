@@ -4,10 +4,6 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "DIGital/Artifact ID Registry")]
 
-[Header("Artifact Data")]
-[SerializeField] private string artifactId;
-public string ArtifactId => artifactId;
-
 public class ArtifactIdRegistry : ScriptableObject
 {
     [Serializable]

@@ -347,13 +347,13 @@ public class ArtifactFormManager : MonoBehaviour
             return;
         }
 
-        targetId = targetId.trim();
+        targetId = targetId.Trim();
 
         for ( int index = 0; index < idRegistry.entries.Count; index++ )
         {
             var entry = idRegistry.entries[index];
             
-            if (entry == null || string.IsNullOrWhiteSpace(entry.ArtifactId))
+            if (entry == null || string.IsNullOrWhiteSpace(entry.artifactId))
             {
                 continue;
             }

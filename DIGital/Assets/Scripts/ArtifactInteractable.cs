@@ -8,6 +8,10 @@ public class ArtifactInteractable : MonoBehaviour, Interactable
     [SerializeField] private TMP_Text textBox;
     [SerializeField] private ArtifactFormManager formManager;
 
+    [Header("Artifact Data")]
+    [SerializeField] private string artifactId;
+    public string ArtifactId => artifactId;
+
     [Header("Artifact Visuals")]
     [SerializeField] private GameObject visualRoot;
     [SerializeField] private Collider[] collidersToDisable;
@@ -142,7 +146,7 @@ public class ArtifactInteractable : MonoBehaviour, Interactable
                 }
             }
         }
-        
+
         else
         {
             Collider[] allColliders = GetComponentsInChildren<Collider>(true);
