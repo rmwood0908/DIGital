@@ -8,14 +8,12 @@ public class DiggableEarthLayer : MonoBehaviour
 
     void Update()
     {
-        if(transform.childCount == 0)
+        if (transform.childCount == 0)
         {
             manager.currentLayer++;
 
-            // check if last layer was dug through
-            if(digLayer == 0)
+            if (digLayer == 0)
             {
-                // ask a question
                 KnowledgeCheck.instance.AskQuestion(Question);
             }
 

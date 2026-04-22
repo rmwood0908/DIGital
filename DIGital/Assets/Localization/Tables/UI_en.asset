@@ -366,6 +366,10 @@ MonoBehaviour:
     m_Localized: No
     m_Metadata:
       m_Items: []
+  - m_Id: 29373357429350400
+    m_Localized: Mark a unit off with stakes before excavating
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
