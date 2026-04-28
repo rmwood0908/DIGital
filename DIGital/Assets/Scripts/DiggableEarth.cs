@@ -11,6 +11,7 @@ public class DiggableEarth : MonoBehaviour, Interactable
     private bool checkForText = false;
     private int digLayer;
 
+    // added localization for backfill
     [Header("Localization")]
     [SerializeField] private string table = "UI";
     [SerializeField] private string digTipKey = "walk_and_excavate_dig";
@@ -43,8 +44,7 @@ public class DiggableEarth : MonoBehaviour, Interactable
             return;
         }
 
-        // Block 3: check layer — bypass global currentLayer check if unit system is active,
-        // since unit marking handles per-cell depth tracking independently
+        // Block 3: check layer
         bool unitSystemActive = UnitMarkerSystem.Instance != null && UnitMarkerSystem.Instance.IsActive;
 
         if (unitSystemActive || manager.currentLayer == digLayer)
