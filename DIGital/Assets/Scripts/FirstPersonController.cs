@@ -7,12 +7,13 @@ interface Interactable
 {
     public void Interact();
     public void displayTooltip();
-    
 
 }
 
 public class FirstPersonController : MonoBehaviour
 {
+    public bool IsUnitMarkingMode { get; set; } = false;
+
     [Header("Movement Speed")]
     [SerializeField] private float walkSpeed = 10.0f;
 
@@ -93,6 +94,7 @@ public class FirstPersonController : MonoBehaviour
     // UPDATED to handle dirt vs artifact interaction
     private void HandleInteraction()
     {
+        if (IsUnitMarkingMode) return;
         if (mainCamera == null)
         {
             return;

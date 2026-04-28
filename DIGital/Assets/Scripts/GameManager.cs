@@ -19,84 +19,68 @@ public class GameManager : MonoBehaviour
     [Header("Scene Objects")]
     [SerializeField] private GameObject excavationBoundary;
 
+    // ── Unit Marker reference ────────────────────────────────────────────────
+    [Header("Unit Marking")]
+    [SerializeField] private UnitMarkerSystem unitMarkerSystem;
+
     private readonly List<GameObject> spawnedSurveyFlags = new List<GameObject>();
 
-    // track diggable tile and number of recordered vs. required artifacts
-    public bool CanExcavate => recordedSurfaceArtifacts >= requiredSurfaceArtifacts;
+    // CanExcavate: survey done AND (no unit system OR player is in a marked unit)
+    public bool CanExcavate =>
+        recordedSurfaceArtifacts >= requiredSurfaceArtifacts &&
+        (unitMarkerSystem == null || unitMarkerSystem.CanPlayerDig);
+
     public int RecordedSurfaceArtifacts => recordedSurfaceArtifacts;
     public int RequiredSurfaceArtifacts => requiredSurfaceArtifacts;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if (excavationBoundary != null)
-        {
             excavationBoundary.SetActive(false);
-        }
 
         if (surveyProgressUI != null)
-        {
             surveyProgressUI.Refresh(recordedSurfaceArtifacts, requiredSurfaceArtifacts);
-        }
     }
 
-    // track spawned flags
     public void RegisterSpawnedSurveyFlag(GameObject flag)
     {
-        if (flag == null)
-        {
-            return;
-        }
-
+        if (flag == null) return;
         spawnedSurveyFlags.Add(flag);
     }
 
-    // track surface artifact recording
     public void RegisterSurfaceArtifactRecorded()
     {
         recordedSurfaceArtifacts++;
-
         if (recordedSurfaceArtifacts > requiredSurfaceArtifacts)
-        {
             recordedSurfaceArtifacts = requiredSurfaceArtifacts;
-        }
 
         Debug.Log($"[GameManager] Surface artifacts recorded: {recordedSurfaceArtifacts}/{requiredSurfaceArtifacts}");
 
         if (surveyProgressUI != null)
-        {
             surveyProgressUI.Refresh(recordedSurfaceArtifacts, requiredSurfaceArtifacts);
-        }
 
         if (recordedSurfaceArtifacts >= requiredSurfaceArtifacts)
-        {
             OnSurfaceSurveyCompleted();
-        }
     }
 
-    // after all artifacts have been recorded
     private void OnSurfaceSurveyCompleted()
     {
-        // hide all spawned red flags
         foreach (GameObject flag in spawnedSurveyFlags)
-        {
-            if (flag != null)
-            {
-                flag.SetActive(false);
-            }
-        }
+            if (flag != null) flag.SetActive(false);
 
-        // show the pre-placed excavation boundary
         if (excavationBoundary != null)
-        {
             excavationBoundary.SetActive(true);
-        }
+
+        // Begin unit marking phase
+        if (unitMarkerSystem != null)
+            unitMarkerSystem.BeginUnitMarkingPhase();
+        else
+            Debug.LogWarning("[GameManager] UnitMarkerSystem not assigned.");
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(currentLayer == 7)
+        if (currentLayer == 7)
         {
             currentStep++;
             currentLayer = -1;

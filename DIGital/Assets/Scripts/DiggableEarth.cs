@@ -1,48 +1,60 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Localization.Settings;
 
 public class DiggableEarth : MonoBehaviour, Interactable
 {
     [SerializeField] private TMP_Text textBox;
     private GameManager manager;
+    private DiggableEarthLayer parentLayer;
     private float textDisplayedTime = 0;
     private bool checkForText = false;
-
     private int digLayer;
 
-    // added localization for backfill (spanish)
+    // added localization for backfill
     [Header("Localization")]
     [SerializeField] private string table = "UI";
     [SerializeField] private string digTipKey = "walk_and_excavate_dig";
     [SerializeField] private string surveyBlockedKey = "walk_and_excavate_complete_survey_first";
+    [SerializeField] private string unitMarkingBlockedKey = "walk_and_excavate_mark_unit_first";
 
     void Start()
     {
-        digLayer = GetComponentInParent<DiggableEarthLayer>().digLayer;
-        manager = GetComponentInParent<DiggableEarthLayer>().manager;
+        parentLayer = GetComponentInParent<DiggableEarthLayer>();
+        digLayer = parentLayer.digLayer;
+        manager = parentLayer.manager;
     }
 
     public void Interact()
     {
-        if (manager == null)
-        {
-            return;
-        }
+        if (manager == null) return;
 
-        // block excavation until pedestrian survey is complete
-        if (!manager.CanExcavate)
+        // Block 1: pedestrian survey not done
+        if (manager.RecordedSurfaceArtifacts < manager.RequiredSurfaceArtifacts)
         {
             textBox.text = LocalizationSettings.StringDatabase.GetLocalizedString(table, surveyBlockedKey);
             return;
         }
 
-        if (manager.currentLayer == digLayer)
+        // Block 2: survey done but this section is not in a marked unit
+        if (UnitMarkerSystem.Instance != null && UnitMarkerSystem.Instance.IsActive
+            && !UnitMarkerSystem.Instance.IsSectionMarked(transform.position))
+        {
+            textBox.text = LocalizationSettings.StringDatabase.GetLocalizedString(table, unitMarkingBlockedKey);
+            return;
+        }
+
+        // Block 3: check layer
+        bool unitSystemActive = UnitMarkerSystem.Instance != null && UnitMarkerSystem.Instance.IsActive;
+
+        if (unitSystemActive || manager.currentLayer == digLayer)
         {
             textBox.text = "";
             manager.dirtPile.increaseSize();
-            
+
+            if (UnitMarkerSystem.Instance != null)
+                UnitMarkerSystem.Instance.NotifySectionFullyExcavated(transform.position, digLayer);
+
             Destroy(gameObject);
         }
     }
@@ -51,23 +63,18 @@ public class DiggableEarth : MonoBehaviour, Interactable
     {
         if (checkForText)
         {
-            if(textDisplayedTime > 0)
+            if (textDisplayedTime > 0)
             {
-                // switcfh text depending on if excavation is allowed
-                if (!manager.CanExcavate)
-                {
+                if (manager.RecordedSurfaceArtifacts < manager.RequiredSurfaceArtifacts)
                     textBox.text = LocalizationSettings.StringDatabase.GetLocalizedString(table, surveyBlockedKey);
-                }
+                else if (UnitMarkerSystem.Instance != null && UnitMarkerSystem.Instance.IsActive
+                         && !UnitMarkerSystem.Instance.IsSectionMarked(transform.position))
+                    textBox.text = LocalizationSettings.StringDatabase.GetLocalizedString(table, unitMarkingBlockedKey);
                 else if (manager.currentLayer == digLayer)
-                {
                     textBox.text = LocalizationSettings.StringDatabase.GetLocalizedString(table, digTipKey);
-                }
                 else
-                {
                     textBox.text = "";
-                }
             }
-
             else
             {
                 textBox.text = "";
@@ -80,11 +87,7 @@ public class DiggableEarth : MonoBehaviour, Interactable
 
     public void displayTooltip()
     {
-        if (manager == null)
-        {
-            return;
-        }
-
+        if (manager == null) return;
         textDisplayedTime = 0.03f;
         checkForText = true;
     }

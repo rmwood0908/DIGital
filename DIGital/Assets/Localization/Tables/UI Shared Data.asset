@@ -339,6 +339,10 @@ MonoBehaviour:
     m_Key: artifact_collection_form_warning_no_button
     m_Metadata:
       m_Items: []
+  - m_Id: 29373357429350400
+    m_Key: walk_and_excavate_mark_unit_first
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
