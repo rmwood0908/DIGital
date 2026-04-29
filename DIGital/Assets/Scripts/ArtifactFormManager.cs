@@ -202,7 +202,7 @@ public class ArtifactFormManager : MonoBehaviour
             firing = FiringInput.text.Trim(),
             paint = PaintInput.text.Trim(),
             cultural_affiliation = CulturalAffiliationInput.text.Trim(),
-            object_class = ObjectClassInput.text.Trim()
+            object_class = ObjectClassInput.text.Trim(),
             bag_number = BagNumberInput.text.Trim(),
             artifact_id = enteredId,
             userId = (SessionManager.Instance != null &&
