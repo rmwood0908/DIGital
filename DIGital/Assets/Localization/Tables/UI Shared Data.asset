@@ -343,6 +343,46 @@ MonoBehaviour:
     m_Key: walk_and_excavate_mark_unit_first
     m_Metadata:
       m_Items: []
+  - m_Id: 31844731919953920
+    m_Key: collection_decorative_tech
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31844961633595392
+    m_Key: collection_firing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31845284968296448
+    m_Key: collection_paint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31845352932798464
+    m_Key: collection_cultural_affiliation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31845455026352128
+    m_Key: collection_object_class
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31845518159015936
+    m_Key: collection_decorative_tech_input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31845763366416384
+    m_Key: collection_firing_input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31845947513139200
+    m_Key: collection_paint_input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31846077897273344
+    m_Key: collection_cultural_affiliation_input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31846202103197696
+    m_Key: collection_object_class_input
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

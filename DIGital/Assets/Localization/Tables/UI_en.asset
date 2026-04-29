@@ -370,6 +370,46 @@ MonoBehaviour:
     m_Localized: Mark a unit off with stakes before excavating
     m_Metadata:
       m_Items: []
+  - m_Id: 31844731919953920
+    m_Localized: 'Decorative Tech:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31844961633595392
+    m_Localized: 'Firing:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31845284968296448
+    m_Localized: 'Paint:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31845352932798464
+    m_Localized: 'Cultural Affiliation:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31845455026352128
+    m_Localized: 'Object Class:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31845518159015936
+    m_Localized: Enter Decorative Tech...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31845763366416384
+    m_Localized: Enter Firing...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31845947513139200
+    m_Localized: Enter Paint...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31846077897273344
+    m_Localized: Enter Cultural Affiliation...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31846202103197696
+    m_Localized: Enter Object Class...
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
