@@ -205,5 +205,50 @@ router.get('/', async (req, res) => {
     }
 });
 
+// get answer-key artifact by id
+router.get('/reference/:artifactId', async (req, res) => {
+    try {
+        const { artifactId } = req.params;
+
+        // query
+        const query = `
+            SELECT id, date_discovered, investigator, area,
+                   unit, layer, site, associated_features,
+                   decorative_tech, material, firing, paint,
+                   cultural_affiliation, object_class, bag_number,
+                   artifact_id, created_at, updated_at, user_id
+            FROM artifacts
+            WHERE artifact_id = $1
+              AND user_id IS NULL
+            ORDER BY created_at DESC
+            LIMIT 1;
+        `;
+
+        const result = await pool.query(query, [artifactId]);
+
+        // error handle
+        if (result.rows.length == 0) {
+            return res.status(404).json({
+                ok: false,
+                error: "No reference artifact found for this artifact ID."
+            });
+        }
+
+        return res.status(200).json({
+            ok: true,
+            artifact: result.row[0],
+            error: null
+        });
+
+    } catch (error) {
+        console.error("Error fetching reference artifact:", error);
+        return res.status(500).json({
+            ok: false,
+            artifact: null,
+            error: "Internatl server error."
+        });
+    }
+});
+
 // export the router
 export default router;
