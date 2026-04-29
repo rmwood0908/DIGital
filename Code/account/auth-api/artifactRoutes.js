@@ -15,9 +15,12 @@ router.post('/', async (req, res) => {
             layer,
             site,
             associated_features,
-            material_type,
-            quantity,
-            weight,
+            decorative_tech,
+            material,
+            firing,
+            paint,
+            cultural_affiliation,
+            object_class,
             bag_number,
             artifact_id,
             userId
@@ -31,10 +34,12 @@ router.post('/', async (req, res) => {
             !unit ||
             !layer ||
             !site ||
-            !material_type ||
-            quantity === undefined ||
-            quantity === '' ||
-            !weight ||
+            !decorative_tech ||
+            !material ||
+            !firing ||
+            !paint ||
+            !cultural_affiliation ||
+            !object_class ||
             !bag_number ||
             !artifact_id
         ) {
@@ -44,24 +49,16 @@ router.post('/', async (req, res) => {
             });
         }
 
-        // coerce quantity to number
-        const quantityValue = Number(quantity);
-
-        if (Number.isNaN(quantityValue)) {
-            return res.status(400).json({
-                ok: false,
-                error: 'Quantity and weight must be numbers',
-            });
-        }
-
         // insert new artifact into database
         const insertArtifactQuery =
             `INSERT INTO artifacts 
         (date_discovered, investigator, area, unit, layer, site, 
-         associated_features, material_type, quantity, weight, 
-         bag_number, artifact_id, user_id) 
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
-         RETURNING id`;
+         associated_features, decorative_tech, material, firing, 
+         paint, cultural_affiliation, object_class, bag_number,
+         artifact_id, user_id) 
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
+         RETURNING *;
+         `;
 
         const values = [
             date_discovered,
@@ -71,9 +68,12 @@ router.post('/', async (req, res) => {
             layer,
             site,
             associated_features || null,
-            material_type,
-            quantityValue,
-            weight,
+            decorative_tech,
+            material,
+            firing,
+            paint,
+            cultural_affiliation,
+            object_class,
             bag_number,
             artifact_id,
             userId || null
@@ -86,7 +86,7 @@ router.post('/', async (req, res) => {
         res.status(201).json({
             ok: true,
             message: 'Artifact created successfully',
-            artifactId: result.rows[0].id
+            artifact: result.rows[0]
         });
     } catch (error) {
         console.error('Error creating artifact:', error);
@@ -100,17 +100,19 @@ router.post('/', async (req, res) => {
 // get route to show artifact to analyze
 router.get('/latest/:userId', async (req, res) => {
     try {
-        const { userId } = req.params
+        const { userId } = req.params;
 
         const selectArtifactQuery =
             `SELECT id, date_discovered, investigator, area,
                 unit, layer, site, associated_features,
-                material_type, quantity, weight, bag_number,
-                artifact_id
+                decorative_tech, material, firing, paint,
+                cultural_affiliation, object_class, bag_number,
+                artifact_id, created_at, updated_at, user_id
          FROM artifacts
          WHERE user_id = $1 OR user_id IS NULL
          ORDER BY created_at DESC
-         LIMIT 1;`;
+         LIMIT 1;
+         `;
 
         // send query to database
         const result = await pool.query(selectArtifactQuery, [userId]);
@@ -144,13 +146,15 @@ router.get('/mine/:userId', async (req, res) => {
 
         // sql query
         const query =
-            `SELECT id, date_discovered, investigator,
-                area, unit, layer, site, associated_features,
-                material_type, quantity, weight, bag_number,
-                artifact_id
+            `SELECT id, date_discovered, investigator, area,
+                unit, layer, site, associated_features,
+                decorative_tech, material, firing, paint,
+                cultural_affiliation, object_class, bag_number,
+                artifact_id, created_at, updated_at, user_id
          FROM artifacts
          WHERE user_id = $1 OR user_id IS NULL
-         ORDER BY created_at DESC;`;
+         ORDER BY created_at DESC;
+         `;
 
         const result = await pool.query(query, [userId]);
 
@@ -163,7 +167,7 @@ router.get('/mine/:userId', async (req, res) => {
 
         // error handling
     } catch (error) {
-        console.error("Errpr fetching user artifacts:", error);
+        console.error("Error fetching user artifacts:", error);
         return res.status(500).json({
             ok: false,
             artifacts: [],
@@ -176,12 +180,14 @@ router.get('/mine/:userId', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const selectAllArtifactsQuery =
-            `SELECT id, date_discovered, investigator,
-                area, unit, layer, site, associated_features,
-                material_type, quantity, weight, bag_number,
-                artifact_id
+            `SELECT id, date_discovered, investigator, area,
+                unit, layer, site, associated_features,
+                decorative_tech, material, firing, paint,
+                cultural_affiliation, object_class, bag_number,
+                artifact_id, created_at, updated_at, user_id
          FROM artifacts
-         ORDER BY created_at DESC;`;
+         ORDER BY created_at DESC;
+         `;
 
         // send query to database
         const result = await pool.query(selectAllArtifactsQuery);
