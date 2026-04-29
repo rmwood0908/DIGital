@@ -19,9 +19,12 @@ public class ArtifactFormManager : MonoBehaviour
     [SerializeField] private TMP_InputField LayerInput;
     [SerializeField] private TMP_InputField SiteInput;
     [SerializeField] private TMP_InputField AssociatedFeaturesInput;
-    [SerializeField] private TMP_InputField MaterialTypeInput;
-    [SerializeField] private TMP_InputField QuantityInput;
-    [SerializeField] private TMP_InputField WeightInput;
+    [SerializeField] private TMP_InputField DecorativeTechInput;
+    [SerializeField] private TMP_InputField MaterialInput;
+    [SerializeField] private TMP_InputField FiringInput;
+    [SerializeField] private TMP_InputField PaintInput;
+    [SerializeField] private TMP_InputField CulturalAffiliationInput;
+    [SerializeField] private TMP_InputField ObjectClassInput;
     [SerializeField] private TMP_InputField BagNumberInput;
     [SerializeField] private TMP_Dropdown ArtifactIdDropdown;
 
@@ -72,9 +75,12 @@ public class ArtifactFormManager : MonoBehaviour
         public string layer;
         public string site;
         public string associated_features;
-        public string material_type;
-        public int quantity;
-        public string weight;
+        public string decorative_tech;
+        public string material;
+        public string firing;
+        public string paint;
+        public string cultural_affiliation;
+        public string object_class;
         public string bag_number;
         public string artifact_id;
         public string userId;
@@ -167,7 +173,7 @@ public class ArtifactFormManager : MonoBehaviour
     public void OnSubmitButtonClicked()
     {
         // front end validation
-        if (!ValidateInputs(out int Quantity))
+        if (!ValidateInputs())
         {
             return;
         }
@@ -191,9 +197,12 @@ public class ArtifactFormManager : MonoBehaviour
             layer = LayerInput.text.Trim(),
             site = SiteInput.text.Trim(),
             associated_features = AssociatedFeaturesInput.text.Trim(),
-            material_type = MaterialTypeInput.text.Trim(),
-            quantity = Quantity,
-            weight = WeightInput.text.Trim(),
+            decorative_tech = DecorativeTechInput.text.Trim(),
+            material = MaterialInput.text.Trim(),
+            firing = FiringInput.text.Trim(),
+            paint = PaintInput.text.Trim(),
+            cultural_affiliation = CulturalAffiliationInput.text.Trim(),
+            object_class = ObjectClassInput.text.Trim()
             bag_number = BagNumberInput.text.Trim(),
             artifact_id = enteredId,
             userId = (SessionManager.Instance != null &&
@@ -251,10 +260,8 @@ public class ArtifactFormManager : MonoBehaviour
         HideContinueWarning();
     }
 
-    private bool ValidateInputs( out int Quantity )
+    private bool ValidateInputs()
     {
-        Quantity = 0;
-
         // required fields
         if (string.IsNullOrWhiteSpace(DateDiscoveredInput.text) ||
             string.IsNullOrWhiteSpace(InvestigatorInput.text) ||
@@ -262,20 +269,16 @@ public class ArtifactFormManager : MonoBehaviour
             string.IsNullOrWhiteSpace(UnitInput.text) ||
             string.IsNullOrWhiteSpace(LayerInput.text) ||
             string.IsNullOrWhiteSpace(SiteInput.text) ||
-            string.IsNullOrWhiteSpace(MaterialTypeInput.text) ||
-            string.IsNullOrWhiteSpace(QuantityInput.text) ||
-            string.IsNullOrWhiteSpace(WeightInput.text) ||
+            string.IsNullOrWhiteSpace(DecorativeTechInput.text) ||
+            string.IsNullOrWhiteSpace(MaterialInput.text) ||
+            string.IsNullOrWhiteSpace(FiringInput.text) ||
+            string.IsNullOrWhiteSpace(PaintInput.text) ||
+            string.IsNullOrWhiteSpace(CulturalAffiliationInput.text) ||
+            string.IsNullOrWhiteSpace(ObjectClassInput.text) ||
             string.IsNullOrWhiteSpace(BagNumberInput.text))
 
         {
             SetStatus("artifact_collection_status_missing_fields");
-            return false;
-        }
-
-        // quantity validation
-        if (!int.TryParse(QuantityInput.text.Trim(), out Quantity))
-        {
-            SetStatus("artifact_collection_status_invalid_quantity");
             return false;
         }
 
@@ -342,9 +345,12 @@ public class ArtifactFormManager : MonoBehaviour
         LayerInput.text = "";
         SiteInput.text = "";
         AssociatedFeaturesInput.text = "";
-        MaterialTypeInput.text = "";
-        QuantityInput.text = "";
-        WeightInput.text = "";
+        DecorativeTechInput.text = "";
+        MaterialInput.text = "";
+        FiringInput.text = "";
+        PaintInput.text = "";
+        CulturalAffiliationInput.text = "";
+        ObjectClassInput.text = "";
         BagNumberInput.text = "";
     }
 
