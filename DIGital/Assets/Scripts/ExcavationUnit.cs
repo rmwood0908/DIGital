@@ -57,4 +57,12 @@ public class ExcavationUnit
             if (stake != null) Object.Destroy(stake);
         if (ropeObject != null) Object.Destroy(ropeObject);
     }
+
+    public int GetDeepestLayerIndex()
+    {
+        int deepest = int.MaxValue;
+        foreach (var kvp in maxDepthPerCell)
+            if (kvp.Value < deepest) deepest = kvp.Value;
+        return deepest == int.MaxValue ? 0 : deepest;
+    }   
 }

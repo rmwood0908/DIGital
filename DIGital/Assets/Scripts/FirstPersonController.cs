@@ -7,7 +7,6 @@ interface Interactable
 {
     public void Interact();
     public void displayTooltip();
-
 }
 
 public class FirstPersonController : MonoBehaviour
@@ -22,7 +21,12 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float heightRange = 80f;
 
     [Header("Interaction")]
-    [SerializeField] private float interactDistance = 3f;  
+    [SerializeField] private float interactDistance = 3f;
+
+    [Header("Climbing")]
+    [SerializeField] private float climbSpeed = 5f;
+    [SerializeField] private float climbDetectDistance = 0.5f;
+    [SerializeField] private float jumpForce = 5f;
 
     [Header("References")]
     [SerializeField] private CharacterController characterController;
@@ -32,9 +36,6 @@ public class FirstPersonController : MonoBehaviour
 
     private Vector3 currentMovement;
     private float verticalRotation;
-
-    // Variable for when sprinting is added
-    //private float currentSpeed => walkSpeed;
 
     void Start()
     {
@@ -53,7 +54,6 @@ public class FirstPersonController : MonoBehaviour
     {
         Vector3 inputDirection = new Vector3(playerHandler.MovementInput.x, 0f, playerHandler.MovementInput.y);
         Vector3 worldDirection = transform.TransformDirection(inputDirection);
-
         return worldDirection.normalized;
     }
 
@@ -63,12 +63,51 @@ public class FirstPersonController : MonoBehaviour
         currentMovement.x = worldDirection.x * walkSpeed;
         currentMovement.z = worldDirection.z * walkSpeed;
 
-        if(!characterController.isGrounded)
+        if (characterController.isGrounded)
+        {
+            if (currentMovement.y < 0) currentMovement.y = 0f;
+        }
+        else
         {
             currentMovement.y += Physics.gravity.y * Time.deltaTime;
         }
 
-        characterController.Move(currentMovement * Time.deltaTime);   
+        // Wall climb 
+        if (IsTouchingClimbableWall() && playerHandler.MovementInput.magnitude > 0.1f)
+        {
+            currentMovement.y = climbSpeed;
+        }
+
+        // Jump
+        if (characterController.isGrounded && Input.GetKeyDown(KeyCode.Space))
+        {
+            currentMovement.y = jumpForce;
+        }
+
+        characterController.Move(currentMovement * Time.deltaTime);
+    }
+
+    /// <summary>
+    /// Raycasts in the player's movement direction slightly above ground level.
+    /// Returns true if there's a solid wall ahead the player can climb.
+    /// </summary>
+    private bool IsTouchingClimbableWall()
+    {
+        Vector3 moveDir = CalculateWorldDirection();
+        if (moveDir.magnitude < 0.1f) return false;
+
+        // Cast from slightly above the player's feet so we detect walls not floors
+        Vector3 rayOrigin = transform.position + Vector3.up * 0.3f;
+        Ray ray = new Ray(rayOrigin, moveDir);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, characterController.radius + climbDetectDistance))
+        {
+            // Climb any wall that isn't tagged as a trigger or is on a non-player layer
+            // Excludes the player's own collider
+            if (hit.collider.gameObject != gameObject)
+                return true;
+        }
+        return false;
     }
 
     private void HorizontalRotation(float rotationAmount)
@@ -91,17 +130,12 @@ public class FirstPersonController : MonoBehaviour
         VerticalRotation(mouseYRotation);
     }
 
-    // UPDATED to handle dirt vs artifact interaction
     private void HandleInteraction()
     {
         if (IsUnitMarkingMode) return;
-        if (mainCamera == null)
-        {
-            return;
-        }
+        if (mainCamera == null) return;
 
-        Ray ray = new Ray(mainCamera.transform.position,
-                          mainCamera.transform.forward);
+        Ray ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
 
         if (Physics.Raycast(ray, out RaycastHit hit, interactDistance))
         {
@@ -109,50 +143,26 @@ public class FirstPersonController : MonoBehaviour
             DiggableEarth dirt = hit.collider.GetComponentInParent<DiggableEarth>();
             if (dirt != null)
             {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    dirt.Interact();
-                }
-                else
-                {
-                    dirt.displayTooltip();
-                }
-
-                return; // stop here, don’t let artifact also fire
+                if (Input.GetMouseButtonDown(0)) dirt.Interact();
+                else dirt.displayTooltip();
+                return;
             }
 
             // 2) else, try artifact
-            ArtifactInteractable artifact =
-                hit.collider.GetComponentInParent<ArtifactInteractable>();
-
+            ArtifactInteractable artifact = hit.collider.GetComponentInParent<ArtifactInteractable>();
             if (artifact != null)
             {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    artifact.Interact();
-                }
-                else
-                {
-                    artifact.displayTooltip();
-                }
-
+                if (Input.GetMouseButtonDown(0)) artifact.Interact();
+                else artifact.displayTooltip();
                 return;
             }
 
             // 3) generic Interactable fallback
-            Interactable generic =
-                hit.collider.GetComponentInParent<Interactable>();
-
+            Interactable generic = hit.collider.GetComponentInParent<Interactable>();
             if (generic != null)
             {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    generic.Interact();
-                }
-                else
-                {
-                    generic.displayTooltip();
-                }
+                if (Input.GetMouseButtonDown(0)) generic.Interact();
+                else generic.displayTooltip();
             }
         }
     }

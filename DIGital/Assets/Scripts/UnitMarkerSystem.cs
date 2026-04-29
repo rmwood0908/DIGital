@@ -142,36 +142,46 @@ public class UnitMarkerSystem : MonoBehaviour
             ExcavationUnit unit = activeUnits[i];
             if (!unit.ContainsCell(cell)) continue;
 
-            bool moreSectionsBelow = AnySectionsRemainingInColumn(cell, sectionWorldPos);
+            // Check if ALL columns in the unit are empty (not just the current one)
+            bool anyColumnRemaining = AnyColumnRemainingInEntireUnit(unit, sectionWorldPos);
 
-            Debug.Log($"[UnitMarkerSystem] Cell {cell} dug at layer {layerIndex}. More below: {moreSectionsBelow}");
+            Debug.Log($"[UnitMarkerSystem] Cell {cell} dug at layer {layerIndex}. Any column remaining in unit: {anyColumnRemaining}");
 
-            if (!moreSectionsBelow)
+            if (!anyColumnRemaining)
             {
-                // No more sections in this column — unit is done, despawn immediately
+                int deepestLayer = unit.GetDeepestLayerIndex();
                 unit.Despawn();
                 activeUnits.RemoveAt(i);
-                Debug.Log("[UnitMarkerSystem] Unit fully excavated — stakes removed. Press U to mark again.");
-                KnowledgeCheck.instance.AskRandomQuestion();
+                Debug.Log($"[UnitMarkerSystem] Unit fully excavated — deepest layer was {deepestLayer}. Stakes removed.");
+
+                DiggableEarthLayer[] allLayers = FindObjectsByType<DiggableEarthLayer>(FindObjectsSortMode.None);
+                foreach (var layer in allLayers)
+                {
+                    if (layer.digLayer == deepestLayer && layer.Question != null)
+                    {
+                        KnowledgeCheck.instance.AskQuestion(layer.Question);
+                        break;
+                    }
+                }
             }
             break;
         }
     }
 
-    private bool AnySectionsRemainingInColumn(Vector2Int cell, Vector3 excludeWorldPos)
+    private bool AnyColumnRemainingInEntireUnit(ExcavationUnit unit, Vector3 excludeWorldPos)
     {
         DiggableEarth[] allSections = FindObjectsByType<DiggableEarth>(FindObjectsSortMode.None);
-        foreach (var section in allSections)
+        foreach (var cell in unit.Cells)
         {
-        // Skip the section currently being destroyed
-        if (section.transform.position == excludeWorldPos) continue;
-
-        Vector2Int sectionCell = WorldToCell(section.transform.position);
-        if (sectionCell == cell) return true;
+            foreach (var section in allSections)
+            {
+                if (section.transform.position == excludeWorldPos) continue;
+                if (WorldToCell(section.transform.position) == cell) return true;
+            }
         }
         return false;
     }
-
+    
     // ── Grid scanning ─────────────────────────────────────────────────────────
 
     private void ScanGridFromScene()
