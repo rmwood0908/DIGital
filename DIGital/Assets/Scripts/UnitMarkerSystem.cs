@@ -148,21 +148,14 @@ public class UnitMarkerSystem : MonoBehaviour
             Debug.Log($"[UnitMarkerSystem] Cell {cell} dug at layer {layerIndex}. Any column remaining in unit: {anyColumnRemaining}");
 
             if (!anyColumnRemaining)
-            {
-                int deepestLayer = unit.GetDeepestLayerIndex();
+            {   
+            int deepestLayer = unit.GetDeepestLayerIndex();
                 unit.Despawn();
                 activeUnits.RemoveAt(i);
                 Debug.Log($"[UnitMarkerSystem] Unit fully excavated — deepest layer was {deepestLayer}. Stakes removed.");
 
-                DiggableEarthLayer[] allLayers = FindObjectsByType<DiggableEarthLayer>(FindObjectsSortMode.None);
-                foreach (var layer in allLayers)
-                {
-                    if (layer.digLayer == deepestLayer && layer.Question != null)
-                    {
-                        KnowledgeCheck.instance.AskQuestion(layer.Question);
-                        break;
-                    }
-                }
+                // Ask a random knowledge check question
+                KnowledgeCheck.instance.AskRandomQuestion();
             }
             break;
         }
@@ -273,36 +266,32 @@ public class UnitMarkerSystem : MonoBehaviour
     {
         if (pendingCorners.Count < 2) return;
 
-        int minX = int.MaxValue, maxX = int.MinValue;
-        int minZ = int.MaxValue, maxZ = int.MinValue;
-        foreach (var c in pendingCorners)
-        {
-            if (c.x < minX) minX = c.x;
-            if (c.x > maxX) maxX = c.x;
-            if (c.y < minZ) minZ = c.y;
-            if (c.y > maxZ) maxZ = c.y;
-        }
+        // Only use the first 2 corners placed
+        Vector2Int c0 = pendingCorners[0];
+        Vector2Int c1 = pendingCorners[1];
 
-        foreach (var c in pendingCorners)
-        {
-            bool onCorner = (c.x == minX || c.x == maxX) && (c.y == minZ || c.y == maxZ);
-            if (!onCorner) return;
-        }
+        int minX = Mathf.Min(c0.x, c1.x);
+        int maxX = Mathf.Max(c0.x, c1.x);
+        int minZ = Mathf.Min(c0.y, c1.y);
+        int maxZ = Mathf.Max(c0.y, c1.y);
 
-        if (pendingCorners.Count == 2)
+        // Must be diagonally opposite — same row or column is invalid
+        if (minX == maxX || minZ == maxZ)
         {
-            if (pendingCorners[0].x == pendingCorners[1].x ||
-                pendingCorners[0].y == pendingCorners[1].y) return;
-        }
-        else if (pendingCorners.Count == 3) return;
+            Debug.Log("[UnitMarkerSystem] Stakes are in the same row or column — cancelling. Place a diagonal corner.");
+            CancelPending();
+            return;
+        } 
 
+        // Collect cells in the rectangle
         List<Vector2Int> cells = new List<Vector2Int>();
         for (int x = minX; x < maxX; x++)
             for (int z = minZ; z < maxZ; z++)
                 cells.Add(new Vector2Int(x, z));
 
-        if (cells.Count == 0) return;
+    if (cells.Count == 0) return;
 
+        // Overlap check
         foreach (var cell in cells)
             foreach (var existing in activeUnits)
                 if (existing.ContainsCell(cell)) { CancelPending(); return; }
