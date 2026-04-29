@@ -86,6 +86,40 @@ public class ArtifactFormManager : MonoBehaviour
         public string userId;
     }
 
+    // reference key
+    [System.Serializable]
+    private class ReferenceArtifact
+    {
+        public int id;
+        public string date_discovered;
+        public string investigator;
+        public string area;
+        public string unit;
+        public string layer;
+        public string site;
+        public string associated_features;
+        public string decorative_tech;
+        public string material;
+        public string firing;
+        public string paint;
+        public string cultural_affiliation;
+        public string object_class;
+        public string bag_number;
+        public string artifact_id;
+        public string created_at;
+        public string updated_at;
+        public string user_id;
+    }
+
+    // reference reponse
+    [System.Serializable]
+    private class ReferenceArtifactResponse
+    {
+        public bool ok;
+        public ReferenceArtifact artifact;
+        public string error;
+    }
+
     private void Awake()
     {
         // cache this once (uses key + table from Inspector)
@@ -102,6 +136,11 @@ public class ArtifactFormManager : MonoBehaviour
 
         HideContinueWarning();
         PopulateArtifactIdDropdown();
+
+        if (ArtifactIdDropdown != null)
+        {
+            ArtifactIdDropdown.onValueChanged.AddListener(OnArtifactDropdownChanged);
+        }
     }
 
     // status text with localization
@@ -335,6 +374,52 @@ public class ArtifactFormManager : MonoBehaviour
         }
     }
 
+    // coroutine to fetch and auto-fill the form
+    private IEnumerator LoadReferenceArtifactCoroutine(string artifactId)
+    {
+        if (string.IsNullOrWhiteSpace(artifactId))
+        {
+            yield break;
+        }
+
+        string url = $"{apiUrl}/reference/{UnityWebRequest.EscapeURL(artifactId)}";
+
+        using (UnityWebRequest request = UnityWebRequest.Get(url))
+        {
+            yield return request.SendWebRequest();
+
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                string serverText = request.downloadHandler != null
+                    ? request.downloadHandler.text
+                    : "";
+
+                Debug.LogWarning(
+                    $"Reference artifact lookup failed: " +
+                    $"{request.responseCode} - {request.error} - {serverText}");
+
+                    yield break;
+            }
+
+            string json = request.downloadHandler.text;
+
+    #if UNITY_EDITOR
+            Debug.Log($"Reference artifact JSON: {json}");
+    #endif
+
+            ReferenceArtifactResponse response =
+                JsonUtility.FromJson<ReferenceArtifactResponse>(json);
+
+            if (response == null || !response.ok || response.artifact == null)
+            {
+                Debug.LogWarning("Reference artifact response was empty or invalid.");
+                yield break;
+            }
+
+            ApplyReferenceArtifactToForm(response.artifact);
+        }
+    }
+
     // clear form
     private void ClearForm()
     {
@@ -424,6 +509,9 @@ public class ArtifactFormManager : MonoBehaviour
             {
                 ArtifactIdDropdown.SetValueWithoutNotify(index);
                 ArtifactIdDropdown.RefreshShownValue();
+
+                StartCoroutine(LoadReferenceArtifactCoroutine(targetId));
+
                 return;
             }
         }
@@ -529,5 +617,41 @@ public class ArtifactFormManager : MonoBehaviour
         }
 
         savedScriptStates.Clear();
+    }
+
+    // helper to decide fields which to get filled
+    private void ApplyReferenceArtifactToForm(ReferenceArtifact artifact)
+    {
+        // check
+        if (artifact == null) return;
+
+        // TODO, use smart strings to auto-fill and maybe something like Sys.Date()
+        // DateDiscoveredInput.text = FormatDate(artifact.date_discovered);
+        // InvestigatorInput.text = artifact.investigator ?? "";
+
+        AreaInput.text = artifact.area ?? "";
+        UnitInput.text = artifact.unit ?? "";
+        LayerInput.text = artifact.layer ?? "";
+        SiteInput.text = artifact.site ?? "";
+        AssociatedFeaturesInput.text = artifact.associated_features ?? "";
+        DecorativeTechInput.text = artifact.decorative_tech ?? "";
+        MaterialInput.text = artifact.material ?? "";
+        FiringInput.text = artifact.firing ?? "";
+        PaintInput.text = artifact.paint ?? "";
+        CulturalAffiliationInput.text = artifact.cultural_affiliation ?? "";
+        ObjectClassInput.text = artifact.object_class ?? "";
+        BagNumberInput.text = artifact.bag_number ?? "";
+    }
+
+    private void OnArtifactDropdownChanged(int index)
+    {
+        string selectedId = GetSelectedArtifactId();
+
+        if (string.IsNullOrWhiteSpace(selectedId))
+        {
+            return;
+        }
+
+        StartCoroutine(LoadReferenceArtifactCoroutine(selectedId));
     }
 }
