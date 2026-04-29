@@ -180,51 +180,51 @@ MonoBehaviour:
       m_Items:
       - rid: 745707523204972612
   - m_Id: 715213671133184
-    m_Localized: Ingrese la Fecha...
+    m_Localized: Ingrese la fecha...
     m_Metadata:
       m_Items: []
   - m_Id: 715825305513984
-    m_Localized: Ingrese el Investigador...
+    m_Localized: Ingrese el investigador...
     m_Metadata:
       m_Items: []
   - m_Id: 716126028722176
-    m_Localized: "Ingrese el \xC1rea..."
+    m_Localized: "Ingrese el \xE1rea..."
     m_Metadata:
       m_Items: []
   - m_Id: 716372825763840
-    m_Localized: Ingrese la Unidad...
+    m_Localized: Ingrese la unidad...
     m_Metadata:
       m_Items: []
   - m_Id: 716645560381440
-    m_Localized: Ingrese la Capa...
+    m_Localized: Ingrese la capa...
     m_Metadata:
       m_Items: []
   - m_Id: 716824002850816
-    m_Localized: Ingrese el Sitio...
+    m_Localized: Ingrese el sitio...
     m_Metadata:
       m_Items: []
   - m_Id: 716968760864768
-    m_Localized: "Ingrese las Caracter\xEDsticas Asociadas..."
+    m_Localized: "Ingrese las caracter\xEDsticas asociadas..."
     m_Metadata:
       m_Items: []
   - m_Id: 717118564626432
-    m_Localized: Ingrese el Tipo de Matieral...
+    m_Localized: Ingrese el tipo de matieral...
     m_Metadata:
       m_Items: []
   - m_Id: 717328493735936
-    m_Localized: Ingrese la Cantidad...
+    m_Localized: Ingrese la cantidad...
     m_Metadata:
       m_Items: []
   - m_Id: 717430927028224
-    m_Localized: Ingrese el Peso...
+    m_Localized: Ingrese el peso...
     m_Metadata:
       m_Items: []
   - m_Id: 717517669429248
-    m_Localized: "Ingrese el N\xFAmero de Bolsa..."
+    m_Localized: "Ingrese el n\xFAmero de bolsa..."
     m_Metadata:
       m_Items: []
   - m_Id: 717525303062528
-    m_Localized: Ingrese el ID del Artefacto...
+    m_Localized: Ingrese el ID del artefacto...
     m_Metadata:
       m_Items: []
   - m_Id: 744056326877184
@@ -371,6 +371,46 @@ MonoBehaviour:
     m_Localized: 'Marca una unidad con estacas antes de excavar
 
 '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31844731919953920
+    m_Localized: "Tecnolog\xEDa decorativa:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31844961633595392
+    m_Localized: "Cocci\xF3n:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31845284968296448
+    m_Localized: 'Pintar:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31845352932798464
+    m_Localized: "Afiliaci\xF3n cultural:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31845455026352128
+    m_Localized: 'Clase de objeto:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31845518159015936
+    m_Localized: "Ingrese en escena la tecnolog\xEDa decorativa..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31845763366416384
+    m_Localized: "Ingrese la cocci\xF3n..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31845947513139200
+    m_Localized: Ingrese en pintar...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31846077897273344
+    m_Localized: "Ingrese la afiliaci\xF3n cultural..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31846202103197696
+    m_Localized: 'Ingrese la clase de objeto:'
     m_Metadata:
       m_Items: []
   references:

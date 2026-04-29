@@ -20,11 +20,14 @@ public class ArtifactAnalysisManager : MonoBehaviour
     [SerializeField] private TMP_InputField LayerInput;
     [SerializeField] private TMP_InputField SiteInput;
     [SerializeField] private TMP_InputField AssociatedFeaturesInput;
-    [SerializeField] private TMP_InputField MaterialTypeInput;
-    [SerializeField] private TMP_InputField QuantityInput;
-    [SerializeField] private TMP_InputField WeightInput;
+    [SerializeField] private TMP_InputField DecorativeTechInput;
+    [SerializeField] private TMP_InputField MaterialInput;
+    [SerializeField] private TMP_InputField FiringInput;
+    [SerializeField] private TMP_InputField PaintInput;
+    [SerializeField] private TMP_InputField CulturalAffiliationInput;
+    [SerializeField] private TMP_InputField ObjectClassInput;
     [SerializeField] private TMP_InputField BagNumberInput;
-    [SerializeField] private TMP_InputField ArtifactIDInput;
+    [SerializeField] private TMP_Dropdown ArtifactIdDropdown;
 
     [Header("Logout / Navigation")]
     [SerializeField] private string accountManagementSceneName = "AccountManagement";
@@ -91,11 +94,17 @@ public class ArtifactAnalysisManager : MonoBehaviour
         public string layer;
         public string site;
         public string associated_features;
-        public string material_type;
-        public int quantity;
-        public string weight;
+        public string decorative_tech;
+        public string material;
+        public string firing;
+        public string paint;
+        public string cultural_affiliation;
+        public string object_class;
         public string bag_number;
         public string artifact_id;
+        public string created_at;
+        public string updated_at;
+        public string user_id;
     }
 
     [System.Serializable]
@@ -305,8 +314,9 @@ public class ArtifactAnalysisManager : MonoBehaviour
         {
             DateDiscoveredInput, InvestigatorInput, AreaInput, UnitInput,
             LayerInput, SiteInput, AssociatedFeaturesInput,
-            MaterialTypeInput, QuantityInput, WeightInput,
-            BagNumberInput, ArtifactIDInput
+            DecorativeTechInput, MaterialInput, FiringInput,
+            PaintInput, CulturalAffiliationInput, ObjectClassInput,
+            BagNumberInput
         };
 
         foreach ( var field in fields )
@@ -315,6 +325,28 @@ public class ArtifactAnalysisManager : MonoBehaviour
             field.readOnly = readOnly;
             field.interactable = !readOnly;
         }
+
+        if (ArtifactIdDropdown != null)
+        {
+            ArtifactIdDropdown.interactable = false;
+        }
+    }
+
+    private void SetArtifactIdDropdown(string artifactId)
+    {
+        if (ArtifactIdDropdown == null) return;
+
+        ArtifactIdDropdown.ClearOptions();
+
+        ArtifactIdDropdown.AddOptions(new List<TMP_Dropdown.OptionData>
+        {
+            new TMP_Dropdown.OptionData(artifactId ?? "")
+        });
+
+        ArtifactIdDropdown.SetValueWithoutNotify(0);
+        ArtifactIdDropdown.RefreshShownValue();
+
+        ArtifactIdDropdown.interactable = false;
     }
 
     // clear fields when placeholder is selected
@@ -327,11 +359,14 @@ public class ArtifactAnalysisManager : MonoBehaviour
         LayerInput.text = "";
         SiteInput.text = "";
         AssociatedFeaturesInput.text = "";
-        MaterialTypeInput.text = "";
-        QuantityInput.text = "";
-        WeightInput.text = "";
+        DecorativeTechInput.text = "";
+        MaterialInput.text = "";
+        FiringInput.text = "";
+        PaintInput.text = "";
+        CulturalAffiliationInput.text = "";
+        ObjectClassInput.text = "";
         BagNumberInput.text = "";
-        ArtifactIDInput.text = "";
+        SetArtifactIdDropdown("");
 
         if (modelRegistry != null)
         {
@@ -506,11 +541,14 @@ public class ArtifactAnalysisManager : MonoBehaviour
         LayerInput.text = artifact.layer;
         SiteInput.text = artifact.site;
         AssociatedFeaturesInput.text = artifact.associated_features;
-        MaterialTypeInput.text = artifact.material_type;
-        QuantityInput.text = artifact.quantity.ToString();
-        WeightInput.text = artifact.weight ?? "";
+        DecorativeTechInput.text = artifact.decorative_tech;
+        MaterialInput.text = artifact.material;
+        FiringInput.text = artifact.firing;
+        PaintInput.text = artifact.paint;
+        CulturalAffiliationInput.text = artifact.cultural_affiliation;
+        ObjectClassInput.text = artifact.object_class;
         BagNumberInput.text = artifact.bag_number;
-        ArtifactIDInput.text = artifact.artifact_id;
+        SetArtifactIdDropdown(artifact.artifact_id);
         ShowModelForArtifact(artifact);
     }
 
