@@ -503,7 +503,7 @@ public class ArtifactAnalysisManager : MonoBehaviour
                 new
                 {
                     id = artifact.artifact_id ?? "",
-                    bag = artifact.bag_number ?? "",
+                    excavator = artifact.investigator ?? "",
                     date = shortDate
                 }
             };

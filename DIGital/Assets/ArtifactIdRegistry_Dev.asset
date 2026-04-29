@@ -13,17 +13,19 @@ MonoBehaviour:
   m_Name: ArtifactIdRegistry_Dev
   m_EditorClassIdentifier: Assembly-CSharp::ArtifactIdRegistry
   entries:
-  - artifactId: 1
+  - artifactId: 15_609_11
+    displayName: Northern Gallinazo Friend
+  - artifactId: 10_000_a
+    displayName: Ciego Blind
+  - artifactId: 10_197_4
+    displayName: Gallinazo Face-Neck-Jar
+  - artifactId: 10_192_4
+    displayName: Mochica Pottery Dog
+  - artifactId: 15_626_040
+    displayName: Moche Urn
+  - artifactId: 15_312_080
+    displayName: Face Molded 2
+  - artifactId: 25_001_001
     displayName: Whole Vessel
-  - artifactId: 2
-    displayName: Incised Stone
-  - artifactId: 3
-    displayName: Stone Citru
-  - artifactId: 4
-    displayName: SW Pot
-  - artifactId: 5
-    displayName: New Qlone
-  - artifactId: 6
-    displayName: Acoma Poly
-  - artifactId: 7
-    displayName: New Qlone Plate
+  - artifactId: 25_001_002
+    displayName: The Upsidedown
