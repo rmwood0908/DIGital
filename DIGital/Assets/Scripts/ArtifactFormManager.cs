@@ -630,8 +630,10 @@ public class ArtifactFormManager : MonoBehaviour
         // InvestigatorInput.text = artifact.investigator ?? "";
 
         AreaInput.text = artifact.area ?? "";
-        UnitInput.text = artifact.unit ?? "";
-        LayerInput.text = artifact.layer ?? "";
+
+        // UnitInput.text = artifact.unit ?? "";
+        // LayerInput.text = artifact.layer ?? "";
+        
         SiteInput.text = artifact.site ?? "";
         AssociatedFeaturesInput.text = artifact.associated_features ?? "";
         DecorativeTechInput.text = artifact.decorative_tech ?? "";
