@@ -1202,6 +1202,29 @@ MonoBehaviour:
   - {fileID: 1168857877}
   nextButton: {fileID: 2045795867}
   closeButton: {fileID: 272688084}
+  questions:
+  - {fileID: 11400000, guid: 21ea60e165420c54e87b48a1e6a62c8f, type: 2}
+  - {fileID: 11400000, guid: 40296896458dfc646bd64c5094bdb540, type: 2}
+  - {fileID: 11400000, guid: 1d0538b6e52089d43a76e49aea247838, type: 2}
+  - {fileID: 11400000, guid: 5a7fd7f3bb602ec428a0f9ff0c403926, type: 2}
+  - {fileID: 11400000, guid: b0598e143795cc14dbb5bacbff4bfad1, type: 2}
+  - {fileID: 11400000, guid: cfe544219eff6c3458043932ba63687f, type: 2}
+  - {fileID: 11400000, guid: 79d3bd5c9cb36604bb64090bdb67d49e, type: 2}
+  - {fileID: 11400000, guid: 0936351e2eb27d5428ac01d429a2e545, type: 2}
+  - {fileID: 11400000, guid: 01e70345a951b56468d764b8dae81a8f, type: 2}
+  - {fileID: 11400000, guid: 9efcfdb4cbbedd143b8bfa568a765118, type: 2}
+  - {fileID: 11400000, guid: 0a55a54509e3138489a6f35445a43005, type: 2}
+  - {fileID: 11400000, guid: 3bf99d0d7ba4164478e46ebec7c50513, type: 2}
+  - {fileID: 11400000, guid: 657508a3a901aba4186bc93756b27935, type: 2}
+  - {fileID: 11400000, guid: dd641a74e5161ee48b0d63bb9b3494dd, type: 2}
+  - {fileID: 11400000, guid: 61b9d68cff37d6b45a604f6261a7c831, type: 2}
+  - {fileID: 11400000, guid: ef0e8608ed29f044bb0cffe6817ad9ad, type: 2}
+  - {fileID: 11400000, guid: 5bdf3462c1ba73f4a9463385f12c10b6, type: 2}
+  - {fileID: 11400000, guid: c0e5773cf018be145b5f922580e61293, type: 2}
+  - {fileID: 11400000, guid: 28746693f2b387a42bd64302385062cf, type: 2}
+  - {fileID: 11400000, guid: d91ded10b793b5d41ab4671310897831, type: 2}
+  - {fileID: 11400000, guid: 625c48f9348a56b469e5372e77be40dd, type: 2}
+  - {fileID: 11400000, guid: bc520d84677a240498909c3a6ffe7f25, type: 2}
 --- !u!1001 &63028556
 PrefabInstance:
   m_ObjectHideFlags: 0

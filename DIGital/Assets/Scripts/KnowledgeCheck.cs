@@ -22,6 +22,9 @@ public class KnowledgeCheck : MonoBehaviour
     private ColorBlock disabledIncorrectColors;
     private ColorBlock disabledCorrectColors;
 
+    // questions
+    public Question[] questions;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -93,6 +96,12 @@ public class KnowledgeCheck : MonoBehaviour
         quizUI.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible   = true;
+    }
+
+    public void AskRandomQuestion()
+    {
+        int randomIndex = Random.Range(0, questions.Length);
+        AskQuestion(questions[randomIndex]);
     }
 
     public void CheckAnswer(int index)

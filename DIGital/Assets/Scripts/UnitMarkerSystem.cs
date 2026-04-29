@@ -152,6 +152,7 @@ public class UnitMarkerSystem : MonoBehaviour
                 unit.Despawn();
                 activeUnits.RemoveAt(i);
                 Debug.Log("[UnitMarkerSystem] Unit fully excavated — stakes removed. Press U to mark again.");
+                KnowledgeCheck.instance.AskRandomQuestion();
             }
             break;
         }
