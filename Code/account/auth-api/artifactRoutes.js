@@ -236,7 +236,7 @@ router.get('/reference/:artifactId', async (req, res) => {
 
         return res.status(200).json({
             ok: true,
-            artifact: result.row[0],
+            artifact: result.rows[0],
             error: null
         });
 
