@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public class UnitMarkerSystem : MonoBehaviour
 {
@@ -28,6 +29,10 @@ public class UnitMarkerSystem : MonoBehaviour
     [SerializeField] private FirstPersonController firstPersonController;
     [SerializeField] private GameObject stakePrefab;
 
+    [Header("Unit Label UI")]
+    [SerializeField] private GameObject unitLabelPanel;
+    [SerializeField] private TextMeshProUGUI unitLabelText;
+
     // ── State ────────────────────────────────────────────────────────────────
     public bool IsActive { get; private set; } = false;
     public bool CanPlayerDig => IsActive && activeUnits.Count > 0;
@@ -44,6 +49,9 @@ public class UnitMarkerSystem : MonoBehaviour
     private Vector3 gridOrigin;
     private bool gridOriginSet = false;
     private readonly HashSet<Vector2Int> validCorners = new HashSet<Vector2Int>();
+
+    private int unitCounter = 0;
+    private bool hasUnstartedUnit = false;  
 
     // ── Unity ────────────────────────────────────────────────────────────────
     private void Awake()
@@ -74,8 +82,19 @@ public class UnitMarkerSystem : MonoBehaviour
     {
         if (!IsActive) return;
         if (!IsPlacingStakes && Input.GetKeyDown(KeyCode.U))
+        {
+            DiggableEarth[] remaining = FindObjectsByType<DiggableEarth>(FindObjectsSortMode.None);
+            if (remaining.Length == 0) return;
+
+            if (hasUnstartedUnit)
+            {
+                Debug.Log($"[UnitMarkerSystem] Dig Unit {unitCounter} before marking a new one.");
+                return;
+            }
+
             EnterStakePlacingMode();
-    }
+        }
+    }   
 
     // ── Public API ───────────────────────────────────────────────────────────
 
@@ -133,6 +152,8 @@ public class UnitMarkerSystem : MonoBehaviour
         return false;
     }
 
+    public Vector2Int WorldToCellPublic(Vector3 worldPos) => WorldToCell(worldPos);
+
     public void NotifySectionFullyExcavated(Vector3 sectionWorldPos, int layerIndex)
     {
         Vector2Int cell = WorldToCell(sectionWorldPos);
@@ -152,6 +173,8 @@ public class UnitMarkerSystem : MonoBehaviour
             int deepestLayer = unit.GetDeepestLayerIndex();
                 unit.Despawn();
                 activeUnits.RemoveAt(i);
+                hasUnstartedUnit = false;
+                if (unitLabelPanel != null) unitLabelPanel.SetActive(false);
                 Debug.Log($"[UnitMarkerSystem] Unit fully excavated — deepest layer was {deepestLayer}. Stakes removed.");
 
                 // Ask a random knowledge check question
@@ -168,7 +191,8 @@ public class UnitMarkerSystem : MonoBehaviour
         {
             foreach (var section in allSections)
             {
-                if (section.transform.position == excludeWorldPos) continue;
+                // Use approximate comparison instead of exact Vector3 equality
+                if (Vector3.Distance(section.transform.position, excludeWorldPos) < 0.01f) continue;
                 if (WorldToCell(section.transform.position) == cell) return true;
             }
         }
@@ -311,16 +335,29 @@ public class UnitMarkerSystem : MonoBehaviour
             new Vector2Int(minX, maxZ),
         };
 
+        // Compute unit center in world space
+        Vector3 unitCenter = new Vector3(
+            gridOrigin.x + (minX + maxX) * 0.5f * gridSize,
+            gridOrigin.y,
+            gridOrigin.z + (minZ + maxZ) * 0.5f * gridSize
+        );
+
+        float stakeInset = 0.25f; // tweak this in code if needed
+
         List<GameObject> stakes = new List<GameObject>();
         foreach (var c in corners)
         {
-            GameObject s = Instantiate(stakePrefab, CellCornerToWorld(c), Quaternion.identity);
+            Vector3 cornerWorld = CellCornerToWorld(c);
+            Vector3 toCenter = (unitCenter - cornerWorld);
+            toCenter.y = 0f;
+            Vector3 stakePos = cornerWorld - toCenter.normalized * stakeInset;
+            GameObject s = Instantiate(stakePrefab, stakePos, Quaternion.identity);
             stakes.Add(s);
         }
 
         Vector3[] ropePoints = new Vector3[5];
         for (int i = 0; i < 4; i++)
-            ropePoints[i] = CellCornerToWorld(corners[i]) + Vector3.up * ropeYOffset;
+            ropePoints[i] = stakes[i].transform.position + Vector3.up * ropeYOffset;
         ropePoints[4] = ropePoints[0];
 
         GameObject ropeGO = new GameObject("UnitRope");
@@ -336,6 +373,11 @@ public class UnitMarkerSystem : MonoBehaviour
         Dictionary<Vector2Int, int> maxDepths = BuildMaxDepthMap(cells);
         activeUnits.Add(new ExcavationUnit(cells, stakes, ropeGO, maxDepths));
         pendingCorners.Clear();
+
+        unitCounter++;
+        hasUnstartedUnit = true;
+        if (unitLabelPanel != null) unitLabelPanel.SetActive(true);
+        if (unitLabelText != null) unitLabelText.text = $"Unit {unitCounter}";
 
         StartCoroutine(ExitStakePlacingNextFrame());
 
