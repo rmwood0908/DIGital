@@ -65,32 +65,27 @@ public class FirstPersonController : MonoBehaviour
 
         if (characterController.isGrounded)
         {
-            if (currentMovement.y < 0) currentMovement.y = 0f;
+            if (currentMovement.y < 0) currentMovement.y = -2f; // small constant keeps grounded flag stable
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                currentMovement.y = jumpForce;
+            }
         }
         else
         {
             currentMovement.y += Physics.gravity.y * Time.deltaTime;
         }
 
-        // Wall climb 
-        if (IsTouchingClimbableWall() && playerHandler.MovementInput.magnitude > 0.1f)
+        // Wall climb only if not already jumping upward
+        if (IsTouchingClimbableWall() && playerHandler.MovementInput.magnitude > 0.1f && currentMovement.y <= 0)
         {
             currentMovement.y = climbSpeed;
-        }
-
-        // Jump
-        if (characterController.isGrounded && Input.GetKeyDown(KeyCode.Space))
-        {
-            currentMovement.y = jumpForce;
         }
 
         characterController.Move(currentMovement * Time.deltaTime);
     }
 
-    /// <summary>
-    /// Raycasts in the player's movement direction slightly above ground level.
-    /// Returns true if there's a solid wall ahead the player can climb.
-    /// </summary>
     private bool IsTouchingClimbableWall()
     {
         Vector3 moveDir = CalculateWorldDirection();
@@ -102,8 +97,6 @@ public class FirstPersonController : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, characterController.radius + climbDetectDistance))
         {
-            // Climb any wall that isn't tagged as a trigger or is on a non-player layer
-            // Excludes the player's own collider
             if (hit.collider.gameObject != gameObject)
                 return true;
         }
