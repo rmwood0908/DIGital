@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Scaniverse
-    second: {fileID: 2800000, guid: ae75c8daa6db8d5489404336fba4d3ba, type: 3}
+    second: {fileID: 2800000, guid: 15230a1e60522bc45804459dc8815cd5, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
