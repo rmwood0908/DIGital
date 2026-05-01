@@ -72,14 +72,14 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 695464761389056
-    m_Localized: Welcome, {username}! Press 'M' to open settings, "Tab" to open AI
-      assistant.
+    m_Localized: Welcome, {username}! Press 'M' to open settings, 'Tab' to open AI
+      assistant, 'U' to start unit marking. Excavating
     m_Metadata:
       m_Items:
       - rid: 745707523204972611
   - m_Id: 696095794425856
-    m_Localized: Welcome, archeologist! Press 'M' to open settings, "Tab" to open
-      AI assistant.
+    m_Localized: Welcome, archeologist! Press 'M' to open settings, 'Tab' to open
+      AI assistant, 'U' to start unit marking. Excavating
     m_Metadata:
       m_Items: []
   - m_Id: 702131037171712
@@ -290,7 +290,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 18888329366761472
-    m_Localized: Langauge
+    m_Localized: Language
     m_Metadata:
       m_Items: []
   - m_Id: 18888355207868416
