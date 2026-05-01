@@ -73,13 +73,15 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 695464761389056
     m_Localized: "\xA1Bienvenido, {username}! Pulsa 'M' para abrir la configuraci\xF3n;
-      'Tab' para abrir el asistente de AI."
+      'Tab' para abrir el asistente de AI y 'U' para iniciar el marcado de unidades.
+      Excavaci\xF3n"
     m_Metadata:
       m_Items:
       - rid: 745707523204972612
   - m_Id: 696095794425856
     m_Localized: "\xA1Bienvenido, arque\xF3logo! Pulsa 'M' para abrir la configuraci\xF3n;
-      'Tab' para abrir el asistente de IA."
+      'Tab' para abrir el asistente de AI y 'U' para iniciar el marcado de unidades.
+      Excavaci\xF3n"
     m_Metadata:
       m_Items: []
   - m_Id: 702131037171712
