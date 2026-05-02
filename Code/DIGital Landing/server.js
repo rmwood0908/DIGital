@@ -6,12 +6,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-app.set('trust proxy', 1);
-app.disable('x-powered-by');
 const PORT = process.env.PORT || 3000;
 
+// Brotli/gzip middleware MUST come before static serving
 app.use((req, res, next) => {
-
   if (req.url.endsWith('.js.br')) {
     res.set('Content-Encoding', 'br');
     res.set('Content-Type', 'application/javascript');
@@ -24,9 +22,7 @@ app.use((req, res, next) => {
   } else if (req.url.endsWith('.symbols.json.br')) {
     res.set('Content-Encoding', 'br');
     res.set('Content-Type', 'application/json');
-  }
-  
-  else if (req.url.endsWith('.js.gz')) {
+  } else if (req.url.endsWith('.js.gz')) {
     res.set('Content-Encoding', 'gzip');
     res.set('Content-Type', 'application/javascript');
   } else if (req.url.endsWith('.wasm.gz')) {
@@ -36,7 +32,6 @@ app.use((req, res, next) => {
     res.set('Content-Encoding', 'gzip');
     res.set('Content-Type', 'application/octet-stream');
   }
-  
   next();
 });
 
