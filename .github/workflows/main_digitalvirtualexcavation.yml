@@ -21,8 +21,8 @@ jobs:
           node-version: '22.x'
 
       - name: npm install and build
-        working-directory: ./Code
         run: |
+          cd Code
           npm install
           npm run build --if-present
 
@@ -52,7 +52,7 @@ jobs:
           tenant-id: ${{ secrets.__tenantidsecretname__ }}
           subscription-id: ${{ secrets.__subscriptionidsecretname__ }}
 
-      - name: 'Deploy to Azure Web App'
+      - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
