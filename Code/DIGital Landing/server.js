@@ -6,6 +6,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+app.set('trust proxy', 1);
+app.disable('x-powered-by');
 const PORT = process.env.PORT || 3000;
 
 app.use((req, res, next) => {
@@ -38,6 +40,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('*', (req, res) => {
